@@ -1,0 +1,38 @@
+RewriteEngine On
+RewriteBase /
+
+# Block direct access to PHP includes
+RewriteRule ^includes/ - [F,L]
+
+# --- Do not rewrite the 404 page ---
+RewriteCond %{REQUEST_URI} ^/404(\.php)?$ [NC]
+RewriteRule ^ - [L]
+
+# --- Do NOT rewrite CSS, JS, images, fonts, etc. ---
+RewriteCond %{REQUEST_URI} !\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|webp|zip|jar|bat|exe|7z|rar)$ [NC]
+
+# Redirigir URLs con extensión a la versión sin extensión
+RewriteCond %{THE_REQUEST} \s/+([^\s?]+)\.(php|html) [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# 1. Load .html if it exists
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.*)/?$ $1.html [L]
+
+# 2. Load .php if it exists
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ $1.php [L]
+
+ErrorDocument 404 /404.php
+DirectoryIndex index.php
+
+AddType application/zip .zip
+AddType application/java-archive .jar
+AddType application/octet-stream .bat
+AddType application/octet-stream .exe
+SetEnvIfNoCase Request_URI "\.(zip|jar|bat|exe|7z|rar)$" no-gzip dont-vary
+
