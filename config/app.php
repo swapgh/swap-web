@@ -10,6 +10,6 @@ return [
     'default_og_image' => 'assets/images/favicons/faviconx512.png',
     'locale' => 'es',
     'fallback_locale' => 'es',
-    'asset_base' => 'assets'
+'asset_base' => '/assets'
 ];
 

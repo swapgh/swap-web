@@ -4,8 +4,7 @@ RewriteBase /
 # 1. Set the default index file
 DirectoryIndex index.php index.html
 
-# 1.5 NEW: Serve assets from parent ../assets/ if not found locally (for outside www/)
-RewriteCond %{REQUEST_FILENAME} !-f
+# 1.0 PRIORITY: Dinahosting assets fix - rewrite to ../assets/ ALWAYS first
 RewriteCond %{REQUEST_URI} ^/assets/
 RewriteRule ^assets/(.*)$ ../assets/$1 [L]
 

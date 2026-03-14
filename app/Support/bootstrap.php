@@ -56,16 +56,9 @@ function page_base_path(): string
     return $dir === '/' ? '' : $dir;
 }
 
-function asset_base_path(): string
+function asset_url(string $path = ''): string
 {
-    $scriptName = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? '/'));
-    $base = page_base_path();
-
-    if (str_contains($scriptName, '/public/')) {
-        return preg_replace('#/public$#', '', $base) ?: '';
-    }
-
-    return $base;
+    return '/assets/' . ltrim($path, '/');
 }
 
 
@@ -75,13 +68,7 @@ function uses_front_controller_links(): bool
     return basename($requestPath) === 'index.php';
 }
 
-function asset_url(string $path = ''): string
-{
-    $base = config('app.asset_base', asset_base_path());
-    $result = $base . (empty($base) ? '' : '/') . ltrim($path, '/');
-    // Always use absolute paths to work correctly on nested routes
-    return '/' . ltrim($result, '/');
-}
+
 
 function page_url(string $path = ''): string
 {
