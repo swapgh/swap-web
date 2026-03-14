@@ -1,38 +1,27 @@
 RewriteEngine On
 RewriteBase /
 
-# Block direct access to PHP includes
-RewriteRule ^includes/ - [F,L]
+# 1. Set the default index file
+DirectoryIndex index.php index.html
 
-# --- Do not rewrite the 404 page ---
-RewriteCond %{REQUEST_URI} ^/404(\.php)?$ [NC]
+# 1.5 NEW: Serve assets from parent ../assets/ if not found locally (for outside www/)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} ^/assets/
+RewriteRule ^assets/(.*)$ ../assets/$1 [L]
+
+# 2. Serve existing files directly (CSS, JS, Images)
+# If the request matches a physical file, stop here and serve it.
+RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]
 
-# --- Do NOT rewrite CSS, JS, images, fonts, etc. ---
-RewriteCond %{REQUEST_URI} !\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|webp|zip|jar|bat|exe|7z|rar)$ [NC]
+# 3. Serve existing directories directly
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
 
-# Redirigir URLs con extensión a la versión sin extensión
-RewriteCond %{THE_REQUEST} \s/+([^\s?]+)\.(php|html) [NC]
-RewriteRule ^ %1 [R=301,L]
-
-# 1. Load .html if it exists
+# 4. Send everything else to index.php (Front Controller)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-RewriteRule ^(.*)/?$ $1.html [L]
+RewriteRule ^ index.php [L]
 
-# 2. Load .php if it exists
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^(.+)$ $1.php [L]
-
-ErrorDocument 404 /404.php
-DirectoryIndex index.php
-
-AddType application/zip .zip
-AddType application/java-archive .jar
-AddType application/octet-stream .bat
-AddType application/octet-stream .exe
-SetEnvIfNoCase Request_URI "\.(zip|jar|bat|exe|7z|rar)$" no-gzip dont-vary
-
+# 5. Custom 404 (Optional)
+ErrorDocument 404 /index.php

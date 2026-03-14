@@ -1,0 +1,205 @@
+/* =================== DOCUMENTATION LAYOUT (SOURCE A STYLE - DARK MODE) =================== */
+
+/* Contenedor principal para separar del header fijo */
+.doc-layout {
+    display: flex;
+    max-width: 1400px;
+    margin: 20px auto 60px;
+    gap: 40px;
+    min-height: 80vh;
+}
+
+/* SIDEBAR IZQUIERDO (Sticky) */
+.doc-sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    background: #0f1928; /* Ligeramente más claro que el body */
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #28343d;
+    height: fit-content;
+    position: sticky;
+    top: 90px; /* Debajo del header fijo */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.doc-sidebar h3 {
+    color: #009dff;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #28343d;
+    padding-bottom: 5px;
+}
+
+.doc-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.doc-sidebar li {
+    margin-bottom: 8px;
+}
+
+.doc-sidebar a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.doc-sidebar a:hover, .doc-sidebar a.active {
+    background: rgba(0, 157, 255, 0.12);
+    color: #fff;
+    border-left: 3px solid #009dff;
+}
+
+/* Botones de descarga en sidebar */
+.sidebar-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    background: #009dff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.sidebar-btn:hover {
+    background: #0086d9;
+}
+
+/* CONTENIDO PRINCIPAL */
+.doc-content {
+    flex: 1;
+}
+
+.result-image {
+    width: 300px;
+    max-width: 300px;
+    height: auto;
+}
+
+.milestone-card {
+    background: #151c28;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    border: 1px solid #28343d;
+}
+
+.milestone-card h1 {
+    color: #009dff;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.milestone-meta {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.milestone-desc {
+    color: #cbd5e1;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #28343d;
+    padding-bottom: 25px;
+}
+
+/* Bloques de código (Compatibles con VS2015) */
+.code-wrapper {
+    background: #1e1e1e;
+    border-radius: 8px;
+    border: 1px solid #333;
+    margin: 25px 0;
+    overflow: hidden;
+}
+
+.code-header {
+    background: #252526;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.code-title {
+    color: #9cdcfe;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.code-toggle {
+    background: transparent;
+    border: 1px solid #555;
+    color: #ccc;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.code-toggle:hover {
+    background: #333;
+    color: #fff;
+}
+
+.code-container {
+    max-height: 300px;
+    overflow-y: auto;
+    transition: max-height 0.3s ease;
+}
+
+.code-container pre {
+    margin: 0 !important;
+    padding: 15px !important;
+}
+
+/* Subtítulos y textos */
+.doc-content h2 {
+    color: #f2a07a;
+    font-size: 1.8rem;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.doc-content h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.doc-content p, .doc-content li {
+    color: #cbd5e1;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .doc-layout { flex-direction: column; gap: 20px; }
+    .doc-sidebar { position: static; width: 100%; }
+    .milestone-card { padding: 1.5rem; }
+    .milestone-card h1 { font-size: 2rem; }
+}
