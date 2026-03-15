@@ -15,14 +15,14 @@ spl_autoload_register(static function (string $class): void {
 });
 
 $config = [
-    'app' => require __DIR__ . '/../../config/app.php',
+    'app'      => require __DIR__ . '/../../config/app.php',
     'database' => require __DIR__ . '/../../config/database.php',
 ];
 
 function config(string $key, mixed $default = null): mixed
 {
     $segments = explode('.', $key);
-    $value = $GLOBALS['config'] ?? [];
+    $value    = $GLOBALS['config'] ?? [];
     foreach ($segments as $segment) {
         if (!is_array($value) || !array_key_exists($segment, $value)) {
             return $default;
@@ -43,11 +43,14 @@ function is_external_href(string $href): bool
     return (bool) preg_match('#^https?://#i', $href);
 }
 
+/**
+ * Returns the base path prefix for the current request.
+ * e.g. "" on production, "/www" when running php -S from project root locally.
+ */
 function page_base_path(): string
 {
     $scriptName = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? '/'));
-    $dir = str_replace('\\', '/', (string) dirname($scriptName));
-    $dir = rtrim($dir, '/');
+    $dir        = rtrim(str_replace('\\', '/', (string) dirname($scriptName)), '/');
 
     if ($dir === '' || $dir === '.') {
         return '';
@@ -56,11 +59,16 @@ function page_base_path(): string
     return $dir === '/' ? '' : $dir;
 }
 
+/**
+ * Returns a URL to an asset.
+ * Assets live in www/assets/ which is served at /assets/ on production
+ * and at /www/assets/ when using php -S from project root locally.
+ */
 function asset_url(string $path = ''): string
 {
-    return '/assets/' . ltrim($path, '/');
+    $base = page_base_path(); // '' on prod, '/www' locally
+    return $base . '/assets/' . ltrim($path, '/');
 }
-
 
 function uses_front_controller_links(): bool
 {
@@ -68,22 +76,18 @@ function uses_front_controller_links(): bool
     return basename($requestPath) === 'index.php';
 }
 
-
-
 function page_url(string $path = ''): string
 {
     $normalizedPath = ltrim($path, '/');
-    $scriptName = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? '/index.php'));
+    $scriptName     = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? '/index.php'));
 
     if (uses_front_controller_links()) {
         if ($normalizedPath === '') {
             return $scriptName;
         }
-
         if (str_starts_with($normalizedPath, '#')) {
             return $scriptName . $normalizedPath;
         }
-
         return $scriptName . '?route=' . rawurlencode('/' . $normalizedPath);
     }
 
@@ -93,7 +97,7 @@ function page_url(string $path = ''): string
 
 function current_scheme(): string
 {
-    $https = $_SERVER['HTTPS'] ?? '';
+    $https     = $_SERVER['HTTPS'] ?? '';
     $forwarded = $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '';
     if ($https === 'on' || $https === '1' || $forwarded === 'https') {
         return 'https';
@@ -139,16 +143,16 @@ function with_lang(string $url, ?string $lang = null): string
         return $url;
     }
 
-    $lang = resolve_page_lang($lang ?? ($GLOBALS['pageLang'] ?? config('app.locale', 'es')), config('app.fallback_locale', 'es'));
+    $lang     = resolve_page_lang($lang ?? ($GLOBALS['pageLang'] ?? config('app.locale', 'es')), config('app.fallback_locale', 'es'));
     $fragment = '';
-    $hashPos = strpos($url, '#');
+    $hashPos  = strpos($url, '#');
     if ($hashPos !== false) {
         $fragment = substr($url, $hashPos);
-        $url = substr($url, 0, $hashPos);
+        $url      = substr($url, 0, $hashPos);
     }
 
-    $path = $url;
-    $query = [];
+    $path     = $url;
+    $query    = [];
     $queryPos = strpos($url, '?');
     if ($queryPos !== false) {
         $path = substr($url, 0, $queryPos);
@@ -156,28 +160,28 @@ function with_lang(string $url, ?string $lang = null): string
     }
 
     $query['lang'] = $lang;
-    $queryString = http_build_query($query);
+    $queryString   = http_build_query($query);
 
     return $path . ($queryString !== '' ? '?' . $queryString : '') . $fragment;
 }
 
 $site = [
-    'name' => (string) config('app.name'),
-    'tagline' => (string) config('app.tagline'),
-    'github_rpg' => (string) config('app.github_rpg'),
-    'github_web' => (string) config('app.github_web'),
-    'contact_email' => (string) config('app.contact_email'),
-    'default_og_image' => asset_url(config('app.default_og_image')),
+    'name'             => (string) config('app.name'),
+    'tagline'          => (string) config('app.tagline'),
+    'github_rpg'       => (string) config('app.github_rpg'),
+    'github_web'       => (string) config('app.github_web'),
+    'contact_email'    => (string) config('app.contact_email'),
+    // FIX: config value is just 'images/...' — asset_url() adds /assets/ prefix
+    'default_og_image' => asset_url((string) config('app.default_og_image')),
 ];
 
 $pageLang = resolve_page_lang((string) ($_GET['lang'] ?? $_COOKIE['swap_lang'] ?? config('app.locale', 'es')), config('app.fallback_locale', 'es'));
 if (isset($_GET['lang']) && $_GET['lang'] === $pageLang && !headers_sent()) {
     setcookie('swap_lang', $pageLang, [
-        'expires' => time() + (86400 * 30),
-        'path' => '/',
+        'expires'  => time() + (86400 * 30),
+        'path'     => '/',
         'samesite' => 'Lax',
     ]);
 }
 
 require_once __DIR__ . '/i18n.php';
-

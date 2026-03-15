@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: /sitemap.php
+Sitemap: https://swap.com.es/sitemap.php

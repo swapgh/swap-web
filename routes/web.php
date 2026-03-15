@@ -21,10 +21,4 @@ return static function (\App\Core\Router $router): void {
     $router->get('/devlog/hito4', static fn() => (new HomeController())->milestone('hito4'));
     $router->get('/devlog/hito5', static fn() => (new HomeController())->milestone('hito5'));
     $router->get('/devlog/hito6', static fn() => (new HomeController())->milestone('hito6'));
-    $router->get('/html/hito1.php', static fn() => (new HomeController())->milestone('hito1'));
-    $router->get('/html/hito2.php', static fn() => (new HomeController())->milestone('hito2'));
-    $router->get('/html/hito3.php', static fn() => (new HomeController())->milestone('hito3'));
-    $router->get('/html/hito4.php', static fn() => (new HomeController())->milestone('hito4'));
-    $router->get('/html/hito5.php', static fn() => (new HomeController())->milestone('hito5'));
-    $router->get('/html/hito6.php', static fn() => (new HomeController())->milestone('hito6'));
 };
