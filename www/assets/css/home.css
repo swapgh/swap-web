@@ -394,7 +394,7 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 320ms ease;
+  transition: background 320ms ease, border-color 320ms ease, box-shadow 320ms ease, color 320ms ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -601,7 +601,7 @@
 }
 
 .timeline-card {
-  transition: all 280ms ease;
+  transition: transform 280ms ease, border-color 280ms ease, background 280ms ease, box-shadow 280ms ease;
 }
 
 .timeline-card:hover {

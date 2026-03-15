@@ -4,20 +4,27 @@ document.addEventListener("DOMContentLoaded", () => {
     if (toggle) {
       e.preventDefault();
       e.stopPropagation();
+
       const menu = toggle.nextElementSibling;
       if (menu) menu.classList.toggle("show");
+
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!expanded));
       return;
     }
 
     document.querySelectorAll(".dropdown-menu.show").forEach((menu) => menu.classList.remove("show"));
+    document.querySelectorAll(".dropdown-toggle[aria-expanded=\"true\"]").forEach((btn) => btn.setAttribute("aria-expanded", "false"));
   });
 
   const hamburger = document.getElementById("hamburger");
   const navList = document.querySelector(".nav-list");
   const toggleNav = () => {
     if (!hamburger || !navList) return;
+    const willOpen = !navList.classList.contains("active");
     navList.classList.toggle("active");
     hamburger.classList.toggle("active");
+    hamburger.setAttribute("aria-expanded", String(willOpen));
   };
 
   if (hamburger && navList) {
@@ -25,7 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
     hamburger.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") toggleNav();
     });
+
+    document.addEventListener("click", (e) => {
+      if (!navList.classList.contains("active")) return;
+      if (e.target.closest(".nav-list") || e.target.closest("#hamburger")) return;
+      toggleNav();
+    });
   }
+
   document.querySelectorAll(".code-container").forEach((container) => {
     if (!container.style.maxHeight) container.style.maxHeight = "300px";
   });

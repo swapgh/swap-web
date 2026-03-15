@@ -14,6 +14,7 @@ $ogImage = $ogImage ?? absolute_url($site['default_og_image']);
   <title><?= e((string) $pageTitle) ?></title>
   <meta name="description" content="<?= e((string) $pageDescription) ?>">
   <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0a1220">
   <link rel="canonical" href="<?= e((string) $canonicalUrl) ?>">
 
   <meta property="og:site_name" content="<?= e((string) $site['name']) ?>">

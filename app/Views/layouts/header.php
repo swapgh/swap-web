@@ -27,7 +27,9 @@ if (Auth::check()) {
           <li><a href="<?= e($item['href']) ?>"><?= e($item['label']) ?></a></li>
         <?php endforeach; ?>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle"><?= e(t('nav.devlog')) ?> <i class="fas fa-chevron-down"></i></a>
+          <button type="button" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            <?= e(t('nav.devlog')) ?> <i class="fas fa-chevron-down" aria-hidden="true"></i>
+          </button>
           <ul class="dropdown-menu">
             <?php for ($i = 1; $i <= 6; $i++): ?>
               <li><a href="<?= e(with_lang(page_url('devlog/hito' . $i))) ?>">Hito <?= e((string) $i) ?></a></li>
@@ -36,7 +38,7 @@ if (Auth::check()) {
         </li>
         <li class="nav-cta">
           <a class="nav-btn" href="<?= e($site['github_rpg']) ?>" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-github"></i> <?= e(t('nav.github')) ?>
+            <i class="fab fa-github" aria-hidden="true" focusable="false"></i> <?= e(t('nav.github')) ?>
           </a>
         </li>
         <?php if (Auth::check()): ?>
@@ -48,9 +50,9 @@ if (Auth::check()) {
           <a class="lang-link<?= $pageLang === 'en' ? ' active' : '' ?>" href="<?= e(with_lang($_SERVER['REQUEST_URI'] ?? $homeUrl, 'en')) ?>"><?= e(t('lang.en')) ?></a>
         </li>
       </ul>
-      <div class="hamburger" id="hamburger" aria-label="<?= e(t('nav.toggle')) ?>" role="button" tabindex="0">
+      <button type="button" class="hamburger" id="hamburger" aria-label="<?= e(t('nav.toggle')) ?>" aria-expanded="false">
         <span></span><span></span><span></span>
-      </div>
+      </button>
     </nav>
   </div>
 </header>
