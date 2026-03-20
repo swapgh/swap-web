@@ -47,7 +47,7 @@ $gamesUrl = page_url('#featured-games'); // Anchor link to featured games
       <!-- =======================
            Code Repositories
            ======================= -->
-      <div class="footer-column">
+      <div class="footer-column footer-optional">
         <span class="footer-title"><?= e(t('footer.repositories')) ?></span>
         <div class="footer-links">
           <!-- External links to GitHub repositories -->
@@ -59,7 +59,7 @@ $gamesUrl = page_url('#featured-games'); // Anchor link to featured games
       <!-- =======================
            Legal Information
            ======================= -->
-      <div class="footer-column">
+      <div class="footer-column footer-optional">
         <span class="footer-title"><?= e(t('footer.legal')) ?></span>
         <div class="footer-links">
           <a href="<?= e(with_lang(page_url('privacy'))) ?>"><?= e(t('footer.privacy')) ?></a>
@@ -70,7 +70,7 @@ $gamesUrl = page_url('#featured-games'); // Anchor link to featured games
       <!-- =======================
            Contact Information
            ======================= -->
-      <div class="footer-column">
+      <div class="footer-column footer-contact-column">
         <span class="footer-title"><?= e(t('footer.contact_title')) ?></span>
         <div class="footer-links">
           <!-- Email link -->

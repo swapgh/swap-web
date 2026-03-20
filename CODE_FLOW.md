@@ -1,149 +1,210 @@
 # CODE_FLOW
 
-## Current Structure
+## Runtime Entry
 
 - `www/index.php`
-  - boots the app
+  - loads `app/Support/bootstrap.php`
   - starts the session
-  - loads `routes/web.php`
-  - loads `routes/api.php`
-  - tracks page views
+  - loads `routes/web.php` and `routes/api.php`
+  - tracks page views through `App\Services\AnalyticsService`
   - dispatches the request through `App\Core\Router`
 
+- `www/router.php`
+  - supports the PHP built-in server in local development
+  - serves real files from `www/` directly
+  - falls back to `www/index.php` for application routes
+
+## Active App Layers
+
+### Support and Core
+
+- `app/Support/bootstrap.php`
+  - autoloads `App\...`
+  - loads config
+  - defines helpers for URLs, money formatting, dates, CSRF, and page language
+  - initializes translations and the global site/page context
+
+- `app/Support/i18n.php`
+  - loads `lang/es.php` and `lang/en.php`
+  - exposes `t(...)`
+
+- `app/Core/Router.php`
+  - registers `GET` and `POST` routes
+  - dispatches exact-match paths
+  - executes route middleware before handlers
+
+- `app/Core/Controller.php`
+  - renders views
+  - sends JSON responses
+  - centralizes sensitive-page and no-store response headers
+
+- `app/Core/View.php`
+  - resolves dot-notation views into `app/Views/...`
+  - injects shared globals plus controller data
+
+- `app/Core/Auth.php`
+  - wraps current session-based auth state
+
+- `app/Core/Session.php`
+  - stores sessions under `storage/cache/sessions`
+  - provides flash helpers and invalidation
+
+### Web HTTP Layer
+
 - `routes/web.php`
-  - registers the public web routes
-  - maps them to `App\Http\Controllers\Web\...`
-  - protects account routes with `App\Http\Middleware\RequireAuth`
-
-- `routes/api.php`
-  - registers API routes
-  - exposes `/api/health`
-  - exposes auth endpoints such as `/api/auth/login`
-  - exposes account endpoints such as `/api/account/profile`
-  - maps them to `App\Http\Controllers\Api\...`
-
-## HTTP Layer
+  - public routes:
+    - `/`
+    - `/projects/swap-rpg`
+    - `/games/*`
+    - `/contact`
+    - `/help`
+    - `/privacy`
+    - `/cookies`
+  - auth/account routes:
+    - `/login`
+    - `/profile`
+    - `/billing/history`
+    - `/characters`
 
 - `app/Http/Controllers/Web/HomeController.php`
   - renders the homepage
-  - renders the 404 page
+  - renders the active 404 page
 
 - `app/Http/Controllers/Web/PageController.php`
-  - renders the static public pages:
-    - project
-    - contact
-    - help
-    - privacy
-    - cookies
+  - renders static/public project and game pages using content builders
 
 - `app/Http/Controllers/Web/AuthController.php`
-  - shows the login page
-  - handles login
-  - handles logout
+  - shows login
+  - handles login/logout
+  - marks auth pages as non-indexable and non-cacheable
 
 - `app/Http/Controllers/Web/ProfileController.php`
-  - renders the signed-in profile page
+  - renders the private profile/account dashboard
+
+- `app/Http/Controllers/Web/BillingController.php`
+  - renders billing history
+  - starts web checkout
 
 - `app/Http/Controllers/Web/CharacterController.php`
-  - renders the signed-in character page
+  - renders the private character/roster page
 
 - `app/Http/Middleware/RequireAuth.php`
   - redirects guests to `/login`
 
-- `app/Http/Controllers/Api/HealthController.php`
-  - returns a JSON health payload for `/api/health`
+### API HTTP Layer
 
-- `app/Http/Controllers/Api/AuthController.php`
-  - handles API login and logout
+- `routes/api.php`
+  - `/api/health`
+  - `/api/auth/login`
+  - `/api/auth/logout`
+  - `/api/account/profile`
+  - `/api/account/characters`
+  - `/api/billing/config`
+  - `/api/billing/checkout`
+  - `/api/billing/webhook`
 
-- `app/Http/Controllers/Api/AccountController.php`
-  - returns the current profile and character data
-
-- `app/Http/Controllers/Api/BillingController.php`
-  - exposes billing config
-  - creates placeholder checkout sessions
-  - reads the latest or requested checkout session
-
-- `app/Http/Controllers/Api/BillingWebhookController.php`
-  - accepts billing webhook events
-  - updates persisted checkout status records
+- `app/Http/Controllers/Api/*.php`
+  - expose JSON contracts for auth, account, billing, and health
+  - all JSON responses go through `Controller::json(...)`
 
 - `app/Http/Middleware/RequireApiAuth.php`
-  - returns `401` JSON for unauthenticated API requests
+  - returns `401` JSON when the current session is not authenticated
 
-## Content Layer
+### Content Layer
 
 - `app/Content/Web/home-page.php`
-  - builds the structured data used by the homepage
+  - builds the homepage content structure
+  - defines hero, carousel, featured games, and CTA copy
 
 - `app/Content/Web/site-pages.php`
-  - builds the structured data for public static pages
+  - builds the public page content for project, contact, legal pages, and featured-game detail pages
 
-## Domain Layer
+### Domain Layer
 
-- `app/Domain/Auth/Entities/User.php`
-  - defines the current placeholder authenticated user payload
+- `app/Domain/Auth`
+  - DTOs for login input/result
+  - placeholder user repository
+  - `LoginManager` for session login/logout orchestration
 
-- `app/Domain/Auth/DTOs/LoginCredentials.php`
-  - defines normalized login input
+- `app/Domain/Account`
+  - `ProfileReader` for current account payloads
+  - `CharacterCatalog` and `CharacterRepository` for the current roster data
 
-- `app/Domain/Auth/DTOs/AuthResult.php`
-  - defines the login result contract
+- `app/Domain/Billing`
+  - DTOs for checkout and webhook data
+  - gateway abstraction plus placeholder and Stripe gateways
+  - `CheckoutService`, `CheckoutGatewayFactory`, `WebhookProcessor`, `StripeWebhookVerifier`
+  - repositories for billing records and webhook events
 
-- `app/Domain/Auth/Repositories/PlaceholderUserRepository.php`
-  - resolves the current placeholder user source
+### Infrastructure
 
-- `app/Domain/Auth/Services/LoginManager.php`
-  - validates sign-in input
-  - logs users into the current session
-  - centralizes logout for web and API flows
+- `app/Infrastructure/Database/Connection.php`
+  - creates the PDO connection from `config/database.php`
 
-- `app/Domain/Account/Services/CharacterCatalog.php`
-  - provides the current placeholder character roster
+- `app/Infrastructure/Database/Migrator.php`
+  - runs SQL migrations from `database/migrations`
 
-- `app/Domain/Account/Services/ProfileReader.php`
-  - shapes the current signed-in profile payload
+- `scripts/migrate.php`
+  - CLI entrypoint for migrations
 
-- `app/Domain/Billing/Services/CheckoutService.php`
-  - validates checkout input
-  - creates checkout sessions through the configured gateway
-  - reads persisted checkout state
+## View and Asset Structure
 
-- `app/Domain/Billing/Services/CheckoutGatewayFactory.php`
-  - resolves the active billing gateway from config
-
-- `app/Domain/Billing/Services/WebhookProcessor.php`
-  - maps webhook events to persisted billing status updates
-
-- `app/Domain/Billing/Services/StripeWebhookVerifier.php`
-  - validates Stripe webhook signatures using the configured webhook secret
-
-- `app/Domain/Billing/Gateways/StripeCheckoutGateway.php`
-  - creates Stripe checkout sessions through Stripe's HTTPS API when Stripe is configured
-
-## Views
+### Views in Use
 
 - `app/Views/web/layouts/`
-  - shared head, header, footer, and scripts
+  - `head.php`
+  - `header.php`
+  - `footer.php`
+  - `scripts.php`
 
 - `app/Views/web/pages/`
   - `home.php`
   - `page.php`
   - `login.php`
   - `profile.php`
+  - `billing-history.php`
   - `characters.php`
   - `404.php`
 
-## Current Direction
+### CSS in Use
 
-- `app/Http/...` is the web delivery layer
-- `app/Http/Controllers/Api/...` is the API delivery layer
-- `app/Content/...` holds page-content builders
-- `app/Domain/...` holds feature-oriented business logic
-- `app/Services/...` currently holds cross-cutting services such as analytics
+- `www/assets/css/system/`
+  - `base.css`
+  - `components.css`
+  - `layout.css`
+  - `chrome.css`
+  - `pages.css`
 
-## Next Refactor Candidates
+- `www/assets/css/pages/`
+  - `home.css`
+  - `auth.css`
+  - `site.css`
 
-- add request/response DTOs for API endpoints as the surface grows
-- introduce repositories or gateways inside each domain once persistence starts
-- split config and service wiring once auth, billing, and API integrations become real
+### JavaScript in Use
+
+- `www/assets/js/main.js`
+  - shared site/header behavior
+
+- `www/assets/js/home.js`
+  - homepage carousel/filter behavior
+
+## Persistence and Sensitive Data
+
+- sessions live under `storage/cache/sessions`
+- file-backed billing fallback lives under `storage/billing/`
+- `storage/billing/` is intentionally gitignored
+- private pages are rendered with `noindex,nofollow,noarchive`
+- JSON API responses send `no-store`/`no-cache`
+
+## Local Development
+
+- start the local server with:
+  - `php -S localhost:8000 -t www www/router.php`
+
+- if DB-backed billing is needed:
+  - configure `DB_*`
+  - run `php scripts/migrate.php`
+
+## Current Source of Truth
+
+The active architecture is the `app/Http`, `app/Domain`, `app/Content`, and `app/Views/web` layout above. That is the structure future changes should follow.

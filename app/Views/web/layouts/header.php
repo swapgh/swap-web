@@ -68,21 +68,21 @@ $navItems = [
               <a href="<?= e(with_lang(page_url('login'))) ?>" role="menuitem">
                 <?= e(t('nav.login')) ?>
               </a>
-              <a href="<?= e(with_lang(page_url('login'))) ?>" role="menuitem">
+              <a href="<?= e(with_lang(page_url('login'))) ?>" role="menuitem" class="nav-optional">
                 <?= e(t('nav.signup')) ?>
               </a>
             <?php endif; ?>
-            <a href="<?= e($supportUrl) ?>" role="menuitem">
+            <a href="<?= e($supportUrl) ?>" role="menuitem" class="nav-optional">
               <?= e(t('nav.support')) ?>
             </a>
-            <button type="button" class="dropdown-item disabled" disabled>
+            <button type="button" class="dropdown-item disabled nav-optional" disabled>
               <?= e(t('nav.shop')) ?>
             </button>
             <a href="<?= e($downloadUrl) ?>" role="menuitem">
               <?= e(t('nav.download')) ?>
             </a>
             <?php if ($isAuthenticated): ?>
-              <a href="<?= e($projectUrl) ?>" role="menuitem">
+              <a href="<?= e($projectUrl) ?>" role="menuitem" class="nav-optional">
                 <?= e(t('nav.project')) ?>
               </a>
               <form action="<?= e(with_lang(page_url('logout'))) ?>" method="post" class="dropdown-form">

@@ -103,9 +103,9 @@ require __DIR__ . '/../layouts/header.php';
         </div>
 
         <div class="hero-actions hero-actions-left">
-          <?php foreach ($home['hero']['actions'] as $action): ?>
+          <?php foreach ($home['hero']['actions'] as $index => $action): ?>
             <?php $actionHref = $action['external'] ? $action['href'] : with_lang(page_url($action['href'])); ?>
-            <a class="btn btn-<?= e($action['variant']) ?>" href="<?= e($actionHref) ?>"<?= $action['external'] ? ' target="_blank" rel="noopener noreferrer"' : '' ?>>
+            <a class="btn btn-<?= e($action['variant']) ?><?= $index > 1 ? ' hero-action-optional' : '' ?>" href="<?= e($actionHref) ?>"<?= $action['external'] ? ' target="_blank" rel="noopener noreferrer"' : '' ?>>
               <?php if (!empty($action['icon'])): ?>
                 <i class="<?= e($action['icon']) ?>" aria-hidden="true"></i>
               <?php endif; ?>
