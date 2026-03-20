@@ -1,4 +1,7 @@
 storage/cache/
 storage/logs/
-
-
+storage/billing/
+.agents
+.playwright-mcp
+.vscode
+skills-lock.json

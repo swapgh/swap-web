@@ -1,0 +1,790 @@
+/* ===============================================
+   Variables globales de color y sombras
+   =============================================== */
+:root {
+  --home-bg-deep: #050811;           /* Fondo más oscuro de la página */
+  --home-bg-mid: #0a1220;            /* Fondo intermedio */
+  --home-panel: rgba(9, 14, 24, 0.86);      /* Panel semi-transparente */
+  --home-panel-strong: rgba(8, 12, 20, 0.94); /* Panel más oscuro */
+  --home-line: rgba(255, 255, 255, 0.1);    /* Línea ligera */
+  --home-line-strong: rgba(125, 211, 255, 0.22); /* Línea acentuada */
+  --home-text: #f4efe5;              /* Color de texto principal */
+  --home-muted: #b7c2d6;             /* Texto secundario / desaturado */
+  --home-accent: #7dd3ff;            /* Color de acento principal */
+  --home-accent-warm: #ffd67a;       /* Color de acento cálido */
+  --home-shadow: 0 28px 90px rgba(0, 0, 0, 0.42); /* Sombra para paneles */
+}
+
+/* ===============================================
+   Fondo de la página principal
+   =============================================== */
+.portfolio-page {
+  margin-top: -70px; /* Ajuste para solapar encabezado */
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(0, 170, 255, 0.18), transparent 24%),
+    radial-gradient(circle at 82% 14%, rgba(255, 214, 122, 0.1), transparent 18%),
+    radial-gradient(circle at 50% 100%, rgba(125, 211, 255, 0.06), transparent 26%),
+    linear-gradient(180deg, #09111d 0%, #060910 44%, #04060b 100%);
+}
+
+/* Efecto de overlay con líneas sutiles */
+.portfolio-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 26%),
+    url("data:image/svg+xml,..."); /* Patrón de líneas */
+  opacity: 0.75;
+}
+
+/* Contenedores generales de la página y hero */
+.portfolio-page .container,
+.hero-shell {
+  width: calc(100vw - 24px);
+  margin: 0 auto;
+}
+
+/* Secciones que eliminan padding y max-width por defecto */
+.games-section .container,
+.hero-banner .container,
+.intro-feature .container {
+  max-width: none;
+  padding: 0;
+}
+
+/* ===============================================
+   Hero, panel y secciones principales
+   =============================================== */
+.hero-panel,
+.hero-banner,
+.intro-feature {
+  position: relative;
+  padding: 2.35rem 0;
+}
+
+/* Sección de juegos */
+.games-section {
+  position: relative;
+  padding: 0 0 1.7rem;
+}
+
+/* Titulos de secciones */
+.section-heading {
+  max-width: 760px;
+  margin-bottom: 1rem;
+}
+
+.section-heading-compact {
+  margin-bottom: 0.55rem;
+}
+
+/* Etiquetas y chips de secciones y tarjetas */
+.section-eyebrow,
+.game-card-focus,
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.section-eyebrow,
+.game-card-focus {
+  color: var(--home-accent-warm);
+}
+
+/* Tipografía de títulos */
+.section-heading h2,
+.hero-copy h1,
+.intro-copy h2,
+.game-card-body h3,
+.showcase-slide figcaption strong {
+  font-family: "Cinzel", Georgia, serif;
+  letter-spacing: -0.03em;
+}
+
+.section-heading h2 {
+  margin-top: 0.7rem;
+  font-size: clamp(2.2rem, 4vw, 4.1rem);
+  line-height: 0.98;
+}
+
+/* Textos secundarios y descripciones */
+.section-heading p,
+.hero-subtitle,
+.hero-description,
+.game-card-body p,
+.intro-copy p,
+.showcase-slide figcaption span,
+.stat-card span {
+  color: var(--home-muted);
+  font-family: "Manrope", sans-serif;
+}
+
+/* Paneles y tarjetas */
+.hero-copy,
+.hero-carousel-wrap,
+.intro-feature-card,
+.game-card {
+  border: 1px solid var(--home-line);
+  box-shadow: var(--home-shadow);
+}
+
+/* Hero principal */
+.hero-copy {
+  display: grid;
+  align-content: start;
+  gap: 0.95rem;
+  padding: clamp(1.5rem, 3vw, 2.35rem);
+  border-radius: 30px;
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+}
+
+.hero-copy h1 {
+  font-size: clamp(3.1rem, 7vw, 5.9rem);
+  line-height: 0.88;
+}
+
+.hero-subtitle {
+  max-width: 32ch;
+  margin: 0 auto;
+  font-size: clamp(1.05rem, 1.7vw, 1.32rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.hero-description {
+  max-width: 56ch;
+  margin: 0 auto;
+}
+
+/* Chips de hero */
+.hero-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.hero-chip {
+  padding: 0.55rem 0.82rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--home-text);
+  letter-spacing: 0.08em;
+}
+
+/* Alineación de botones */
+.hero-actions-left {
+  justify-content: center;
+}
+
+/* Estadísticas del hero */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.25rem;
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+.stat-card {
+  padding: 1rem 1.05rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.stat-card strong {
+  display: block;
+  color: var(--home-accent-warm);
+  font-family: "Cinzel", serif;
+  font-size: 2rem;
+}
+
+/* Carousel de hero */
+.hero-carousel-wrap {
+  padding: 0.85rem 0.85rem 0.8rem;
+  border-radius: 0 0 32px 32px;
+  background:
+    radial-gradient(circle at top right, rgba(125, 211, 255, 0.08), transparent 20%),
+    linear-gradient(180deg, rgba(9, 14, 24, 0.98), rgba(6, 10, 17, 0.92));
+}
+
+/* ===============================================
+   Carousel de showcases / sliders de imágenes
+   =============================================== */
+.showcase-carousel {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 24px;
+  background: rgba(6, 10, 17, 0.72);
+}
+
+.showcase-viewport {
+  overflow: hidden;
+  padding: 0.85rem 0.15rem 0.65rem;
+}
+
+.showcase-track {
+  display: flex;
+  align-items: center;
+  min-height: clamp(340px, 58vh, 660px);
+  transition: transform 420ms ease;
+}
+
+.showcase-slide {
+  flex: 0 0 33.333%;
+  padding: 0 0.6rem;
+  opacity: 0.36;
+  transform: scale(0.86);
+  filter: brightness(0.56) saturate(0.88);
+  transition: transform 360ms ease, opacity 360ms ease, filter 360ms ease;
+}
+
+/* Slide activo y resaltado */
+.showcase-slide.active {
+  opacity: 1;
+  transform: scale(1.01);
+  filter: none;
+  z-index: 2;
+}
+
+.showcase-slide.prev,
+.showcase-slide.next {
+  opacity: 0.72;
+  transform: scale(0.91);
+  filter: brightness(0.82);
+}
+
+.showcase-slide-inner {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #0a1220;
+}
+
+.showcase-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.showcase-slide figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 1rem;
+  background: linear-gradient(180deg, transparent 48%, rgba(2, 5, 11, 0.66));
+}
+
+/* Botones y acciones del carousel */
+.carousel-actions {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.carousel-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-width: 96px;
+  padding: 0.64rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(8, 13, 23, 0.6);
+  color: var(--home-text);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.carousel-link i {
+  font-size: 0.78rem;
+}
+
+/* Botones de navegación del slider */
+.showcase-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  width: 3rem;
+  height: 3rem;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(8, 13, 23, 0.7);
+  color: var(--text-main);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.showcase-btn-left {
+  left: 1rem;
+}
+
+.showcase-btn-right {
+  right: 1rem;
+}
+
+.showcase-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.55rem;
+  padding-bottom: 1rem;
+}
+
+.showcase-dot {
+  width: 0.72rem;
+  height: 0.72rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+}
+
+.showcase-dot.active {
+  background: var(--home-accent-warm);
+}
+
+/* ===============================================
+   Filtro de juegos y chips
+   =============================================== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-bottom: 0.55rem;
+}
+
+.filter-chip {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--home-text);
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.filter-chip.active {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #07111d;
+}
+
+/* ===============================================
+   Grid de juegos
+   =============================================== */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+/* Tarjetas de juegos */
+.game-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  border-radius: 26px;
+  background: linear-gradient(180deg, rgba(10, 15, 25, 0.96), rgba(7, 11, 18, 0.92));
+}
+
+/* Media de la tarjeta */
+.game-card-media {
+  position: relative;
+  min-height: 280px;
+  background-position: center;
+  background-size: cover;
+}
+
+/* Chip de foco de la tarjeta */
+.game-card-focus {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(8, 13, 23, 0.68);
+  letter-spacing: 0.08em;
+}
+
+/* Cuerpo de la tarjeta */
+.game-card-body {
+  display: grid;
+  align-content: start;
+  gap: 0.55rem;
+  padding: 1rem 1.05rem 1.1rem;
+}
+
+/* Línea superior de la tarjeta con plataformas */
+.game-card-topline {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+
+.game-card-topline .featured-platform {
+  order: -1;
+}
+
+/* Título de la tarjeta */
+.game-card-body h3 {
+  font-size: 1.45rem;
+  line-height: 1.02;
+}
+
+.game-card-summary {
+  margin: 0.8rem 0 1rem;
+  color: var(--home-muted);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+/* Plataforma destacada */
+.featured-platform {
+  padding: 0.36rem 0.72rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--home-text);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Enlaces de texto con acento */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--home-accent-warm);
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.text-link i {
+  font-size: 0.84rem;
+}
+
+/* ===============================================
+   Intro-feature section
+   =============================================== */
+.intro-feature-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+  gap: 1.2rem;
+  padding: clamp(1.45rem, 3vw, 2.3rem);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 214, 122, 0.08), transparent 18%),
+    linear-gradient(135deg, rgba(10, 15, 25, 0.98), rgba(7, 10, 17, 0.92));
+}
+
+/* Copia de la intro */
+.intro-copy h2 {
+  margin-top: 0.7rem;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 0.98;
+}
+
+.intro-copy p {
+  max-width: 62ch;
+  margin-top: 1rem;
+}
+
+.intro-side {
+  display: grid;
+  align-content: center;
+}
+
+/* Puntos destacados de la intro */
+.intro-points {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.03);
+  list-style: none;
+}
+
+.intro-points li {
+  color: var(--home-text);
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+}
+
+.intro-points li::before {
+  content: "•";
+  margin-right: 0.55rem;
+  color: var(--home-accent-warm);
+}
+
+/* Efectos de animación al revelar */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 420ms ease, transform 420ms ease;
+}
+
+.reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Ocultar tarjetas filtradas */
+.game-card.is-hidden {
+  display: none;
+}
+
+/* ===============================================
+   Media queries para responsive design
+   =============================================== */
+/* Adaptación hasta 1180px */
+@media (max-width: 1180px) {
+  .intro-feature-card,
+  .game-card {
+    grid-template-columns: 1fr;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-copy,
+  .intro-feature-card {
+    padding: 1.4rem;
+  }
+
+  .showcase-track,
+  .showcase-slide img {
+    min-height: 380px;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Adaptación pantallas muy grandes (>1600px) */
+@media (min-width: 1600px) {
+  .portfolio-page .container,
+  .hero-shell {
+    width: calc(100vw - 32px);
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .game-card-media {
+    min-height: 300px;
+  }
+}
+
+/* Adaptación hasta 1080px */
+@media (max-width: 1080px) {
+  .portfolio-page .container,
+  .hero-shell {
+    width: calc(100vw - 18px);
+  }
+
+  .showcase-carousel {
+    border-radius: 20px;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .showcase-slide {
+    flex-basis: 100%;
+    padding: 0 0.45rem;
+    opacity: 0.28;
+    transform: scale(0.96);
+    filter: none;
+  }
+
+  .showcase-slide.active {
+    transform: scale(1);
+  }
+
+  .showcase-slide.prev,
+  .showcase-slide.next {
+    opacity: 0.28;
+    transform: scale(0.96);
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-feature-card {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-side {
+    align-content: start;
+  }
+}
+
+/* Adaptación hasta 768px (tablets y móviles grandes) */
+@media (max-width: 768px) {
+  .portfolio-page .container,
+  .hero-shell {
+    width: calc(100vw - 14px);
+  }
+
+  .games-section .container,
+  .hero-banner .container,
+  .intro-feature .container {
+    padding: 0;
+  }
+
+  .hero-panel,
+  .games-section,
+  .hero-banner,
+  .intro-feature {
+    padding: 2.1rem 0;
+  }
+
+  .hero-copy,
+  .hero-carousel-wrap,
+  .intro-feature-card {
+    border-radius: 20px;
+  }
+
+  .hero-carousel-wrap {
+    border-radius: 0 0 20px 20px;
+    padding: 0.7rem 0.7rem 0.65rem;
+  }
+
+  .section-heading h2,
+  .intro-copy h2 {
+    font-size: clamp(1.8rem, 9vw, 2.6rem);
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.6rem, 14vw, 4rem);
+  }
+
+  .hero-subtitle {
+    max-width: none;
+  }
+
+  .hero-description {
+    max-width: 44ch;
+  }
+
+  .showcase-track,
+  .showcase-slide img {
+    min-height: 280px;
+  }
+
+  .showcase-btn {
+    display: none;
+  }
+
+  .carousel-actions {
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .carousel-link {
+    min-width: 88px;
+    padding: 0.58rem 0.8rem;
+    font-size: 0.74rem;
+  }
+
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .game-card-topline {
+    flex-direction: column;
+  }
+
+  .game-card-topline .featured-platform {
+    order: 0;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    gap: 0.7rem;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Adaptación hasta 480px (móviles pequeños) */
+@media (max-width: 480px) {
+  .portfolio-page {
+    margin-top: -62px;
+  }
+
+  .showcase-track,
+  .showcase-slide img {
+    min-height: 236px;
+  }
+
+  .showcase-slide figcaption {
+    padding: 0.85rem;
+  }
+
+  .hero-copy,
+  .intro-feature-card {
+    padding: 1rem;
+  }
+
+  .game-card-body {
+    padding: 0.9rem;
+  }
+
+  .filter-chip {
+    padding: 0.66rem 0.82rem;
+    font-size: 0.88rem;
+  }
+}

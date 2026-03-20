@@ -1,0 +1,361 @@
+<?php
+declare(strict_types=1);
+
+/**
+ * Returns the structured content for the homepage.
+ *
+ * @param string $lang The current language code ('es' or 'en')
+ * @param array $site Global site configuration (GitHub links, assets, etc.)
+ * @return array Structured homepage content
+ */
+function build_home_page_content(string $lang, array $site): array
+{
+    $content = [
+        'es' => [
+            'title' => 'Swap RPG | Portfolio premium del proyecto',
+            'description' => 'Portfolio y landing page para Swap RPG: identidad del juego, proyectos destacados y una entrada mas clara al universo del portfolio.',
+            'hero' => [
+                'eyebrow' => 'Portfolio + Game Landing',
+                'title' => 'Swap RPG',
+                'subtitle' => 'Un RPG 2D en Java presentado como portfolio y como producto.',
+                'description' => 'Una home mas limpia para entender rapido el proyecto principal, descubrir juegos relacionados y dejar la descarga solo donde realmente importa.',
+                'background_image' => 'images/misc/liminal3.jpg',
+                'actions' => [
+                    [
+                        'label' => 'Ver pagina del proyecto',
+                        'href' => 'projects/swap-rpg',
+                        'external' => false,
+                        'variant' => 'primary',
+                        'icon' => 'fas fa-gamepad',
+                    ],
+                    [
+                        'label' => 'Descargar demo',
+                        'href' => asset_url('downloads/demo.zip'),
+                        'external' => true,
+                        'variant' => 'secondary',
+                        'icon' => 'fas fa-download',
+                    ],
+                    [
+                        'label' => 'Ver repositorio',
+                        'href' => $site['github_rpg'],
+                        'external' => true,
+                        'variant' => 'ghost',
+                        'icon' => 'fab fa-github',
+                    ],
+                ],
+                'chips' => [
+                    'Java + Swing',
+                    '2D dark fantasy',
+                    'Playable prototype',
+                ],
+                'stats' => [
+                    ['value' => '6', 'label' => 'juegos destacados'],
+                    ['value' => '1', 'label' => 'descarga principal'],
+                    ['value' => '1', 'label' => 'hub central'],
+                ],
+            ],
+            'carousel' => [
+                'aria_label' => 'Momentos destacados de Swap RPG',
+                'actions' => [
+                    [
+                        'label' => 'Proyecto',
+                        'href' => 'projects/swap-rpg',
+                        'external' => false,
+                        'icon' => 'fas fa-compass',
+                    ],
+                    [
+                        'label' => 'Repositorio',
+                        'href' => $site['github_rpg'],
+                        'external' => true,
+                        'icon' => 'fab fa-github',
+                    ],
+                ],
+                'slides' => [
+                    [
+                        'image' => 'images/milestones/1_Title.png',
+                        'alt' => 'Pantalla de titulo de Swap RPG',
+                    ],
+                    [
+                        'image' => 'images/milestones/1_Class.png',
+                        'alt' => 'Seleccion de clase del jugador',
+                    ],
+                    [
+                        'image' => 'images/milestones/1_Enemy.png',
+                        'alt' => 'Combate contra enemigo en Swap RPG',
+                    ],
+                ],
+            ],
+            'games' => [
+                'title' => 'JUEGOS DESTACADOS',
+                'filters_label' => 'Filtrar juegos por plataforma',
+                'filters' => [
+                    ['key' => 'all', 'label' => 'Todos'],
+                    ['key' => 'pc', 'label' => 'PC'],
+                    ['key' => 'playstation', 'label' => 'PlayStation'],
+                    ['key' => 'switch', 'label' => 'Switch'],
+                    ['key' => 'xbox', 'label' => 'Xbox'],
+                ],
+                'cards' => [
+                    [
+                        'name' => 'Swap RPG',
+                        'platform_label' => 'PC · Switch',
+                        'platform_tags' => ['pc', 'switch'],
+                        'focus' => 'Core Identity',
+                        'image' => 'images/milestones/1_Title.png',
+                        'summary' => 'El RPG insignia del portfolio: fantasia oscura, exploracion compacta y combate por turnos con identidad propia.',
+                        'href' => 'projects/swap-rpg',
+                        'external' => false,
+                        'cta' => 'Abrir pagina',
+                        'icon' => 'fas fa-arrow-right',
+                    ],
+                    [
+                        'name' => 'Class Select',
+                        'platform_label' => 'PC · PlayStation',
+                        'platform_tags' => ['pc', 'playstation'],
+                        'focus' => 'UI / Flow',
+                        'image' => 'images/milestones/1_Class.png',
+                        'summary' => 'Un RPG tactico corto centrado en composicion de grupo, lectura rapida de clases y decisiones previas al combate.',
+                        'href' => 'games/class-select',
+                        'external' => false,
+                        'cta' => 'Ver juego',
+                        'icon' => 'fas fa-gamepad',
+                    ],
+                    [
+                        'name' => 'Combat Slice',
+                        'platform_label' => 'PC · Xbox',
+                        'platform_tags' => ['pc', 'xbox'],
+                        'focus' => 'Systems',
+                        'image' => 'images/milestones/1_Enemy.png',
+                        'summary' => 'Un action RPG compacto orientado a encuentros intensos, telegraphs claros y progresion agresiva.',
+                        'href' => 'games/combat-slice',
+                        'external' => false,
+                        'cta' => 'Ver juego',
+                        'icon' => 'fas fa-bolt',
+                    ],
+                    [
+                        'name' => 'Dark Biome',
+                        'platform_label' => 'Switch',
+                        'platform_tags' => ['switch'],
+                        'focus' => 'Worldbuilding',
+                        'image' => 'images/misc/Dark_Tree.png',
+                        'summary' => 'Una aventura atmosferica de exploracion breve donde el bosque y la ambientacion sostienen toda la experiencia.',
+                        'href' => 'games/dark-biome',
+                        'external' => false,
+                        'cta' => 'Ver juego',
+                        'icon' => 'fas fa-tree',
+                    ],
+                    [
+                        'name' => 'Rogue Build',
+                        'platform_label' => 'PlayStation',
+                        'platform_tags' => ['playstation'],
+                        'focus' => 'Character Readability',
+                        'image' => 'images/characters/rogue.png',
+                        'summary' => 'Un dungeon crawler rapido donde sigilo, movilidad y legibilidad del personaje marcan el ritmo completo.',
+                        'href' => 'games/rogue-build',
+                        'external' => false,
+                        'cta' => 'Ver juego',
+                        'icon' => 'fas fa-user-secret',
+                    ],
+                    [
+                        'name' => 'Liminal Zone',
+                        'platform_label' => 'Switch · Xbox',
+                        'platform_tags' => ['switch', 'xbox'],
+                        'focus' => 'Atmosphere',
+                        'image' => 'images/misc/liminal2.png',
+                        'summary' => 'Una experiencia narrativa corta apoyada en espacios surrealistas, color contenido y tension constante.',
+                        'href' => 'games/liminal-zone',
+                        'external' => false,
+                        'cta' => 'Ver juego',
+                        'icon' => 'fas fa-moon',
+                    ],
+                ],
+            ],
+            'intro_feature' => [
+                'eyebrow' => 'Why This Project Matters',
+                'title' => 'Una home mas clara para enseñar el proyecto principal sin saturar la salida.',
+                'description' => 'La pagina gana cuando una sola descarga destaca, el proyecto principal queda arriba del todo y los juegos secundarios funcionan como piezas con identidad propia y pagina dedicada.',
+                'points' => [
+                    'Menos friccion entre descubrir el proyecto y salir del sitio.',
+                    'Cada imagen destacada funciona como un juego con contexto propio.',
+                    'Los iconos ayudan a leer si un enlace abre proyecto, repo o detalle.',
+                ],
+                'primary_cta' => 'Explorar pagina del proyecto',
+                'secondary_cta' => 'Contactar',
+            ],
+        ],
+        'en' => [
+            'title' => 'Swap RPG | Premium project portfolio',
+            'description' => 'Portfolio and landing page for Swap RPG: game identity, featured projects, and a cleaner entry point into the portfolio world.',
+            'hero' => [
+                'eyebrow' => 'Portfolio + Game Landing',
+                'title' => 'Swap RPG',
+                'subtitle' => 'A Java 2D RPG presented as both portfolio and product.',
+                'description' => 'A cleaner homepage to understand the flagship project quickly, discover related games, and keep download pressure to a single clear entry point.',
+                'background_image' => 'images/misc/liminal3.jpg',
+                'actions' => [
+                    [
+                        'label' => 'Open project page',
+                        'href' => 'projects/swap-rpg',
+                        'external' => false,
+                        'variant' => 'primary',
+                        'icon' => 'fas fa-gamepad',
+                    ],
+                    [
+                        'label' => 'Download demo',
+                        'href' => asset_url('downloads/demo.zip'),
+                        'external' => true,
+                        'variant' => 'secondary',
+                        'icon' => 'fas fa-download',
+                    ],
+                    [
+                        'label' => 'View repository',
+                        'href' => $site['github_rpg'],
+                        'external' => true,
+                        'variant' => 'ghost',
+                        'icon' => 'fab fa-github',
+                    ],
+                ],
+                'chips' => [
+                    'Java + Swing',
+                    '2D dark fantasy',
+                    'Playable prototype',
+                ],
+                'stats' => [
+                    ['value' => '6', 'label' => 'featured games'],
+                    ['value' => '1', 'label' => 'main download'],
+                    ['value' => '1', 'label' => 'central hub'],
+                ],
+            ],
+            'carousel' => [
+                'aria_label' => 'Swap RPG featured moments',
+                'actions' => [
+                    [
+                        'label' => 'Project',
+                        'href' => 'projects/swap-rpg',
+                        'external' => false,
+                        'icon' => 'fas fa-compass',
+                    ],
+                    [
+                        'label' => 'Repository',
+                        'href' => $site['github_rpg'],
+                        'external' => true,
+                        'icon' => 'fab fa-github',
+                    ],
+                ],
+                'slides' => [
+                    [
+                        'image' => 'images/milestones/1_Title.png',
+                        'alt' => 'Swap RPG title screen',
+                    ],
+                    [
+                        'image' => 'images/milestones/1_Class.png',
+                        'alt' => 'Player class selection screen',
+                    ],
+                    [
+                        'image' => 'images/milestones/1_Enemy.png',
+                        'alt' => 'Enemy encounter in Swap RPG',
+                    ],
+                ],
+            ],
+            'games' => [
+                'title' => 'FEATURED GAMES',
+                'filters_label' => 'Filter games by platform',
+                'filters' => [
+                    ['key' => 'all', 'label' => 'All'],
+                    ['key' => 'pc', 'label' => 'PC'],
+                    ['key' => 'playstation', 'label' => 'PlayStation'],
+                    ['key' => 'switch', 'label' => 'Switch'],
+                    ['key' => 'xbox', 'label' => 'Xbox'],
+                ],
+                'cards' => [
+                    [
+                        'name' => 'Swap RPG',
+                        'platform_label' => 'PC · Switch',
+                        'platform_tags' => ['pc', 'switch'],
+                        'focus' => 'Core Identity',
+                        'image' => 'images/milestones/1_Title.png',
+                        'summary' => 'The flagship portfolio RPG: dark fantasy, compact exploration, and turn-based combat with a clear identity.',
+                        'href' => 'projects/swap-rpg',
+                        'external' => false,
+                        'cta' => 'Open page',
+                        'icon' => 'fas fa-arrow-right',
+                    ],
+                    [
+                        'name' => 'Class Select',
+                        'platform_label' => 'PC · PlayStation',
+                        'platform_tags' => ['pc', 'playstation'],
+                        'focus' => 'UI / Flow',
+                        'image' => 'images/milestones/1_Class.png',
+                        'summary' => 'A short tactical RPG focused on party composition, class readability, and pre-combat decisions.',
+                        'href' => 'games/class-select',
+                        'external' => false,
+                        'cta' => 'Open game page',
+                        'icon' => 'fas fa-gamepad',
+                    ],
+                    [
+                        'name' => 'Combat Slice',
+                        'platform_label' => 'PC · Xbox',
+                        'platform_tags' => ['pc', 'xbox'],
+                        'focus' => 'Systems',
+                        'image' => 'images/milestones/1_Enemy.png',
+                        'summary' => 'A compact action RPG built around intense encounters, readable telegraphs, and aggressive progression.',
+                        'href' => 'games/combat-slice',
+                        'external' => false,
+                        'cta' => 'Open game page',
+                        'icon' => 'fas fa-bolt',
+                    ],
+                    [
+                        'name' => 'Dark Biome',
+                        'platform_label' => 'Switch',
+                        'platform_tags' => ['switch'],
+                        'focus' => 'Worldbuilding',
+                        'image' => 'images/misc/Dark_Tree.png',
+                        'summary' => 'A short atmospheric exploration game where the forest and environmental storytelling carry the whole experience.',
+                        'href' => 'games/dark-biome',
+                        'external' => false,
+                        'cta' => 'Open game page',
+                        'icon' => 'fas fa-tree',
+                    ],
+                    [
+                        'name' => 'Rogue Build',
+                        'platform_label' => 'PlayStation',
+                        'platform_tags' => ['playstation'],
+                        'focus' => 'Character Readability',
+                        'image' => 'images/characters/rogue.png',
+                        'summary' => 'A fast dungeon crawler where stealth, mobility, and strong character readability set the pace.',
+                        'href' => 'games/rogue-build',
+                        'external' => false,
+                        'cta' => 'Open game page',
+                        'icon' => 'fas fa-user-secret',
+                    ],
+                    [
+                        'name' => 'Liminal Zone',
+                        'platform_label' => 'Switch · Xbox',
+                        'platform_tags' => ['switch', 'xbox'],
+                        'focus' => 'Atmosphere',
+                        'image' => 'images/misc/liminal2.png',
+                        'summary' => 'A short narrative experience driven by surreal spaces, restrained color, and persistent tension.',
+                        'href' => 'games/liminal-zone',
+                        'external' => false,
+                        'cta' => 'Open game page',
+                        'icon' => 'fas fa-moon',
+                    ],
+                ],
+            ],
+            'intro_feature' => [
+                'eyebrow' => 'Why This Project Matters',
+                'title' => 'A clearer homepage that presents the flagship project without crowding the exit paths.',
+                'description' => 'The page works better when one download stands out, the flagship project stays at the top, and the secondary games behave like finished pieces with their own context.',
+                'points' => [
+                    'Less friction between discovering the project and leaving the site.',
+                    'Each featured image now behaves like a game with its own context.',
+                    'Icons make it easier to read whether a link opens a project, repo, or detail page.',
+                ],
+                'primary_cta' => 'Explore project page',
+                'secondary_cta' => 'Get in touch',
+            ],
+        ],
+    ];
+
+    return $content[$lang] ?? $content['es'];
+}
