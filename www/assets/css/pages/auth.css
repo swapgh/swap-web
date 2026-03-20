@@ -9,8 +9,8 @@
   place-items: center;
   padding: 2rem 20px 4rem;
   background:
-    radial-gradient(circle at 16% 10%, rgba(125, 211, 255, 0.12), transparent 24%),
-    radial-gradient(circle at 84% 8%, rgba(255, 214, 122, 0.08), transparent 18%);
+    radial-gradient(circle at 16% 10%, rgba(196, 208, 220, 0.06), transparent 24%),
+    radial-gradient(circle at 84% 8%, rgba(170, 184, 196, 0.04), transparent 18%);
 }
 /* =========================
    Estructura del "shell" de autenticación
@@ -46,9 +46,10 @@
   border-radius: 24px;
   border: 1px solid var(--line-soft);
   background:
-    radial-gradient(circle at top right, rgba(125, 211, 255, 0.08), transparent 20%),
-    linear-gradient(180deg, rgba(11, 18, 30, 0.96), rgba(9, 14, 24, 0.92));
+    radial-gradient(circle at top right, rgba(196, 208, 220, 0.04), transparent 20%),
+    linear-gradient(180deg, rgba(31, 35, 40, 0.74), rgba(17, 19, 23, 0.86));
   box-shadow: var(--shadow-blizzard);
+  backdrop-filter: blur(18px);
 }
 /* =========================
    Tipografía y encabezados
@@ -81,7 +82,7 @@
 
 .auth-copy-banner {
   padding: 1.4rem 1.6rem;
-  background: rgba(8, 13, 23, 0.72);
+  background: rgba(18, 21, 25, 0.66);
 }
 
 .auth-account-hero,
@@ -184,7 +185,7 @@
 .auth-character-card {
   padding: 1.35rem;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(255, 255, 255, 0.035);
 }
 
@@ -205,7 +206,7 @@
 
 .auth-kpi-card {
   padding: 1rem 1.05rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.035);
 }
@@ -236,7 +237,7 @@
 }
 
 .auth-card span {
-  color: #d7e5ff;
+  color: #cdd6df;
   font-size: 0.92rem;
 }
 
@@ -244,9 +245,9 @@
   width: 100%;
   padding: 0.95rem 1rem;
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.03);
-  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text-main);
 }
 /* =========================
    Divisor con texto
@@ -273,7 +274,7 @@
 .auth-divider span {
   position: relative;
   padding: 0 0.85rem;
-  background: rgba(12, 21, 36, 0.88);
+  background: rgba(18, 21, 25, 0.9);
 }
 /* =========================
    Proveedores externos
@@ -286,10 +287,10 @@
 .auth-provider {
   width: 100%;
   padding: 0.95rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.68);
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(230, 235, 241, 0.62);
   font-weight: 600;
   text-align: left;
   cursor: not-allowed;
@@ -355,7 +356,7 @@
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-bottom: 0.85rem;
-  color: #d7e5ff;
+  color: #cdd6df;
   font-size: 0.95rem;
 }
 
@@ -375,10 +376,10 @@
   display: grid;
   gap: 1rem;
   padding: 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 22px;
   background:
-    radial-gradient(circle at top right, rgba(125, 211, 255, 0.08), transparent 22%),
+    radial-gradient(circle at top right, rgba(196, 208, 220, 0.04), transparent 22%),
     rgba(255, 255, 255, 0.03);
 }
 
@@ -416,7 +417,7 @@
   display: grid;
   gap: 0.55rem;
   padding: 1.1rem 1.15rem;
-  border: 1px dashed rgba(255, 255, 255, 0.14);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.02);
 }
@@ -440,7 +441,7 @@
   gap: 0.85rem;
   align-items: center;
   padding: 1rem 1.1rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.03);
 }
@@ -454,7 +455,7 @@
 
 .auth-record-main strong,
 .auth-record-meta strong {
-  color: #fff;
+  color: var(--text-main);
 }
 
 .auth-record-main span,
@@ -509,4 +510,152 @@
   .auth-records-toolbar-actions {
     min-width: 0;
   }
+}
+
+html[data-theme="classic"] .auth-page {
+  background:
+    radial-gradient(circle at 16% 10%, rgba(125, 211, 255, 0.12), transparent 24%),
+    radial-gradient(circle at 84% 8%, rgba(255, 214, 122, 0.08), transparent 18%);
+}
+
+html[data-theme="classic"] .auth-copy,
+html[data-theme="classic"] .auth-card {
+  background:
+    radial-gradient(circle at top right, rgba(125, 211, 255, 0.08), transparent 20%),
+    linear-gradient(180deg, rgba(11, 18, 30, 0.96), rgba(9, 14, 24, 0.92));
+  backdrop-filter: none;
+}
+
+html[data-theme="classic"] .auth-copy-banner {
+  background: rgba(8, 13, 23, 0.72);
+}
+
+html[data-theme="classic"] .auth-card span,
+html[data-theme="classic"] .auth-character-metrics {
+  color: #d8e2eb;
+}
+
+html[data-theme="classic"] .auth-card input,
+html[data-theme="classic"] .auth-provider,
+html[data-theme="classic"] .auth-billing-spotlight {
+  border-color: rgba(214, 224, 236, 0.1);
+}
+
+html[data-theme="classic"] .auth-divider span {
+  background: rgba(12, 21, 36, 0.88);
+}
+
+html[data-theme="forest"] .auth-page {
+  background:
+    radial-gradient(circle at 16% 10%, rgba(155, 191, 177, 0.1), transparent 24%),
+    radial-gradient(circle at 84% 8%, rgba(197, 213, 205, 0.06), transparent 18%);
+}
+
+html[data-theme="forest"] .auth-copy,
+html[data-theme="forest"] .auth-card {
+  background:
+    radial-gradient(circle at top right, rgba(155, 191, 177, 0.06), transparent 20%),
+    linear-gradient(180deg, rgba(14, 22, 20, 0.96), rgba(10, 16, 15, 0.92));
+  backdrop-filter: none;
+}
+
+html[data-theme="forest"] .auth-copy-banner {
+  background: rgba(8, 13, 23, 0.72);
+}
+
+html[data-theme="forest"] .auth-card span,
+html[data-theme="forest"] .auth-character-metrics {
+  color: #d7e4dd;
+}
+
+html[data-theme="forest"] .auth-card input,
+html[data-theme="forest"] .auth-provider,
+html[data-theme="forest"] .auth-billing-spotlight {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+html[data-theme="forest"] .auth-divider span {
+  background: rgba(12, 21, 36, 0.88);
+}
+
+html[data-theme="mist"] .auth-page {
+  background:
+    radial-gradient(circle at 16% 10%, rgba(180, 196, 214, 0.08), transparent 24%),
+    radial-gradient(circle at 84% 8%, rgba(127, 148, 170, 0.08), transparent 18%);
+}
+
+html[data-theme="mist"] .auth-copy,
+html[data-theme="mist"] .auth-card {
+  background:
+    radial-gradient(circle at top right, rgba(180, 196, 214, 0.06), transparent 20%),
+    linear-gradient(180deg, rgba(14, 21, 29, 0.96), rgba(10, 16, 24, 0.92));
+  backdrop-filter: none;
+}
+
+html[data-theme="mist"] .auth-copy-banner {
+  background: rgba(12, 19, 27, 0.72);
+}
+
+html[data-theme="mist"] .auth-card span,
+html[data-theme="mist"] .auth-character-metrics {
+  color: #d8e2eb;
+}
+
+html[data-theme="mist"] .auth-card input,
+html[data-theme="mist"] .auth-provider,
+html[data-theme="mist"] .auth-billing-spotlight {
+  border-color: rgba(214, 224, 236, 0.1);
+}
+
+html[data-theme="mist"] .auth-divider span {
+  background: rgba(13, 20, 28, 0.88);
+}
+
+html[data-theme="light"] .auth-page {
+  background:
+    radial-gradient(circle at 16% 10%, rgba(96, 127, 157, 0.08), transparent 24%),
+    radial-gradient(circle at 84% 8%, rgba(190, 203, 216, 0.2), transparent 18%);
+}
+
+html[data-theme="light"] .auth-copy,
+html[data-theme="light"] .auth-card {
+  border-color: rgba(79, 99, 124, 0.08);
+  background:
+    radial-gradient(circle at top right, rgba(96, 127, 157, 0.04), transparent 20%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(238, 243, 247, 0.92));
+}
+
+html[data-theme="light"] .auth-copy-banner,
+html[data-theme="light"] .auth-stat-card,
+html[data-theme="light"] .auth-character-card,
+html[data-theme="light"] .auth-kpi-card,
+html[data-theme="light"] .auth-empty-state,
+html[data-theme="light"] .auth-record-row,
+html[data-theme="light"] .auth-billing-spotlight {
+  border-color: rgba(79, 99, 124, 0.08);
+  background: rgba(255, 255, 255, 0.62);
+}
+
+html[data-theme="light"] .auth-card span,
+html[data-theme="light"] .auth-character-metrics {
+  color: var(--text-main);
+}
+
+html[data-theme="light"] .auth-card input,
+html[data-theme="light"] .auth-provider {
+  border-color: rgba(79, 99, 124, 0.1);
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--text-main);
+}
+
+html[data-theme="light"] .auth-provider {
+  color: var(--text-muted);
+}
+
+html[data-theme="light"] .auth-divider {
+  color: var(--text-muted);
+}
+
+html[data-theme="light"] .auth-divider span {
+  background: rgba(245, 248, 251, 0.94);
 }

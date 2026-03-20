@@ -1,29 +1,62 @@
 // Wait until the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
+  const allowedThemes = ["moon", "classic", "mist", "forest", "light"];
+  const themeColorMap = {
+    moon: "#0b0d10",
+    classic: "#0a1220",
+    mist: "#0b1118",
+    forest: "#0c1412",
+    light: "#f2f5f8",
+  };
+
+  const applyTheme = (theme) => {
+    const safeTheme = allowedThemes.includes(theme) ? theme : "moon";
+    document.documentElement.dataset.theme = safeTheme;
+    document.documentElement.style.colorScheme = safeTheme === "light" ? "light" : "dark";
+    window.localStorage.setItem("swap-theme", safeTheme);
+
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) {
+      themeMeta.setAttribute("content", themeColorMap[safeTheme] || themeColorMap.moon);
+    }
+
+    document.querySelectorAll(".theme-option").forEach((button) => {
+      const isActive = button.dataset.themeValue === safeTheme;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+  };
+
+  applyTheme(document.documentElement.dataset.theme || "moon");
 
   // =============================
   // GLOBAL DROPDOWN CLICK HANDLER
   // =============================
+  const closeAllDropdowns = () => {
+    document.querySelectorAll(".dropdown-menu.show").forEach((menu) => menu.classList.remove("show"));
+    document.querySelectorAll('.dropdown-toggle[aria-expanded="true"]').forEach((btn) => btn.setAttribute("aria-expanded", "false"));
+  };
+
   document.addEventListener("click", (e) => {
     const toggle = e.target.closest(".dropdown-toggle");
 
     if (toggle) {
-      // Prevent default link behavior and stop bubbling
       e.preventDefault();
       e.stopPropagation();
 
       const menu = toggle.nextElementSibling;
-      if (menu) menu.classList.toggle("show"); // Show/hide the dropdown menu
+      const willOpen = menu && !menu.classList.contains("show");
 
-      // Update aria-expanded for accessibility
-      const expanded = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!expanded));
+      closeAllDropdowns();
+
+      if (menu && willOpen) {
+        menu.classList.add("show");
+        toggle.setAttribute("aria-expanded", "true");
+      }
       return;
     }
 
-    // Close all dropdowns if clicked outside
-    document.querySelectorAll(".dropdown-menu.show").forEach((menu) => menu.classList.remove("show"));
-    document.querySelectorAll('.dropdown-toggle[aria-expanded="true"]').forEach((btn) => btn.setAttribute("aria-expanded", "false"));
+    closeAllDropdowns();
   });
 
   // =============================
@@ -39,28 +72,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =============================
-  // NAV DROPDOWN (USER BUTTON)
+  // THEME SWITCHER
   // =============================
-  document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
-    const toggle = dropdown.querySelector('.dropdown-toggle');
-    const menu = dropdown.querySelector('.dropdown-menu');
-
-    toggle?.addEventListener('click', (e) => {
-      e.stopPropagation();                  // Prevent closing global handler
-      const open = menu.classList.toggle('show'); // Toggle menu visibility
-      toggle.setAttribute('aria-expanded', open);
-    });
-  });
-
-  // =============================
-  // CLOSE DROPDOWNS WHEN CLICKING OUTSIDE
-  // =============================
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
-      menu.classList.remove('show');
-      menu.closest('.nav-dropdown')
-          ?.querySelector('.dropdown-toggle')
-          ?.setAttribute('aria-expanded', 'false');
+  document.querySelectorAll(".theme-option").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      applyTheme(button.dataset.themeValue || "moon");
     });
   });
 

@@ -10,12 +10,13 @@
   max-width: 1100px;
   margin: 0 auto;
   padding: clamp(1.5rem, 3vw, 2.4rem);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 30px;
   background:
-    radial-gradient(circle at top right, rgba(125, 211, 255, 0.14), transparent 20%),
-    linear-gradient(180deg, rgba(9, 14, 24, 0.98), rgba(6, 10, 17, 0.92));
+    radial-gradient(circle at top right, rgba(196, 208, 220, 0.04), transparent 20%),
+    linear-gradient(180deg, rgba(28, 31, 36, 0.7), rgba(15, 17, 20, 0.84));
   box-shadow: var(--shadow-blizzard);
+  backdrop-filter: blur(18px);
 }
 
 .page-eyebrow {
@@ -66,9 +67,10 @@
 .page-highlights li,
 .page-panel {
   padding: 1.15rem 1.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(10px);
 }
 
 .page-panel h2 {
@@ -77,7 +79,15 @@
 }
 
 .page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
   justify-content: flex-start;
+}
+
+.page-actions .btn {
+  min-width: 168px;
 }
 
 .section-error {
@@ -104,4 +114,66 @@
   .page-grid {
     grid-template-columns: 1fr;
   }
+}
+
+html[data-theme="classic"] .page-card,
+html[data-theme="classic"] .section-error .error-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at top right, rgba(125, 211, 255, 0.14), transparent 20%),
+    linear-gradient(180deg, rgba(9, 14, 24, 0.98), rgba(6, 10, 17, 0.92));
+  backdrop-filter: none;
+}
+
+html[data-theme="classic"] .page-highlights li,
+html[data-theme="classic"] .page-panel {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: none;
+}
+
+html[data-theme="forest"] .page-card,
+html[data-theme="forest"] .section-error .error-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at top right, rgba(155, 191, 177, 0.1), transparent 20%),
+    linear-gradient(180deg, rgba(14, 22, 20, 0.98), rgba(10, 16, 15, 0.92));
+  backdrop-filter: none;
+}
+
+html[data-theme="forest"] .page-highlights li,
+html[data-theme="forest"] .page-panel {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: none;
+}
+
+html[data-theme="mist"] .page-card,
+html[data-theme="mist"] .section-error .error-card {
+  border: 1px solid rgba(214, 224, 236, 0.08);
+  background:
+    radial-gradient(circle at top right, rgba(180, 196, 214, 0.08), transparent 20%),
+    linear-gradient(180deg, rgba(14, 21, 29, 0.98), rgba(10, 16, 24, 0.92));
+  backdrop-filter: none;
+}
+
+html[data-theme="mist"] .page-highlights li,
+html[data-theme="mist"] .page-panel {
+  border: 1px solid rgba(214, 224, 236, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: none;
+}
+
+html[data-theme="light"] .page-card,
+html[data-theme="light"] .section-error .error-card {
+  border: 1px solid rgba(79, 99, 124, 0.08);
+  background:
+    radial-gradient(circle at top right, rgba(96, 127, 157, 0.05), transparent 20%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(238, 243, 247, 0.92));
+}
+
+html[data-theme="light"] .page-highlights li,
+html[data-theme="light"] .page-panel {
+  border: 1px solid rgba(79, 99, 124, 0.08);
+  background: rgba(255, 255, 255, 0.62);
 }

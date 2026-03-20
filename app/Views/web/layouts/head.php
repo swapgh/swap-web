@@ -27,7 +27,7 @@ $ogType = $ogType ?? 'website';
 $ogImage = $ogImage ?? absolute_url($site['default_og_image']);
 ?>
 <!DOCTYPE html>
-<html lang="<?= e((string) $pageLang) ?>">
+<html lang="<?= e((string) $pageLang) ?>" data-theme="moon">
 <head>
   <!-- Character encoding -->
   <meta charset="UTF-8">
@@ -46,6 +46,29 @@ $ogImage = $ogImage ?? absolute_url($site['default_og_image']);
 
   <!-- Browser theme color -->
   <meta name="theme-color" content="#0a1220">
+
+  <script>
+    (() => {
+      const allowedThemes = ["moon", "classic", "mist", "forest", "light"];
+      const storedTheme = window.localStorage.getItem("swap-theme");
+      const theme = allowedThemes.includes(storedTheme) ? storedTheme : "moon";
+      const themeColors = {
+        moon: "#0b0d10",
+        classic: "#0a1220",
+        mist: "#0b1118",
+        forest: "#0c1412",
+        light: "#f2f5f8"
+      };
+
+      document.documentElement.dataset.theme = theme;
+      document.documentElement.style.colorScheme = theme === "light" ? "light" : "dark";
+
+      const themeMeta = document.querySelector('meta[name="theme-color"]');
+      if (themeMeta) {
+        themeMeta.setAttribute("content", themeColors[theme] || themeColors.moon);
+      }
+    })();
+  </script>
 
   <!-- Canonical URL for SEO -->
   <link rel="canonical" href="<?= e((string) $canonicalUrl) ?>">
