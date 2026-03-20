@@ -16,8 +16,11 @@ return static function (\App\Core\Router $router): void {
     $router->get('/contact', [PageController::class, 'contact']);
     $router->get('/help', [PageController::class, 'help']);
     $router->get('/store', [PageController::class, 'store']);
+    $router->get('/aviso-legal', [PageController::class, 'legalNotice']);
     $router->get('/privacy', [PageController::class, 'privacy']);
     $router->get('/cookies', [PageController::class, 'cookies']);
+    $router->get('/payment-disclaimer', [PageController::class, 'paymentDisclaimer']);
+    $router->get('/support-terms', [PageController::class, 'supportTerms']);
     $router->get('/games/class-select', [PageController::class, 'classSelect']);
     $router->get('/games/combat-slice', [PageController::class, 'combatSlice']);
     $router->get('/games/dark-biome', [PageController::class, 'darkBiome']);

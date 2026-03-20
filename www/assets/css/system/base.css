@@ -71,18 +71,18 @@ html[data-theme="mist"] {
 
 html[data-theme="light"] {
   color-scheme: light;
-  --bg-deep: #f2f5f8;
-  --panel-dark: rgba(255, 255, 255, 0.86);
-  --line-soft: rgba(77, 97, 122, 0.12);
-  --text-main: #16202b;
-  --text-muted: #607182;
+  --bg-deep: #edf2f6;
+  --panel-dark: rgba(255, 255, 255, 0.92);
+  --line-soft: rgba(77, 97, 122, 0.16);
+  --text-main: #12202d;
+  --text-muted: #4f6173;
   --accent: #607f9d;
-  --accent-strong: #294763;
+  --accent-strong: #203e59;
   --accent-warm: #7d92a5;
   --accent-hover: rgba(96, 127, 157, 0.12);
-  --shadow-blizzard: 0 18px 44px rgba(21, 30, 40, 0.08);
-  --surface-panel: rgba(255, 255, 255, 0.84);
-  --surface-panel-soft: rgba(16, 24, 32, 0.035);
+  --shadow-blizzard: 0 18px 44px rgba(21, 30, 40, 0.1);
+  --surface-panel: rgba(255, 255, 255, 0.9);
+  --surface-panel-soft: rgba(16, 24, 32, 0.05);
 }
 
 * {

@@ -60,11 +60,14 @@ $gamesUrl = page_url('#featured-games'); // Anchor link to featured games
       <!-- =======================
            Legal Information
            ======================= -->
-      <div class="footer-column footer-optional">
+      <div class="footer-column">
         <span class="footer-title"><?= e(t('footer.legal')) ?></span>
         <div class="footer-links">
+          <a href="<?= e(with_lang(page_url('aviso-legal'))) ?>"><?= e(t('footer.legal_notice')) ?></a>
           <a href="<?= e(with_lang(page_url('privacy'))) ?>"><?= e(t('footer.privacy')) ?></a>
           <a href="<?= e(with_lang(page_url('cookies'))) ?>"><?= e(t('footer.cookies')) ?></a>
+          <a href="<?= e(with_lang(page_url('payment-disclaimer'))) ?>"><?= e(t('footer.payment_disclaimer')) ?></a>
+          <a href="<?= e(with_lang(page_url('support-terms'))) ?>"><?= e(t('footer.support_terms')) ?></a>
         </div>
       </div>
 
@@ -76,7 +79,7 @@ $gamesUrl = page_url('#featured-games'); // Anchor link to featured games
         <div class="footer-links">
           <!-- Email link -->
           <a href="mailto:<?= e($site['contact_email']) ?>">
-            <?= e(t('footer.email')) ?>: <?= e($site['contact_email']) ?>
+            <?= e($site['contact_email']) ?>
           </a>
         </div>
       </div>
@@ -92,3 +95,16 @@ $gamesUrl = page_url('#featured-games'); // Anchor link to featured games
     </div>
   </div>
 </footer>
+<div class="cookie-banner" id="cookie-banner" hidden>
+  <div class="cookie-banner-inner">
+    <div class="cookie-banner-copy">
+      <strong><?= e(t('cookies.banner_title')) ?></strong>
+      <p><?= e(t('cookies.banner_body')) ?></p>
+    </div>
+    <div class="cookie-banner-actions">
+      <button type="button" class="btn btn-secondary cookie-banner-button" data-cookie-consent="essential"><?= e(t('cookies.banner_essential')) ?></button>
+      <button type="button" class="btn btn-primary cookie-banner-button" data-cookie-consent="accepted"><?= e(t('cookies.banner_accept')) ?></button>
+      <a class="btn btn-ghost cookie-banner-link" href="<?= e(with_lang(page_url('cookies'))) ?>"><?= e(t('cookies.banner_more')) ?></a>
+    </div>
+  </div>
+</div>

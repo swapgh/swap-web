@@ -27,6 +27,11 @@ final class PageController extends Controller
         $this->renderPage('store');
     }
 
+    public function legalNotice(): void
+    {
+        $this->renderPage('legal-notice');
+    }
+
     public function privacy(): void
     {
         $this->renderPage('privacy');
@@ -35,6 +40,16 @@ final class PageController extends Controller
     public function cookies(): void
     {
         $this->renderPage('cookies');
+    }
+
+    public function paymentDisclaimer(): void
+    {
+        $this->renderPage('payment-disclaimer');
+    }
+
+    public function supportTerms(): void
+    {
+        $this->renderPage('support-terms');
     }
 
     public function classSelect(): void
@@ -68,6 +83,9 @@ final class PageController extends Controller
 
         $pageContent = build_site_page_content($slug, $GLOBALS['pageLang'], $GLOBALS['site']);
 
-        $this->render('web.pages.page', ['page' => $pageContent]);
+        $this->render('web.pages.page', [
+            'page' => $pageContent,
+            'pageSlug' => $slug,
+        ]);
     }
 }

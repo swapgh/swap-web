@@ -1024,15 +1024,15 @@ html[data-theme="light"] .hero-carousel-wrap,
 html[data-theme="light"] .intro-feature-card,
 html[data-theme="light"] .game-card {
   background:
-    radial-gradient(circle at top right, rgba(96, 127, 157, 0.05), transparent 20%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(238, 243, 247, 0.94));
+    radial-gradient(circle at top right, rgba(96, 127, 157, 0.06), transparent 20%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(234, 240, 245, 0.98));
 }
 
 html[data-theme="light"] .showcase-slide-inner,
 html[data-theme="light"] .carousel-link,
 html[data-theme="light"] .showcase-btn,
 html[data-theme="light"] .game-card-focus {
-  background: rgba(255, 255, 255, 0.76);
+  background: rgba(255, 255, 255, 0.84);
   color: var(--home-text);
 }
 
@@ -1040,8 +1040,8 @@ html[data-theme="light"] .hero-chip,
 html[data-theme="light"] .featured-platform,
 html[data-theme="light"] .filter-chip,
 html[data-theme="light"] .intro-points {
-  border-color: rgba(79, 99, 124, 0.08);
-  background: rgba(255, 255, 255, 0.62);
+  border-color: rgba(79, 99, 124, 0.12);
+  background: rgba(255, 255, 255, 0.78);
 }
 
 html[data-theme="light"] .filter-chip.active {
