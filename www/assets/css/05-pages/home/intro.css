@@ -1,0 +1,72 @@
+.intro-feature-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+  gap: 1.2rem;
+  padding: clamp(1.45rem, 3vw, 2.3rem);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at top right, rgba(170, 184, 196, 0.03), transparent 18%),
+    linear-gradient(135deg, rgba(28, 32, 37, 0.98), rgba(16, 19, 23, 0.94));
+}
+
+.intro-copy h2 {
+  margin-top: 0.7rem;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 0.98;
+}
+
+.intro-copy p {
+  max-width: 62ch;
+  margin-top: 1rem;
+}
+
+.intro-side {
+  display: grid;
+  align-content: center;
+}
+
+.intro-points {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.03);
+  list-style: none;
+}
+
+.intro-points li {
+  color: var(--home-text);
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+}
+
+.intro-points li::before {
+  content: "•";
+  margin-right: 0.55rem;
+  color: var(--home-accent);
+}
+
+html[data-theme="classic"] .intro-feature-card {
+  background:
+    radial-gradient(circle at top right, rgba(125, 211, 255, 0.08), transparent 18%),
+    linear-gradient(135deg, rgba(16, 24, 37, 0.98), rgba(8, 12, 20, 0.92));
+}
+
+html[data-theme="forest"] .intro-feature-card {
+  background:
+    radial-gradient(circle at top right, rgba(155, 191, 177, 0.06), transparent 18%),
+    linear-gradient(135deg, rgba(14, 22, 20, 0.98), rgba(9, 15, 14, 0.92));
+}
+
+html[data-theme="mist"] .intro-feature-card {
+  background:
+    radial-gradient(circle at top right, rgba(180, 196, 214, 0.06), transparent 18%),
+    linear-gradient(135deg, rgba(14, 21, 29, 0.98), rgba(10, 16, 24, 0.92));
+}
+
+html[data-theme="light"] .intro-feature-card,
+html[data-theme="light"] .intro-points {
+  border-color: rgba(79, 99, 124, 0.12);
+  background: rgba(255, 255, 255, 0.78);
+}

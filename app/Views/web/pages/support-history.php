@@ -78,7 +78,7 @@ $latestSession = $recentSessions[0] ?? null;
 $latestStatus = billing_status_meta((string) ($latestSession['status'] ?? 'pending'));
 $pageTitle = $page['title'];
 $pageDescription = $page['description'];
-$extraCss = ['css/pages/auth.css'];
+$extraCss = ['css/05-pages/billing.css'];
 require __DIR__ . '/../layouts/head.php';
 require __DIR__ . '/../layouts/header.php';
 ?>

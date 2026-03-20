@@ -1,0 +1,65 @@
+.auth-account-nav-card {
+  position: sticky;
+  top: 96px;
+}
+
+.auth-account-nav {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.auth-account-nav-link {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  min-height: 46px;
+  padding: 0.78rem 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-main);
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.auth-account-nav-link:hover,
+.auth-account-nav-link:focus-visible {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(2px);
+}
+
+.auth-account-nav-link.is-active {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--accent-strong);
+}
+
+@media (max-width: 860px) {
+  .auth-account-nav-card {
+    position: static;
+  }
+}
+
+html[data-theme="light"] .auth-account-nav-link {
+  border-color: rgba(79, 99, 124, 0.1);
+  background: rgba(255, 255, 255, 0.64);
+  color: #213243;
+}
+
+html[data-theme="light"] .auth-account-nav-link:hover,
+html[data-theme="light"] .auth-account-nav-link:focus-visible {
+  border-color: rgba(96, 127, 157, 0.18);
+  background: rgba(255, 255, 255, 0.86);
+  color: #1b2c3d;
+}
+
+html[data-theme="light"] .auth-account-nav-link.is-active {
+  border-color: rgba(96, 127, 157, 0.28);
+  background: linear-gradient(180deg, rgba(232, 239, 245, 0.98), rgba(217, 228, 238, 0.98));
+  color: #17324a;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 10px 24px rgba(40, 58, 75, 0.08);
+}

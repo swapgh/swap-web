@@ -1,0 +1,19 @@
+body {
+  font-family: "Manrope", "Open Sans", "Segoe UI", sans-serif;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  scroll-margin-top: 90px;
+  font-family: "Cinzel", Georgia, serif;
+}
+
+p,
+li,
+span,
+label,
+input,
+button,
+textarea,
+select {
+  font-family: "Manrope", "Open Sans", "Segoe UI", sans-serif;
+}

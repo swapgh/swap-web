@@ -3,7 +3,7 @@ $pageTitle = $home['title'];
 $pageDescription = $home['description'];
 $extraCss = [
     'https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap',
-    'css/pages/home.css',
+    'css/05-pages/home.css',
 ];
 $extraScripts = ['js/home.js'];
 require __DIR__ . '/../layouts/head.php';

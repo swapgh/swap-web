@@ -118,7 +118,7 @@ $hasPendingCheckout = $currentBillingState === 'pending' && !empty($currentBilli
 $billingActionLabel = $hasPendingCheckout ? $page['complete_contribution'] : $page['make_contribution'];
 $pageTitle = $page['title'];
 $pageDescription = $page['description'];
-$extraCss = ['css/pages/auth.css'];
+$extraCss = ['css/05-pages/profile.css'];
 require __DIR__ . '/../layouts/head.php';
 require __DIR__ . '/../layouts/header.php';
 ?>

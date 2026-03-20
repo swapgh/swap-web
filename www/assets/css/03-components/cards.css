@@ -1,0 +1,32 @@
+.surface-card {
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-card);
+  background:
+    radial-gradient(circle at top right, rgba(196, 208, 220, 0.03), transparent 22%),
+    linear-gradient(180deg, rgba(28, 31, 36, 0.96), rgba(17, 20, 24, 0.94));
+  box-shadow: var(--shadow-blizzard);
+}
+
+html[data-theme="classic"] .surface-card {
+  background:
+    radial-gradient(circle at top right, rgba(125, 211, 255, 0.1), transparent 22%),
+    linear-gradient(180deg, rgba(14, 21, 29, 0.96), rgba(10, 16, 24, 0.92));
+}
+
+html[data-theme="forest"] .surface-card {
+  background:
+    radial-gradient(circle at top right, rgba(155, 191, 177, 0.08), transparent 22%),
+    linear-gradient(180deg, rgba(14, 22, 20, 0.96), rgba(11, 18, 16, 0.92));
+}
+
+html[data-theme="mist"] .surface-card {
+  background:
+    radial-gradient(circle at top right, rgba(180, 196, 214, 0.08), transparent 22%),
+    linear-gradient(180deg, rgba(14, 21, 29, 0.96), rgba(10, 16, 24, 0.92));
+}
+
+html[data-theme="light"] .surface-card {
+  background:
+    radial-gradient(circle at top right, rgba(96, 127, 157, 0.05), transparent 22%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(239, 244, 248, 0.92));
+}

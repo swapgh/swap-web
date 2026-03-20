@@ -1,0 +1,204 @@
+@media (max-width: 1180px) {
+  .intro-feature-card,
+  .game-card {
+    grid-template-columns: 1fr;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-copy,
+  .intro-feature-card {
+    padding: 1.4rem;
+  }
+
+  .showcase-track,
+  .showcase-slide img {
+    min-height: 380px;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1600px) {
+  .portfolio-page .container,
+  .hero-shell {
+    width: calc(100vw - 32px);
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .game-card-media {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .portfolio-page .container,
+  .hero-shell {
+    width: calc(100vw - 18px);
+  }
+
+  .showcase-carousel {
+    border-radius: 20px;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .showcase-slide {
+    flex-basis: 100%;
+    padding: 0 0.45rem;
+    opacity: 0.28;
+    transform: scale(0.96);
+    filter: none;
+  }
+
+  .showcase-slide.active {
+    transform: scale(1);
+  }
+
+  .showcase-slide.prev,
+  .showcase-slide.next {
+    opacity: 0.28;
+    transform: scale(0.96);
+  }
+
+  .hero-stats,
+  .intro-feature-card {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-side {
+    align-content: start;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-page .container,
+  .hero-shell {
+    width: calc(100vw - 14px);
+  }
+
+  .games-section .container,
+  .hero-banner .container,
+  .intro-feature .container {
+    padding: 0;
+  }
+
+  .hero-panel,
+  .games-section,
+  .hero-banner,
+  .intro-feature {
+    padding: 2.1rem 0;
+  }
+
+  .hero-copy,
+  .hero-carousel-wrap,
+  .intro-feature-card {
+    border-radius: 20px;
+  }
+
+  .hero-carousel-wrap {
+    border-radius: 0 0 20px 20px;
+    padding: 0.7rem 0.7rem 0.65rem;
+  }
+
+  .section-heading h2,
+  .intro-copy h2 {
+    font-size: clamp(1.8rem, 9vw, 2.6rem);
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.6rem, 14vw, 4rem);
+  }
+
+  .hero-subtitle {
+    max-width: none;
+  }
+
+  .hero-description {
+    max-width: 44ch;
+  }
+
+  .hero-chip-row,
+  .showcase-btn,
+  .hero-action-optional {
+    display: none;
+  }
+
+  .showcase-track,
+  .showcase-slide img {
+    min-height: 280px;
+  }
+
+  .carousel-actions {
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .carousel-link {
+    min-width: 88px;
+    padding: 0.58rem 0.8rem;
+    font-size: 0.74rem;
+  }
+
+  .games-grid,
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .game-card-topline {
+    flex-direction: column;
+  }
+
+  .game-card-topline .featured-platform {
+    order: 0;
+  }
+
+  .hero-actions {
+    gap: 0.7rem;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-page {
+    margin-top: -62px;
+  }
+
+  .showcase-track,
+  .showcase-slide img {
+    min-height: 236px;
+  }
+
+  .showcase-slide figcaption {
+    padding: 0.85rem;
+  }
+
+  .hero-copy,
+  .intro-feature-card {
+    padding: 1rem;
+  }
+
+  .game-card-body {
+    padding: 0.9rem;
+  }
+
+  .filter-chip {
+    padding: 0.66rem 0.82rem;
+    font-size: 0.88rem;
+  }
+}

@@ -20,7 +20,7 @@ $normalizeInternalTarget = static function (string $href): string {
 $currentInternalTarget = $normalizeInternalTarget($currentRequestUri);
 $extraCss = [
     'https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap',
-    'css/pages/site.css',
+    'css/05-pages/legal.css',
 ];
 require __DIR__ . '/../layouts/head.php';
 require __DIR__ . '/../layouts/header.php';

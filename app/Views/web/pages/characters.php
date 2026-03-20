@@ -43,7 +43,7 @@ $copy = [
 $page = $copy[$pageLang] ?? $copy['es'];
 $pageTitle = $page['title'];
 $pageDescription = $page['description'];
-$extraCss = ['css/pages/auth.css'];
+$extraCss = ['css/05-pages/characters.css'];
 require __DIR__ . '/../layouts/head.php';
 require __DIR__ . '/../layouts/header.php';
 ?>

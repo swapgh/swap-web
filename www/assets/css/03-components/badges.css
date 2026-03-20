@@ -1,0 +1,38 @@
+.ui-status-badge,
+.auth-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  width: fit-content;
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ui-status-badge.is-pending,
+.auth-status-badge.is-pending {
+  background: rgba(255, 201, 92, 0.16);
+  color: #ffd36f;
+}
+
+.ui-status-badge.is-paid,
+.auth-status-badge.is-paid {
+  background: rgba(88, 214, 141, 0.16);
+  color: #7df2ac;
+}
+
+.ui-status-badge.is-failed,
+.auth-status-badge.is-failed {
+  background: rgba(255, 107, 107, 0.16);
+  color: #ff9c9c;
+}
+
+.ui-status-badge.is-expired,
+.auth-status-badge.is-expired {
+  background: rgba(144, 162, 188, 0.18);
+  color: #c7d2e6;
+}

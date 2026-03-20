@@ -1,0 +1,17 @@
+:root {
+  --bg-deep: #030507;
+  --panel-dark: rgba(18, 21, 25, 0.94);
+  --line-soft: rgba(163, 173, 184, 0.12);
+  --text-main: #e6ebf1;
+  --text-muted: #8e98a4;
+  --accent: #7c8996;
+  --accent-strong: #c4d0dc;
+  --accent-warm: #aab8c4;
+  --accent-hover: rgba(124, 137, 150, 0.1);
+  --shadow-blizzard: 0 18px 42px rgba(0, 0, 0, 0.56);
+  --surface-panel: rgba(22, 25, 30, 0.92);
+  --surface-panel-soft: rgba(255, 255, 255, 0.035);
+  --radius-card: 24px;
+  --radius-pill: 999px;
+  --space-page-x: 20px;
+}

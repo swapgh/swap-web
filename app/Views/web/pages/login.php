@@ -43,7 +43,7 @@ $pageTitle = $page['title'];
 $pageDescription = $page['description'];
 
 // CSS extra específico para la página de autenticación
-$extraCss = ['css/pages/auth.css'];
+$extraCss = ['css/05-pages/auth.css'];
 
 // Carga la plantilla del head y header
 require __DIR__ . '/../layouts/head.php';

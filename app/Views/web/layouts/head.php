@@ -93,11 +93,15 @@ $ogImage = $ogImage ?? absolute_url($site['default_og_image']);
   <link rel="icon" type="image/x-icon" href="<?= e(asset_url('images/favicons/favicon.ico')) ?>">
 
   <!-- Main CSS file -->
-  <link rel="stylesheet" href="<?= e(asset_url('css/system/base.css')) ?>">
-  <link rel="stylesheet" href="<?= e(asset_url('css/system/components.css')) ?>">
-  <link rel="stylesheet" href="<?= e(asset_url('css/system/layout.css')) ?>">
-  <link rel="stylesheet" href="<?= e(asset_url('css/system/chrome.css')) ?>">
-  <link rel="stylesheet" href="<?= e(asset_url('css/system/pages.css')) ?>">
+  <link rel="stylesheet" href="<?= e(asset_url('css/00-tokens/tokens.css')) ?>">
+  <link rel="stylesheet" href="<?= e(asset_url('css/00-tokens/themes.css')) ?>">
+  <link rel="stylesheet" href="<?= e(asset_url('css/01-base/reset.css')) ?>">
+  <link rel="stylesheet" href="<?= e(asset_url('css/01-base/base.css')) ?>">
+  <link rel="stylesheet" href="<?= e(asset_url('css/01-base/typography.css')) ?>">
+  <link rel="stylesheet" href="<?= e(asset_url('css/01-base/accessibility.css')) ?>">
+  <link rel="stylesheet" href="<?= e(asset_url('css/02-layout/section.css')) ?>">
+  <link rel="stylesheet" href="<?= e(asset_url('css/02-layout/site-chrome.css')) ?>">
+  <link rel="stylesheet" href="<?= e(asset_url('css/03-components/components.css')) ?>">
 
   <!-- Extra CSS files (can be local or external) -->
   <?php foreach ($extraCss as $href): ?>

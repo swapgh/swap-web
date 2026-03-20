@@ -1,0 +1,28 @@
+.ui-banner,
+.auth-banner {
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  font-weight: 600;
+}
+
+.ui-banner-success,
+.auth-banner-success {
+  background: rgba(88, 214, 141, 0.12);
+  border-color: rgba(88, 214, 141, 0.28);
+  color: #9df0bc;
+}
+
+.ui-banner-warning,
+.auth-banner-warning {
+  background: rgba(255, 201, 92, 0.12);
+  border-color: rgba(255, 201, 92, 0.24);
+  color: #ffd36f;
+}
+
+.ui-banner-error,
+.auth-banner-error {
+  background: rgba(255, 107, 107, 0.12);
+  border-color: rgba(255, 107, 107, 0.24);
+  color: #ffabab;
+}

@@ -1,0 +1,212 @@
+.auth-character-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.auth-account-space-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.auth-account-space-card {
+  display: grid;
+  gap: 0.9rem;
+  align-content: start;
+  padding: 1.35rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.auth-account-space-card h3,
+.auth-account-space-card p {
+  margin: 0;
+}
+
+.auth-character-card h3 {
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+}
+
+.auth-character-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+  color: #cdd6df;
+  font-size: 0.95rem;
+}
+
+.auth-character-actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.auth-billing-history-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.auth-billing-overview-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.auth-billing-spotlight {
+  display: grid;
+  gap: 1rem;
+  padding: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at top right, rgba(196, 208, 220, 0.04), transparent 22%),
+    rgba(255, 255, 255, 0.03);
+}
+
+.auth-billing-spotlight-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.auth-billing-spotlight-head h3 {
+  margin: 0.2rem 0 0;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.auth-billing-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.auth-billing-meta-grid p {
+  margin: 0.2rem 0 0;
+}
+
+.auth-billing-timeline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.2rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.auth-empty-state {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1.1rem 1.15rem;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.auth-empty-state h3 {
+  margin: 0;
+}
+
+.auth-record-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.auth-record-list-tight {
+  gap: 0.7rem;
+}
+
+.auth-record-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) repeat(4, minmax(0, 0.9fr)) auto;
+  gap: 0.85rem;
+  align-items: center;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.auth-record-main,
+.auth-record-meta,
+.auth-record-action {
+  display: grid;
+  gap: 0.32rem;
+}
+
+.auth-record-main strong,
+.auth-record-meta strong {
+  color: var(--text-main);
+}
+
+.auth-record-main span,
+.auth-record-meta span {
+  color: var(--text-muted);
+  word-break: break-word;
+}
+
+.auth-record-action .auth-secondary {
+  min-width: 96px;
+}
+
+.auth-records-panel {
+  gap: 1.1rem;
+}
+
+.auth-records-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 1rem;
+}
+
+.auth-records-toolbar-actions {
+  min-width: 280px;
+}
+
+@media (max-width: 860px) {
+  .auth-records-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .auth-records-toolbar-actions {
+    min-width: 0;
+  }
+}
+
+html[data-theme="classic"] .auth-character-metrics {
+  color: #d8e2eb;
+}
+
+html[data-theme="classic"] .auth-billing-spotlight {
+  border-color: rgba(214, 224, 236, 0.1);
+}
+
+html[data-theme="forest"] .auth-character-metrics {
+  color: #d7e4dd;
+}
+
+html[data-theme="forest"] .auth-billing-spotlight {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+html[data-theme="mist"] .auth-character-metrics {
+  color: #d8e2eb;
+}
+
+html[data-theme="mist"] .auth-billing-spotlight {
+  border-color: rgba(214, 224, 236, 0.1);
+}
+
+html[data-theme="light"] .auth-copy p,
+html[data-theme="light"] .auth-detail-card p,
+html[data-theme="light"] .auth-meta-note,
+html[data-theme="light"] .auth-empty-state p,
+html[data-theme="light"] .auth-record-main span,
+html[data-theme="light"] .auth-record-meta span,
+html[data-theme="light"] .auth-billing-timeline {
+  color: var(--text-muted);
+}
+
+html[data-theme="light"] .auth-character-metrics {
+  color: var(--text-main);
+}
+
+html[data-theme="light"] .auth-provider {
+  color: var(--text-muted);
+}

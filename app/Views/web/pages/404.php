@@ -2,7 +2,7 @@
 http_response_code(404);
 $pageTitle = t('error.title');
 $pageDescription = t('error.title');
-$extraCss = ['css/pages/site.css'];
+$extraCss = ['css/05-pages/error.css'];
 require __DIR__ . '/../layouts/head.php';
 require __DIR__ . '/../layouts/header.php';
 ?>
