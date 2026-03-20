@@ -8,6 +8,11 @@ $copy = [
         'summary' => 'Una vista compacta de como el roster, la progresion y los sistemas del jugador pueden vivir dentro del sitio.',
         'active_slots' => 'espacios activos',
         'prototype_roster' => 'Roster prototipo',
+        'account_area' => 'Area de cuenta',
+        'overview' => 'Resumen',
+        'support' => 'Apoyo',
+        'store' => 'Store',
+        'history' => 'Historial',
         'roster_eyebrow' => 'Roster',
         'roster_heading' => 'Alineacion actual',
         'level' => 'Nivel',
@@ -22,6 +27,11 @@ $copy = [
         'summary' => 'A compact preview of how party data, progression, and player-facing systems can live inside the site.',
         'active_slots' => 'active slots',
         'prototype_roster' => 'Prototype roster',
+        'account_area' => 'Account area',
+        'overview' => 'Overview',
+        'support' => 'Support',
+        'store' => 'Store',
+        'history' => 'History',
         'roster_eyebrow' => 'Roster',
         'roster_heading' => 'Current lineup',
         'level' => 'Level',
@@ -48,6 +58,20 @@ require __DIR__ . '/../layouts/header.php';
         <span class="auth-chip"><?= e($page['prototype_roster']) ?></span>
       </div>
     </div>
+    <div class="auth-account-layout">
+    <aside class="auth-card auth-account-nav-card">
+      <div class="auth-section-heading">
+        <span class="auth-eyebrow"><?= e($page['eyebrow']) ?></span>
+        <h2><?= e($page['account_area']) ?></h2>
+      </div>
+      <nav class="auth-account-nav" aria-label="<?= e($page['account_area']) ?>">
+        <a class="auth-account-nav-link" href="<?= e(with_lang(page_url('profile'))) ?>"><?= e($page['overview']) ?></a>
+        <a class="auth-account-nav-link is-active" href="<?= e(with_lang(page_url('characters'))) ?>"><?= e($page['heading']) ?></a>
+        <a class="auth-account-nav-link" href="<?= e(with_lang(page_url('profile'))) ?>#support-area"><?= e($page['support']) ?></a>
+        <a class="auth-account-nav-link" href="<?= e(with_lang(page_url('store'))) ?>"><?= e($page['store']) ?></a>
+        <a class="auth-account-nav-link" href="<?= e(with_lang(page_url('support/history'))) ?>"><?= e($page['history']) ?></a>
+      </nav>
+    </aside>
     <div class="auth-card auth-characters-panel">
       <div class="auth-section-heading">
         <span class="auth-eyebrow"><?= e($page['roster_eyebrow']) ?></span>
@@ -69,6 +93,7 @@ require __DIR__ . '/../layouts/header.php';
       <div class="auth-action-list">
         <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('profile'))) ?>"><?= e($page['back_profile']) ?></a>
       </div>
+    </div>
     </div>
   </section>
 </main>

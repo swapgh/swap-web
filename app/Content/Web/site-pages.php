@@ -96,6 +96,41 @@ function build_site_page_content(string $slug, string $lang, array $site): array
                     ['label' => 'Contactar', 'href' => with_lang(page_url('contact')), 'variant' => 'secondary', 'external' => false, 'icon' => 'fas fa-envelope'],
                 ],
             ],
+            'store' => [
+                'title' => 'Store | Swap RPG',
+                'description' => 'Pagina reservada para futuros productos y merch de Swap.',
+                'eyebrow' => 'Store',
+                'heading' => 'La tienda sera el espacio para merch y compras reales.',
+                'lead' => 'Esta pagina separa claramente el apoyo al proyecto de las futuras compras. Las contribuciones siguen en el area de soporte; los productos, merch o extras iran aqui.',
+                'highlights' => [
+                    'Espacio reservado para merch y productos del proyecto.',
+                    'Separacion clara entre apoyo voluntario y compras.',
+                    'Base preparada para crecer sin mezclar conceptos.',
+                ],
+                'sections' => [
+                    [
+                        'title' => 'Que ira en Store',
+                        'body' => 'Cuando existan articulos reales, este sera el lugar para merch, bundles, extras digitales o cualquier compra con logica de producto.',
+                    ],
+                    [
+                        'title' => 'Que no va aqui',
+                        'body' => 'Las contribuciones voluntarias y el supporter tier no deberian vivir en la tienda. Es mejor mantener el apoyo al proyecto como una accion separada y mas clara.',
+                    ],
+                    [
+                        'title' => 'Estado actual',
+                        'body' => 'Por ahora la tienda es una pagina placeholder. Existe para fijar la estructura correcta antes de mezclar donaciones, apoyo y compras en un mismo flujo.',
+                    ],
+                    [
+                        'title' => 'Siguiente paso razonable',
+                        'body' => 'Si mas adelante añades productos, esta pagina puede crecer hacia un catalogo ligero con fichas, precio y una historia de pedidos independiente del area de soporte.',
+                    ],
+                ],
+                'actions' => [
+                    ['label' => 'Volver al inicio', 'href' => with_lang(page_url('')), 'variant' => 'primary', 'external' => false, 'icon' => 'fas fa-house'],
+                    ['label' => 'Ir al perfil', 'href' => with_lang(page_url('profile')), 'variant' => 'secondary', 'external' => false, 'icon' => 'fas fa-user'],
+                    ['label' => 'Ver proyecto', 'href' => with_lang(page_url('projects/swap-rpg')), 'variant' => 'ghost', 'external' => false, 'icon' => 'fas fa-gamepad'],
+                ],
+            ],
             'privacy' => [
                 'title' => 'Privacidad | Swap RPG',
                 'description' => 'Resumen actual de privacidad y tratamiento de datos del sitio.',
@@ -417,6 +452,41 @@ function build_site_page_content(string $slug, string $lang, array $site): array
                 'actions' => [
                     ['label' => 'Open project page', 'href' => with_lang(page_url('projects/swap-rpg')), 'variant' => 'primary', 'external' => false, 'icon' => 'fas fa-gamepad'],
                     ['label' => 'Contact', 'href' => with_lang(page_url('contact')), 'variant' => 'secondary', 'external' => false, 'icon' => 'fas fa-envelope'],
+                ],
+            ],
+            'store' => [
+                'title' => 'Store | Swap RPG',
+                'description' => 'Reserved page for future Swap products and merch.',
+                'eyebrow' => 'Store',
+                'heading' => 'The store will be the place for merch and real purchases.',
+                'lead' => 'This page cleanly separates project support from future purchases. Contributions stay in the support area; products, merch, or extras will live here.',
+                'highlights' => [
+                    'Reserved space for merch and project products.',
+                    'Clear split between voluntary support and purchases.',
+                    'A cleaner structure for future growth.',
+                ],
+                'sections' => [
+                    [
+                        'title' => 'What goes in Store',
+                        'body' => 'When real items exist, this is where merch, bundles, digital extras, or any product-based purchase flow should live.',
+                    ],
+                    [
+                        'title' => 'What does not go here',
+                        'body' => 'Voluntary contributions and the supporter tier should stay outside the store. It is better to keep project support as a separate, clearer action.',
+                    ],
+                    [
+                        'title' => 'Current status',
+                        'body' => 'For now the store is a placeholder page. Its purpose is to establish the right structure before support and purchases get mixed into one flow.',
+                    ],
+                    [
+                        'title' => 'Reasonable next step',
+                        'body' => 'If you add products later, this page can grow into a light catalog with product cards, price, and its own order history separate from support.',
+                    ],
+                ],
+                'actions' => [
+                    ['label' => 'Back home', 'href' => with_lang(page_url('')), 'variant' => 'primary', 'external' => false, 'icon' => 'fas fa-house'],
+                    ['label' => 'Go to profile', 'href' => with_lang(page_url('profile')), 'variant' => 'secondary', 'external' => false, 'icon' => 'fas fa-user'],
+                    ['label' => 'View project', 'href' => with_lang(page_url('projects/swap-rpg')), 'variant' => 'ghost', 'external' => false, 'icon' => 'fas fa-gamepad'],
                 ],
             ],
             'privacy' => [

@@ -22,6 +22,11 @@ final class PageController extends Controller
         $this->renderPage('help');
     }
 
+    public function store(): void
+    {
+        $this->renderPage('store');
+    }
+
     public function privacy(): void
     {
         $this->renderPage('privacy');

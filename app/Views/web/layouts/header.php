@@ -7,6 +7,7 @@ $gamesUrl = with_lang(page_url('#featured-games'));
 $downloadUrl = asset_url('downloads/demo.zip');
 $supportUrl = with_lang(page_url('help'));
 $projectUrl = with_lang(page_url('projects/swap-rpg'));
+$storeUrl = with_lang(page_url('store'));
 $currentRequestUri = (string) ($_SERVER['REQUEST_URI'] ?? $homeUrl);
 $langEsUrl = with_lang($currentRequestUri, 'es');
 $langEnUrl = with_lang($currentRequestUri, 'en');
@@ -24,24 +25,24 @@ $navItems = [
 ];
 $settingsCopy = [
   'es' => [
-    'button' => 'Ajustes',
-    'appearance' => 'Tema',
-    'language' => 'Idioma',
-    'theme_moon' => 'Moon',
-    'theme_classic' => 'Classic',
-    'theme_mist' => 'Mist',
-    'theme_forest' => 'Forest',
-    'theme_light' => 'Light',
+        'button' => 'Ajustes',
+        'appearance' => 'Tema',
+        'language' => 'Idioma',
+        'theme_classic' => 'Classic',
+        'theme_moon' => 'Moon',
+        'theme_mist' => 'Mist',
+        'theme_forest' => 'Forest',
+        'theme_light' => 'Light',
   ],
   'en' => [
-    'button' => 'Settings',
-    'appearance' => 'Theme',
-    'language' => 'Language',
-    'theme_moon' => 'Moon',
-    'theme_classic' => 'Classic',
-    'theme_mist' => 'Mist',
-    'theme_forest' => 'Forest',
-    'theme_light' => 'Light',
+        'button' => 'Settings',
+        'appearance' => 'Theme',
+        'language' => 'Language',
+        'theme_classic' => 'Classic',
+        'theme_moon' => 'Moon',
+        'theme_mist' => 'Mist',
+        'theme_forest' => 'Forest',
+        'theme_light' => 'Light',
   ],
 ];
 $settingsUi = $settingsCopy[$pageLang] ?? $settingsCopy['en'];
@@ -79,20 +80,20 @@ $settingsUi = $settingsCopy[$pageLang] ?? $settingsCopy['en'];
           </button>
           <div class="dropdown-menu dropdown-menu-settings" role="menu">
             <div class="dropdown-section">
-              <span class="dropdown-section-title"><?= e($settingsUi['appearance']) ?></span>
-              <div class="theme-switcher" role="group" aria-label="<?= e($settingsUi['appearance']) ?>">
-                <button type="button" class="theme-option" data-theme-value="moon"><?= e($settingsUi['theme_moon']) ?></button>
-                <button type="button" class="theme-option" data-theme-value="classic"><?= e($settingsUi['theme_classic']) ?></button>
-                <button type="button" class="theme-option" data-theme-value="mist"><?= e($settingsUi['theme_mist']) ?></button>
-                <button type="button" class="theme-option" data-theme-value="forest"><?= e($settingsUi['theme_forest']) ?></button>
-                <button type="button" class="theme-option" data-theme-value="light"><?= e($settingsUi['theme_light']) ?></button>
-              </div>
-            </div>
-            <div class="dropdown-section">
               <span class="dropdown-section-title"><?= e($settingsUi['language']) ?></span>
               <div class="language-switcher" role="group" aria-label="<?= e($settingsUi['language']) ?>">
                 <a class="lang-link<?= $pageLang === 'es' ? ' active' : '' ?>" href="<?= e($langEsUrl) ?>" role="menuitem"><?= e(t('lang.es')) ?></a>
                 <a class="lang-link<?= $pageLang === 'en' ? ' active' : '' ?>" href="<?= e($langEnUrl) ?>" role="menuitem"><?= e(t('lang.en')) ?></a>
+              </div>
+            </div>
+            <div class="dropdown-section">
+              <span class="dropdown-section-title"><?= e($settingsUi['appearance']) ?></span>
+              <div class="theme-switcher" role="group" aria-label="<?= e($settingsUi['appearance']) ?>">
+                <button type="button" class="theme-option" data-theme-value="classic"><?= e($settingsUi['theme_classic']) ?></button>
+                <button type="button" class="theme-option" data-theme-value="moon"><?= e($settingsUi['theme_moon']) ?></button>
+                <button type="button" class="theme-option" data-theme-value="mist"><?= e($settingsUi['theme_mist']) ?></button>
+                <button type="button" class="theme-option" data-theme-value="forest"><?= e($settingsUi['theme_forest']) ?></button>
+                <button type="button" class="theme-option" data-theme-value="light"><?= e($settingsUi['theme_light']) ?></button>
               </div>
             </div>
           </div>
@@ -138,9 +139,9 @@ $settingsUi = $settingsCopy[$pageLang] ?? $settingsCopy['en'];
             <a href="<?= e($supportUrl) ?>" role="menuitem" class="nav-optional">
               <?= e(t('nav.support')) ?>
             </a>
-            <button type="button" class="dropdown-item disabled nav-optional" disabled>
+            <a href="<?= e($storeUrl) ?>" role="menuitem" class="nav-optional">
               <?= e(t('nav.shop')) ?>
-            </button>
+            </a>
             <a href="<?= e($downloadUrl) ?>" role="menuitem">
               <?= e(t('nav.download')) ?>
             </a>

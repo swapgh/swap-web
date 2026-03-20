@@ -38,6 +38,7 @@ $gamesUrl = page_url('#featured-games'); // Anchor link to featured games
         <span class="footer-title"><?= e(t('footer.project_links')) ?></span>
         <div class="footer-links">
           <a href="<?= e(with_lang(page_url('projects/swap-rpg'))) ?>"><?= e(t('footer.project')) ?></a>
+          <a href="<?= e(with_lang(page_url('store'))) ?>">Store</a>
           <a href="<?= e(asset_url('downloads/demo.zip')) ?>"><?= e(t('footer.demo')) ?></a>
           <a href="<?= e(with_lang(page_url('help'))) ?>"><?= e(t('footer.help')) ?></a>
           <a href="<?= e(with_lang(page_url('contact'))) ?>"><?= e(t('footer.contact')) ?></a>

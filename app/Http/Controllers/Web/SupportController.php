@@ -9,7 +9,7 @@ use App\Domain\Account\Services\ProfileReader;
 use App\Domain\Billing\DTOs\CheckoutRequest;
 use App\Domain\Billing\Services\CheckoutService;
 
-final class BillingController extends Controller
+final class SupportController extends Controller
 {
     public function history(): void
     {
@@ -17,7 +17,7 @@ final class BillingController extends Controller
 
         $service = new CheckoutService();
 
-        $this->render('web.pages.billing-history', [
+        $this->render('web.pages.support-history', [
             'user' => (new ProfileReader())->current(),
             'billingSessions' => $service->all(),
             'billingAvailable' => $service->isAvailable(),
@@ -43,11 +43,11 @@ final class BillingController extends Controller
 
         $result = (new CheckoutService())->create($request);
         if (!$result->success || $result->session === null) {
-            Session::flash('billing_error', $result->error ?? 'Unable to start checkout.');
+            Session::flash('billing_error', $result->error ?? 'Unable to start contribution.');
             $this->redirect(with_lang(page_url('profile')));
         }
 
-        Session::flash('billing_success', 'Checkout session created.');
+        Session::flash('billing_success', 'Contribution session created.');
         $this->redirect($result->session->checkoutUrl);
     }
 }

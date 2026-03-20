@@ -3,60 +3,68 @@ use App\Core\Auth;
 
 $copy = [
     'es' => [
-        'title' => 'Historial de pagos | Swap',
-        'description' => 'Historial de pagos y actividad de checkout de Swap.',
-        'eyebrow' => 'Pagos',
-        'heading' => 'Historial de pagos',
+        'title' => 'Historial de apoyo | Swap',
+        'description' => 'Historial de contribuciones y actividad de apoyo de Swap.',
+        'eyebrow' => 'Support',
+        'heading' => 'Historial de apoyo',
         'summary' => 'Un registro compacto de actividad para %s con el detalle justo para leer rapido.',
-        'billing_enabled' => 'Pagos activos',
-        'billing_disabled' => 'Pagos desactivados',
-        'sessions' => 'sesiones',
+        'support_enabled' => 'Apoyo activo',
+        'support_disabled' => 'Apoyo desactivado',
+        'contributions' => 'contribuciones',
         'provider' => 'Proveedor',
-        'billing' => 'Pagos',
+        'support' => 'Apoyo',
         'enabled' => 'Activo',
         'disabled' => 'Desactivado',
         'latest' => 'Ultimo',
         'no_records' => 'Sin registros',
-        'history_eyebrow' => 'Historial',
-        'history_heading' => 'Sesiones recientes',
+        'history_eyebrow' => 'History',
+        'history_heading' => 'Contribuciones recientes',
+        'account_area' => 'Area de cuenta',
+        'overview' => 'Resumen',
+        'support_nav' => 'Apoyo',
         'back_profile' => 'Volver al perfil',
+        'store' => 'Store',
         'characters' => 'Personajes',
         'empty_heading' => 'Todavia no hay registros',
-        'empty_body' => 'Cuando se cree una sesion de checkout, aparecera aqui como una fila compacta.',
+        'empty_body' => 'Cuando se cree una contribucion, aparecera aqui como una fila compacta.',
         'status' => 'Estado',
         'amount' => 'Importe',
         'customer' => 'Cliente',
         'created' => 'Creado',
-        'open' => 'Abrir',
-        'showing_latest' => 'Mostrando las ultimas %d sesiones para mantener la pagina legible.',
+        'open' => 'Abrir aporte',
+        'showing_latest' => 'Mostrando las ultimas %d contribuciones para mantener la pagina legible.',
     ],
     'en' => [
-        'title' => 'Billing history | Swap',
-        'description' => 'Swap billing history and checkout activity.',
-        'eyebrow' => 'Billing',
-        'heading' => 'Billing history',
+        'title' => 'Support history | Swap',
+        'description' => 'Swap support history and contribution activity.',
+        'eyebrow' => 'Support',
+        'heading' => 'Support history',
         'summary' => 'A compact activity log for %s with enough detail to scan fast.',
-        'billing_enabled' => 'Billing enabled',
-        'billing_disabled' => 'Billing disabled',
-        'sessions' => 'sessions',
+        'support_enabled' => 'Support enabled',
+        'support_disabled' => 'Support disabled',
+        'contributions' => 'contributions',
         'provider' => 'Provider',
-        'billing' => 'Billing',
+        'support' => 'Support',
         'enabled' => 'Enabled',
         'disabled' => 'Disabled',
         'latest' => 'Latest',
         'no_records' => 'No records',
         'history_eyebrow' => 'History',
-        'history_heading' => 'Recent sessions',
+        'history_heading' => 'Recent contributions',
+        'account_area' => 'Account area',
+        'overview' => 'Overview',
+        'support_nav' => 'Support',
         'back_profile' => 'Back to profile',
+        'store' => 'Store',
         'characters' => 'Characters',
-        'empty_heading' => 'No billing records yet',
-        'empty_body' => 'When a checkout session is created, it will appear here as a compact activity row.',
+        'empty_heading' => 'No support records yet',
+        'empty_body' => 'When a contribution is created, it will appear here as a compact activity row.',
         'status' => 'Status',
         'amount' => 'Amount',
         'customer' => 'Customer',
         'created' => 'Created',
-        'open' => 'Open',
-        'showing_latest' => 'Showing the latest %d sessions to keep the page readable.',
+        'open' => 'Open contribution',
+        'showing_latest' => 'Showing the latest %d contributions to keep the page readable.',
     ],
 ];
 
@@ -83,9 +91,9 @@ require __DIR__ . '/../layouts/header.php';
           <h1><?= e($page['heading']) ?></h1>
           <p class="auth-account-summary"><?= e(sprintf($page['summary'], (string) ($currentUser['email'] ?? 'your account'))) ?></p>
           <div class="auth-account-chips">
-            <span class="auth-chip"><?= e($isBillingAvailable ? $page['billing_enabled'] : $page['billing_disabled']) ?></span>
+            <span class="auth-chip"><?= e($isBillingAvailable ? $page['support_enabled'] : $page['support_disabled']) ?></span>
             <span class="auth-chip"><?= e(ucfirst($billingProviderName)) ?></span>
-            <span class="auth-chip"><?= e((string) count($sessions) . ' ' . $page['sessions']) ?></span>
+            <span class="auth-chip"><?= e((string) count($sessions) . ' ' . $page['contributions']) ?></span>
           </div>
         </div>
         <div class="auth-kpi-strip">
@@ -94,11 +102,11 @@ require __DIR__ . '/../layouts/header.php';
             <strong><?= e(ucfirst($billingProviderName)) ?></strong>
           </article>
           <article class="auth-kpi-card">
-            <span class="auth-stat-label"><?= e($page['billing']) ?></span>
+            <span class="auth-stat-label"><?= e($page['support']) ?></span>
             <strong><?= e($isBillingAvailable ? $page['enabled'] : $page['disabled']) ?></strong>
           </article>
           <article class="auth-kpi-card">
-            <span class="auth-stat-label"><?= e($page['sessions']) ?></span>
+            <span class="auth-stat-label"><?= e($page['contributions']) ?></span>
             <strong><?= e((string) count($sessions)) ?></strong>
           </article>
           <article class="auth-kpi-card">
@@ -109,6 +117,20 @@ require __DIR__ . '/../layouts/header.php';
       </div>
     </div>
 
+    <div class="auth-account-layout">
+    <aside class="auth-card auth-account-nav-card">
+      <div class="auth-section-heading">
+        <span class="auth-eyebrow"><?= e($page['eyebrow']) ?></span>
+        <h2><?= e($page['account_area']) ?></h2>
+      </div>
+      <nav class="auth-account-nav" aria-label="<?= e($page['account_area']) ?>">
+        <a class="auth-account-nav-link" href="<?= e(with_lang(page_url('profile'))) ?>"><?= e($page['overview']) ?></a>
+        <a class="auth-account-nav-link" href="<?= e(with_lang(page_url('characters'))) ?>"><?= e($page['characters']) ?></a>
+        <a class="auth-account-nav-link" href="<?= e(with_lang(page_url('profile'))) ?>#support-area"><?= e($page['support_nav']) ?></a>
+        <a class="auth-account-nav-link" href="<?= e(with_lang(page_url('store'))) ?>"><?= e($page['store']) ?></a>
+        <a class="auth-account-nav-link is-active" href="<?= e(with_lang(page_url('support/history'))) ?>"><?= e($page['heading']) ?></a>
+      </nav>
+    </aside>
     <div class="auth-card auth-records-panel">
       <div class="auth-records-toolbar">
         <div class="auth-section-heading">
@@ -117,6 +139,7 @@ require __DIR__ . '/../layouts/header.php';
         </div>
         <div class="auth-inline-actions auth-records-toolbar-actions">
           <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('profile'))) ?>"><?= e($page['back_profile']) ?></a>
+          <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('store'))) ?>"><?= e($page['store']) ?></a>
           <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('characters'))) ?>"><?= e($page['characters']) ?></a>
         </div>
       </div>
@@ -133,7 +156,7 @@ require __DIR__ . '/../layouts/header.php';
             <?php $createdAt = format_datetime_ui((string) ($session['created_at'] ?? '')); ?>
             <article class="auth-record-row">
               <div class="auth-record-main">
-                <strong><?= e((string) ($session['product_key'] ?? 'supporter_pack')) ?></strong>
+                <strong><?= e((string) ($session['product_key'] ?? 'supporter_tier')) ?></strong>
                 <span><?= e((string) ($session['id'] ?? '')) ?></span>
               </div>
               <div class="auth-record-meta">
@@ -164,6 +187,7 @@ require __DIR__ . '/../layouts/header.php';
           <p class="auth-meta-note"><?= e(sprintf($page['showing_latest'], count($recentSessions))) ?></p>
         <?php endif; ?>
       <?php endif; ?>
+    </div>
     </div>
   </section>
 </main>

@@ -6,68 +6,96 @@ $copy = [
         'title' => 'Perfil | Swap',
         'description' => 'Resumen de cuenta de Swap.',
         'eyebrow' => 'Perfil',
-        'summary' => 'Una vista de cuenta mas clara, centrada en tu sesion, el ultimo estado de pago y las acciones que si importan.',
+        'summary' => 'Tu area de jugador: acceso rapido a personajes, apoyo al proyecto, tienda e historial desde un mismo sitio.',
         'signin' => 'Acceso',
         'session' => 'Sesion',
         'session_live' => 'Activa',
-        'billing' => 'Pagos',
+        'support' => 'Apoyo',
         'enabled' => 'Activo',
         'disabled' => 'Desactivado',
         'latest' => 'Ultimo',
-        'no_checkout' => 'Sin checkout',
-        'billing_eyebrow' => 'Pagos',
-        'billing_heading' => 'Ultimo checkout',
-        'success_banner' => 'Checkout completado. La ultima sesion aparece aqui.',
-        'cancel_banner' => 'El checkout se cancelo antes de completar el pago.',
-        'supporter_pack' => 'Supporter pack',
-        'session_id' => 'ID de sesion',
+        'no_contribution' => 'Sin aporte',
+        'support_eyebrow' => 'Apoyo',
+        'support_heading' => 'Apoyo al proyecto',
+        'success_banner' => 'Contribucion completada. La ultima sesion aparece aqui.',
+        'cancel_banner' => 'La contribucion se cancelo antes de completarse.',
+        'supporter_tier' => 'Nivel supporter',
+        'supporter_note' => 'Ahora mismo esta area solo inicia el nivel supporter. La compra de productos o merch va en la tienda.',
+        'contribution_id' => 'ID de contribucion',
         'customer' => 'Cliente',
-        'product' => 'Producto',
+        'tier' => 'Nivel',
         'provider' => 'Proveedor',
         'created' => 'Creado',
         'updated' => 'Actualizado',
-        'open_checkout' => 'Abrir checkout',
-        'view_history' => 'Ver historial',
-        'empty_heading' => 'Todavia no hay checkout',
-        'empty_body' => 'La primera sesion de pago aparecera aqui sin obligarte a saltar a otra pagina.',
+        'complete_contribution' => 'Completar contribucion',
+        'make_contribution' => 'Hacer contribucion',
+        'view_history' => 'Historial de apoyo',
+        'empty_heading' => 'Todavia no hay contribuciones',
+        'empty_body' => 'Tu primera contribucion aparecera aqui sin obligarte a saltar a otra pagina.',
         'actions_eyebrow' => 'Acciones',
-        'actions_heading' => 'Accesos rapidos',
-        'start_checkout' => 'Iniciar checkout',
+        'actions_heading' => 'Area de cuenta',
+        'support_action_heading' => 'Siguiente paso',
+        'store' => 'Tienda',
+        'overview' => 'Resumen',
+        'support_nav' => 'Apoyo',
+        'history_nav' => 'Historial',
+        'characters_nav' => 'Personajes',
         'view_characters' => 'Ver personajes',
+        'spaces_eyebrow' => 'Navegacion',
+        'spaces_heading' => 'Tus espacios',
+        'characters_card_body' => 'Consulta tu grupo actual y la informacion jugable ya integrada en la web.',
+        'support_card_body' => 'Apoya el proyecto si quieres hacerlo, sin que esta pantalla gire solo alrededor del pago.',
+        'store_card_body' => 'La tienda queda separada para futuras compras, merch o contenido del juego.',
+        'history_card_body' => 'Revisa contribuciones anteriores y el estado de tus sesiones recientes.',
+        'go_to' => 'Abrir',
         'logout' => 'Cerrar sesion',
     ],
     'en' => [
         'title' => 'Profile | Swap',
         'description' => 'Swap account overview.',
         'eyebrow' => 'Profile',
-        'summary' => 'A cleaner account view focused on your session, latest billing state, and the next useful actions.',
+        'summary' => 'Your player area: quick access to characters, project support, store, and history from one place.',
         'signin' => 'Sign-in',
         'session' => 'Session',
         'session_live' => 'Live',
-        'billing' => 'Billing',
+        'support' => 'Support',
         'enabled' => 'Enabled',
         'disabled' => 'Disabled',
         'latest' => 'Latest',
-        'no_checkout' => 'No checkout',
-        'billing_eyebrow' => 'Billing',
-        'billing_heading' => 'Latest checkout',
-        'success_banner' => 'Checkout completed. The latest session is shown below.',
-        'cancel_banner' => 'Checkout was canceled before payment completed.',
-        'supporter_pack' => 'Supporter pack',
-        'session_id' => 'Session ID',
+        'no_contribution' => 'No support yet',
+        'support_eyebrow' => 'Support',
+        'support_heading' => 'Project support',
+        'success_banner' => 'Contribution completed. The latest session is shown below.',
+        'cancel_banner' => 'The contribution was canceled before completion.',
+        'supporter_tier' => 'Supporter tier',
+        'supporter_note' => 'This area currently starts only the supporter tier. Product and merch purchases belong in the store.',
+        'contribution_id' => 'Contribution ID',
         'customer' => 'Customer',
-        'product' => 'Product',
+        'tier' => 'Tier',
         'provider' => 'Provider',
         'created' => 'Created',
         'updated' => 'Updated',
-        'open_checkout' => 'Open checkout',
-        'view_history' => 'View history',
-        'empty_heading' => 'No checkout session yet',
-        'empty_body' => 'Your first billing session will appear here instead of sending you to a separate page immediately.',
+        'complete_contribution' => 'Complete contribution',
+        'make_contribution' => 'Make contribution',
+        'view_history' => 'Support history',
+        'empty_heading' => 'No contributions yet',
+        'empty_body' => 'Your first contribution will appear here instead of sending you to a separate page immediately.',
         'actions_eyebrow' => 'Actions',
-        'actions_heading' => 'Quick actions',
-        'start_checkout' => 'Start checkout',
+        'actions_heading' => 'Account area',
+        'support_action_heading' => 'Next step',
+        'store' => 'Store',
+        'overview' => 'Overview',
+        'support_nav' => 'Support',
+        'history_nav' => 'History',
+        'characters_nav' => 'Characters',
         'view_characters' => 'View characters',
+        'spaces_eyebrow' => 'Navigation',
+        'spaces_heading' => 'Your spaces',
+        'characters_card_body' => 'Check your current party and the game-facing data already living on the website.',
+        'support_card_body' => 'Support the project if you want to, without making this whole screen feel like a payment wall.',
+        'store_card_body' => 'The store stays separate for future merch, products, or game-related purchases.',
+        'history_card_body' => 'Review past contributions and the status of your latest sessions.',
+        'go_to' => 'Open',
         'logout' => 'Log out',
     ],
 ];
@@ -85,6 +113,9 @@ $accountEmail = (string) ($currentUser['email'] ?? '');
 $authSource = ucfirst((string) ($currentUser['auth_source'] ?? 'unknown'));
 $latestCreatedAt = format_datetime_ui((string) ($currentBillingSession['created_at'] ?? ''));
 $latestUpdatedAt = format_datetime_ui((string) ($currentBillingSession['updated_at'] ?? ''));
+$currentBillingState = (string) ($currentBillingSession['status'] ?? '');
+$hasPendingCheckout = $currentBillingState === 'pending' && !empty($currentBillingSession['checkout_url']);
+$billingActionLabel = $hasPendingCheckout ? $page['complete_contribution'] : $page['make_contribution'];
 $pageTitle = $page['title'];
 $pageDescription = $page['description'];
 $extraCss = ['css/pages/auth.css'];
@@ -115,22 +146,71 @@ require __DIR__ . '/../layouts/header.php';
             <strong><?= e($page['session_live']) ?></strong>
           </article>
           <article class="auth-kpi-card">
-            <span class="auth-stat-label"><?= e($page['billing']) ?></span>
+            <span class="auth-stat-label"><?= e($page['support']) ?></span>
             <strong><?= e($isBillingAvailable ? $page['enabled'] : $page['disabled']) ?></strong>
           </article>
           <article class="auth-kpi-card">
             <span class="auth-stat-label"><?= e($page['latest']) ?></span>
-            <strong><?= e($currentBillingSession !== null ? $billingStatus['label'] : $page['no_checkout']) ?></strong>
+            <strong><?= e($currentBillingSession !== null ? $billingStatus['label'] : $page['no_contribution']) ?></strong>
           </article>
         </div>
       </div>
     </div>
 
-    <div class="auth-stage-grid">
+    <div class="auth-account-layout">
+      <aside class="auth-card auth-account-nav-card">
+        <div class="auth-section-heading">
+          <span class="auth-eyebrow"><?= e($page['actions_eyebrow']) ?></span>
+          <h2><?= e($page['actions_heading']) ?></h2>
+        </div>
+        <nav class="auth-account-nav" aria-label="<?= e($page['actions_heading']) ?>">
+          <a class="auth-account-nav-link is-active" href="<?= e(with_lang(page_url('profile'))) ?>"><?= e($page['overview']) ?></a>
+          <a class="auth-account-nav-link" href="<?= e(with_lang(page_url('characters'))) ?>"><?= e($page['characters_nav']) ?></a>
+          <a class="auth-account-nav-link" href="<?= e(with_lang(page_url('profile'))) ?>#support-area"><?= e($page['support_nav']) ?></a>
+          <a class="auth-account-nav-link" href="<?= e(with_lang(page_url('store'))) ?>"><?= e($page['store']) ?></a>
+          <a class="auth-account-nav-link" href="<?= e(with_lang(page_url('support/history'))) ?>"><?= e($page['history_nav']) ?></a>
+        </nav>
+      </aside>
+
+    <div class="auth-account-main">
+      <div class="auth-card auth-overview-panel">
+        <div class="auth-section-heading">
+          <span class="auth-eyebrow"><?= e($page['spaces_eyebrow']) ?></span>
+          <h2><?= e($page['spaces_heading']) ?></h2>
+        </div>
+        <div class="auth-grid auth-account-space-grid">
+          <article class="auth-detail-card auth-account-space-card">
+            <span class="auth-stat-label"><?= e($page['characters_nav']) ?></span>
+            <h3><?= e($page['characters_nav']) ?></h3>
+            <p><?= e($page['characters_card_body']) ?></p>
+            <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('characters'))) ?>"><?= e($page['go_to']) ?></a>
+          </article>
+          <article class="auth-detail-card auth-account-space-card">
+            <span class="auth-stat-label"><?= e($page['support_nav']) ?></span>
+            <h3><?= e($page['support_nav']) ?></h3>
+            <p><?= e($page['support_card_body']) ?></p>
+            <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('profile'))) ?>#support-area"><?= e($page['go_to']) ?></a>
+          </article>
+          <article class="auth-detail-card auth-account-space-card">
+            <span class="auth-stat-label"><?= e($page['store']) ?></span>
+            <h3><?= e($page['store']) ?></h3>
+            <p><?= e($page['store_card_body']) ?></p>
+            <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('store'))) ?>"><?= e($page['go_to']) ?></a>
+          </article>
+          <article class="auth-detail-card auth-account-space-card">
+            <span class="auth-stat-label"><?= e($page['history_nav']) ?></span>
+            <h3><?= e($page['history_nav']) ?></h3>
+            <p><?= e($page['history_card_body']) ?></p>
+            <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('support/history'))) ?>"><?= e($page['go_to']) ?></a>
+          </article>
+        </div>
+      </div>
+
+      <div class="auth-stage-grid" id="support-area">
       <div class="auth-card auth-stage-main">
         <div class="auth-section-heading">
-          <span class="auth-eyebrow"><?= e($page['billing_eyebrow']) ?></span>
-          <h2><?= e($page['billing_heading']) ?></h2>
+          <span class="auth-eyebrow"><?= e($page['support_eyebrow']) ?></span>
+          <h2><?= e($page['support_heading']) ?></h2>
         </div>
         <?php if ($checkoutReturn === 'success'): ?>
           <div class="auth-banner auth-banner-success"><?= e($page['success_banner']) ?></div>
@@ -148,14 +228,14 @@ require __DIR__ . '/../layouts/header.php';
           <div class="auth-billing-spotlight">
             <div class="auth-billing-spotlight-head">
               <div>
-                <span class="auth-stat-label"><?= e($page['supporter_pack']) ?></span>
+                <span class="auth-stat-label"><?= e($page['supporter_tier']) ?></span>
                 <h3><?= e(format_money_from_cents((int) ($currentBillingSession['amount_cents'] ?? 0), (string) ($currentBillingSession['currency'] ?? 'EUR'))) ?></h3>
               </div>
               <span class="auth-status-badge <?= e($billingStatus['class']) ?>"><?= e($billingStatus['label']) ?></span>
             </div>
             <div class="auth-billing-meta-grid">
               <div>
-                <span class="auth-stat-label"><?= e($page['session_id']) ?></span>
+                <span class="auth-stat-label"><?= e($page['contribution_id']) ?></span>
                 <p><?= e((string) ($currentBillingSession['id'] ?? '')) ?></p>
               </div>
               <div>
@@ -163,7 +243,7 @@ require __DIR__ . '/../layouts/header.php';
                 <p><?= e((string) ($currentBillingSession['customer_email'] ?? $accountEmail)) ?></p>
               </div>
               <div>
-                <span class="auth-stat-label"><?= e($page['product']) ?></span>
+                <span class="auth-stat-label"><?= e($page['tier']) ?></span>
                 <p><?= e((string) ($currentBillingSession['product_key'] ?? 'supporter_pack')) ?></p>
               </div>
               <div>
@@ -178,8 +258,7 @@ require __DIR__ . '/../layouts/header.php';
               <?php endif; ?>
             </div>
             <div class="auth-inline-actions">
-              <a class="auth-secondary auth-link-button" href="<?= e((string) ($currentBillingSession['checkout_url'] ?? '#')) ?>"><?= e($page['open_checkout']) ?></a>
-              <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('billing/history'))) ?>"><?= e($page['view_history']) ?></a>
+              <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('support/history'))) ?>"><?= e($page['view_history']) ?></a>
             </div>
           </div>
         <?php else: ?>
@@ -196,13 +275,18 @@ require __DIR__ . '/../layouts/header.php';
           <h2><?= e($page['actions_heading']) ?></h2>
         </div>
         <div class="auth-action-list">
-          <form action="<?= e(with_lang(page_url('billing/checkout'))) ?>" method="post" class="auth-inline-form">
+          <div class="auth-meta-note">
+            <strong><?= e($page['support_action_heading']) ?>:</strong> <?= e($page['supporter_note']) ?>
+          </div>
+          <form action="<?= e(with_lang(page_url('support/contribute'))) ?>" method="post" class="auth-inline-form">
             <?= csrf_field() ?>
             <input type="hidden" name="product_key" value="supporter_pack">
             <input type="hidden" name="currency" value="EUR">
             <input type="hidden" name="amount_cents" value="499">
-            <button type="submit" class="auth-submit"<?= $isBillingAvailable ? '' : ' disabled' ?>><?= e($page['start_checkout']) ?></button>
+            <button type="submit" class="auth-submit"<?= $isBillingAvailable ? '' : ' disabled' ?>><?= e($billingActionLabel) ?></button>
           </form>
+          <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('support/history'))) ?>"><?= e($page['view_history']) ?></a>
+          <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('store'))) ?>"><?= e($page['store']) ?></a>
           <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('characters'))) ?>"><?= e($page['view_characters']) ?></a>
           <form action="<?= e(with_lang(page_url('logout'))) ?>" method="post">
             <?= csrf_field() ?>
@@ -210,6 +294,8 @@ require __DIR__ . '/../layouts/header.php';
           </form>
         </div>
       </aside>
+      </div>
+    </div>
     </div>
   </section>
 </main>

@@ -27,7 +27,7 @@ $ogType = $ogType ?? 'website';
 $ogImage = $ogImage ?? absolute_url($site['default_og_image']);
 ?>
 <!DOCTYPE html>
-<html lang="<?= e((string) $pageLang) ?>" data-theme="moon">
+<html lang="<?= e((string) $pageLang) ?>" data-theme="classic">
 <head>
   <!-- Character encoding -->
   <meta charset="UTF-8">
@@ -49,9 +49,9 @@ $ogImage = $ogImage ?? absolute_url($site['default_og_image']);
 
   <script>
     (() => {
-      const allowedThemes = ["moon", "classic", "mist", "forest", "light"];
+      const allowedThemes = ["classic", "moon", "mist", "forest", "light"];
       const storedTheme = window.localStorage.getItem("swap-theme");
-      const theme = allowedThemes.includes(storedTheme) ? storedTheme : "moon";
+      const theme = allowedThemes.includes(storedTheme) ? storedTheme : "classic";
       const themeColors = {
         moon: "#0b0d10",
         classic: "#0a1220",
@@ -65,7 +65,7 @@ $ogImage = $ogImage ?? absolute_url($site['default_og_image']);
 
       const themeMeta = document.querySelector('meta[name="theme-color"]');
       if (themeMeta) {
-        themeMeta.setAttribute("content", themeColors[theme] || themeColors.moon);
+        themeMeta.setAttribute("content", themeColors[theme] || themeColors.classic);
       }
     })();
   </script>

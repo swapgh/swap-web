@@ -134,8 +134,20 @@
   gap: 1rem;
 }
 
+.auth-account-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
 .auth-account-dashboard {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.auth-account-main {
+  display: grid;
+  gap: 1rem;
 }
 
 .auth-stage-grid {
@@ -148,6 +160,44 @@
 .auth-actions-panel,
 .auth-characters-panel {
   align-content: start;
+}
+
+.auth-account-nav-card {
+  position: sticky;
+  top: 96px;
+}
+
+.auth-account-nav {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.auth-account-nav-link {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  min-height: 46px;
+  padding: 0.78rem 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-main);
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.auth-account-nav-link:hover,
+.auth-account-nav-link:focus-visible {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(2px);
+}
+
+.auth-account-nav-link.is-active {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--accent-strong);
 }
 
 .auth-account-panel {
@@ -346,6 +396,25 @@
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
+.auth-account-space-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.auth-account-space-card {
+  display: grid;
+  gap: 0.9rem;
+  align-content: start;
+  padding: 1.35rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.auth-account-space-card h3,
+.auth-account-space-card p {
+  margin: 0;
+}
+
 .auth-character-card h3 {
   margin-bottom: 0.75rem;
   font-size: 1.5rem;
@@ -488,6 +557,8 @@
     grid-template-columns: 1fr;
   }
 
+  .auth-account-layout,
+  .auth-account-space-grid,
   .auth-hero-split,
   .auth-stage-grid,
   .auth-account-dashboard,
@@ -509,6 +580,10 @@
 
   .auth-records-toolbar-actions {
     min-width: 0;
+  }
+
+  .auth-account-nav-card {
+    position: static;
   }
 }
 

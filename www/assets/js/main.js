@@ -1,6 +1,6 @@
 // Wait until the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
-  const allowedThemes = ["moon", "classic", "mist", "forest", "light"];
+  const allowedThemes = ["classic", "moon", "mist", "forest", "light"];
   const themeColorMap = {
     moon: "#0b0d10",
     classic: "#0a1220",
@@ -10,14 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const applyTheme = (theme) => {
-    const safeTheme = allowedThemes.includes(theme) ? theme : "moon";
+    const safeTheme = allowedThemes.includes(theme) ? theme : "classic";
     document.documentElement.dataset.theme = safeTheme;
     document.documentElement.style.colorScheme = safeTheme === "light" ? "light" : "dark";
     window.localStorage.setItem("swap-theme", safeTheme);
 
     const themeMeta = document.querySelector('meta[name="theme-color"]');
     if (themeMeta) {
-      themeMeta.setAttribute("content", themeColorMap[safeTheme] || themeColorMap.moon);
+      themeMeta.setAttribute("content", themeColorMap[safeTheme] || themeColorMap.classic);
     }
 
     document.querySelectorAll(".theme-option").forEach((button) => {
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  applyTheme(document.documentElement.dataset.theme || "moon");
+  applyTheme(document.documentElement.dataset.theme || "classic");
 
   // =============================
   // GLOBAL DROPDOWN CLICK HANDLER
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".theme-option").forEach((button) => {
     button.addEventListener("click", (event) => {
       event.preventDefault();
-      applyTheme(button.dataset.themeValue || "moon");
+      applyTheme(button.dataset.themeValue || "classic");
     });
   });
 
