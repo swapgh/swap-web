@@ -64,8 +64,8 @@ export BILLING_PROVIDER=stripe
 export STRIPE_PUBLIC_KEY=your_public_key
 export STRIPE_SECRET_KEY=your_secret_key
 export STRIPE_WEBHOOK_SECRET=your_webhook_secret
-export BILLING_SUCCESS_URL=https://your-site.example/profile?checkout=success
-export BILLING_CANCEL_URL=https://your-site.example/profile?checkout=cancel
+export BILLING_SUCCESS_URL=https://your-site.example/account?checkout=success
+export BILLING_CANCEL_URL=https://your-site.example/account?checkout=cancel
 ```
 
 Without these values, the public site still runs, but live Stripe payments will not.
@@ -73,5 +73,11 @@ Without these values, the public site still runs, but live Stripe payments will 
 ## Notes
 
 - `storage/` must stay writable.
-- `storage/billing/` is ignored on purpose and should not be committed.
+- `storage/cache/sessions/` and `storage/billing/` are runtime data and should not be committed.
+- Session files under `storage/cache/sessions/` are generated automatically and are safe to clear locally.
 - Private account pages and API responses are marked to avoid indexing/caching.
+
+## Placeholder auth
+
+- In local development, placeholder auth is enabled by default.
+- Any valid email can enter the private account area while `app.features.placeholder_auth` remains enabled.

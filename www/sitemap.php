@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../app/Support/bootstrap.php';
 
+use App\Support\PageCatalog;
+
 header('Content-Type: application/xml; charset=UTF-8');
 
 function url(string $path): string
@@ -10,31 +12,17 @@ function url(string $path): string
     return absolute_url($path);
 }
 
-$pageEntries = [
-    ['path' => '', 'source' => __DIR__ . '/../app/Views/web/pages/home.php'],
-    ['path' => 'projects/swap-rpg', 'source' => __DIR__ . '/../app/Content/Web/site-pages.php'],
-    ['path' => 'contact', 'source' => __DIR__ . '/../app/Content/Web/site-pages.php'],
-    ['path' => 'help', 'source' => __DIR__ . '/../app/Content/Web/site-pages.php'],
-    ['path' => 'aviso-legal', 'source' => __DIR__ . '/../app/Content/Web/site-pages.php'],
-    ['path' => 'privacy', 'source' => __DIR__ . '/../app/Content/Web/site-pages.php'],
-    ['path' => 'cookies', 'source' => __DIR__ . '/../app/Content/Web/site-pages.php'],
-    ['path' => 'payment-disclaimer', 'source' => __DIR__ . '/../app/Content/Web/site-pages.php'],
-    ['path' => 'support-terms', 'source' => __DIR__ . '/../app/Content/Web/site-pages.php'],
-    ['path' => 'games/class-select', 'source' => __DIR__ . '/../app/Content/Web/site-pages.php'],
-    ['path' => 'games/combat-slice', 'source' => __DIR__ . '/../app/Content/Web/site-pages.php'],
-    ['path' => 'games/dark-biome', 'source' => __DIR__ . '/../app/Content/Web/site-pages.php'],
-    ['path' => 'games/rogue-build', 'source' => __DIR__ . '/../app/Content/Web/site-pages.php'],
-    ['path' => 'games/liminal-zone', 'source' => __DIR__ . '/../app/Content/Web/site-pages.php'],
-];
+$urls = [[
+    'loc' => url(''),
+    'lastmod' => is_file(__DIR__ . '/../app/Content/Pages/home.php') ? date('c', filemtime(__DIR__ . '/../app/Content/Pages/home.php')) : null,
+]];
 
-$urls = array_map(static function (array $entry): array {
-    $source = $entry['source'];
-
-    return [
-        'loc' => url($entry['path']),
-        'lastmod' => is_file($source) ? date('c', filemtime($source)) : null,
+foreach (PageCatalog::sitemapEntries() as $page) {
+    $urls[] = [
+        'loc' => url((string) $page['path']),
+        'lastmod' => is_file(__DIR__ . '/../app/Content/Pages/public-pages.php') ? date('c', filemtime(__DIR__ . '/../app/Content/Pages/public-pages.php')) : null,
     ];
-}, $pageEntries);
+}
 
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 ?>

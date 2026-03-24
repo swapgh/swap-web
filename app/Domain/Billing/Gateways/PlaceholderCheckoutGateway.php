@@ -16,7 +16,7 @@ final class PlaceholderCheckoutGateway implements CheckoutGateway
     public function createSession(CheckoutRequest $request): CheckoutSessionData
     {
         $id = 'chk_' . bin2hex(random_bytes(8));
-        $profileUrl = with_lang(page_url('profile'));
+        $profileUrl = with_lang(page_url('account'));
         $separator = str_contains($profileUrl, '?') ? '&' : '?';
 
         return new CheckoutSessionData(

@@ -9,15 +9,15 @@ final class HomeController extends Controller
 {
     public function index(): void
     {
-        require_once dirname(__DIR__, 3) . '/Content/Web/home-page.php';
+        require_once dirname(__DIR__, 3) . '/Content/Pages/home.php';
 
         $pageContent = build_home_page_content($GLOBALS['pageLang'], $GLOBALS['site']);
 
-        $this->render('web.pages.home', ['home' => $pageContent]);
+        $this->renderPage('web.pages.public.home', ['home' => $pageContent]);
     }
 
     public function notFound(): void
     {
-        $this->render('web.pages.404');
+        $this->renderPage('web.pages.public.error-404');
     }
 }

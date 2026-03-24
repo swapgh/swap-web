@@ -10,6 +10,11 @@ abstract class Controller
         View::render($view, $data);
     }
 
+    protected function renderPage(string $contentView, array $data = [], string $layout = 'web.layouts.site'): void
+    {
+        $this->render($layout, $data + ['contentView' => $contentView]);
+    }
+
     protected function json(array $payload, int $status = 200): never
     {
         http_response_code($status);

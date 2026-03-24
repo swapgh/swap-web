@@ -66,7 +66,7 @@ final class StripeCheckoutGateway implements CheckoutGateway
             return $this->successUrl;
         }
 
-        $profileUrl = with_lang(page_url('profile'));
+        $profileUrl = with_lang(page_url('account'));
         $separator = str_contains($profileUrl, '?') ? '&' : '?';
 
         return absolute_url($profileUrl . $separator . 'checkout=success');
@@ -78,7 +78,7 @@ final class StripeCheckoutGateway implements CheckoutGateway
             return $this->cancelUrl;
         }
 
-        $profileUrl = with_lang(page_url('profile'));
+        $profileUrl = with_lang(page_url('account'));
         $separator = str_contains($profileUrl, '?') ? '&' : '?';
 
         return absolute_url($profileUrl . $separator . 'checkout=cancel');

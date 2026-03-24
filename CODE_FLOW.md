@@ -28,13 +28,18 @@
   - loads `lang/es.php` and `lang/en.php`
   - exposes `t(...)`
 
+- `app/Support/PageCatalog.php`
+  - loads `config/pages.php`
+  - centralizes the public page catalog
+  - is reused by web routes and sitemap generation
+
 - `app/Core/Router.php`
   - registers `GET` and `POST` routes
   - dispatches exact-match paths
   - executes route middleware before handlers
 
 - `app/Core/Controller.php`
-  - renders views
+  - renders views and page layouts
   - sends JSON responses
   - centralizes sensitive-page and no-store response headers
 
@@ -58,35 +63,38 @@
     - `/games/*`
     - `/contact`
     - `/help`
+    - `/store`
+    - `/aviso-legal`
     - `/privacy`
     - `/cookies`
+    - `/payment-disclaimer`
+    - `/support-terms`
   - auth/account routes:
     - `/login`
-    - `/profile`
-    - `/billing/history`
-    - `/characters`
+    - `/logout`
+    - `/account`
+    - `/account/characters`
+    - `/account/support/history`
+    - `/account/support/checkout`
 
 - `app/Http/Controllers/Web/HomeController.php`
   - renders the homepage
   - renders the active 404 page
 
-- `app/Http/Controllers/Web/PageController.php`
-  - renders static/public project and game pages using content builders
+- `app/Http/Controllers/Web/PublicPageController.php`
+  - resolves public pages from `PageCatalog`
+  - renders project, legal, contact, help, store, and game-detail pages from content builders
 
 - `app/Http/Controllers/Web/AuthController.php`
   - shows login
   - handles login/logout
   - marks auth pages as non-indexable and non-cacheable
 
-- `app/Http/Controllers/Web/ProfileController.php`
-  - renders the private profile/account dashboard
-
-- `app/Http/Controllers/Web/BillingController.php`
-  - renders billing history
+- `app/Http/Controllers/Web/AccountController.php`
+  - renders the private account dashboard
+  - renders account characters
+  - renders support history
   - starts web checkout
-
-- `app/Http/Controllers/Web/CharacterController.php`
-  - renders the private character/roster page
 
 - `app/Http/Middleware/RequireAuth.php`
   - redirects guests to `/login`
@@ -112,12 +120,15 @@
 
 ### Content Layer
 
-- `app/Content/Web/home-page.php`
+- `app/Content/Pages/home.php`
   - builds the homepage content structure
   - defines hero, carousel, featured games, and CTA copy
 
-- `app/Content/Web/site-pages.php`
-  - builds the public page content for project, contact, legal pages, and featured-game detail pages
+- `app/Content/Pages/public-pages.php`
+  - builds public page content for project, contact, legal pages, store, help, and featured-game detail pages
+
+- `config/pages.php`
+  - is the source of truth for public page slugs and paths
 
 ### Domain Layer
 
@@ -152,47 +163,90 @@
 ### Views in Use
 
 - `app/Views/web/layouts/`
-  - `head.php`
-  - `header.php`
-  - `footer.php`
-  - `scripts.php`
+  - `site.php`
 
-- `app/Views/web/pages/`
+- `app/Views/web/partials/`
+  - `head.php`
+  - `site-header.php`
+  - `site-footer.php`
+  - `scripts.php`
+  - `account-nav.php`
+
+- `app/Views/web/pages/public/`
   - `home.php`
-  - `page.php`
+  - `content-page.php`
+  - `error-404.php`
+
+- `app/Views/web/pages/auth/`
   - `login.php`
-  - `profile.php`
-  - `billing-history.php`
+
+- `app/Views/web/pages/account/`
+  - `dashboard.php`
   - `characters.php`
-  - `404.php`
+  - `support-history.php`
 
 ### CSS in Use
 
-- `www/assets/css/system/`
+- `www/assets/css/app.css`
+  - imports the shared CSS stack
+
+- `www/assets/css/tokens/`
+  - `core.css`
+  - `themes.css`
+
+- `www/assets/css/base/`
+  - `reset.css`
   - `base.css`
-  - `components.css`
-  - `layout.css`
-  - `chrome.css`
-  - `pages.css`
+  - `typography.css`
+  - `accessibility.css`
+
+- `www/assets/css/layouts/`
+  - `section.css`
+  - `site-header.css`
+  - `site-footer.css`
+  - `legal-nav.css`
+  - `account.css`
+
+- `www/assets/css/components/`
+  - `buttons.css`
+  - `chips.css`
+  - `banners.css`
+  - `badges.css`
+  - `cards.css`
+  - `dropdowns.css`
+  - `cookie-banner.css`
+  - `forms.css`
 
 - `www/assets/css/pages/`
   - `home.css`
-  - `auth.css`
-  - `site.css`
+  - `content-page.css`
+  - `error-404.css`
+  - `home/*`
 
 ### JavaScript in Use
 
-- `www/assets/js/main.js`
-  - shared site/header behavior
+- `www/assets/js/app.js`
+  - initializes the shared site modules on `DOMContentLoaded`
 
-- `www/assets/js/home.js`
-  - homepage carousel/filter behavior
+- `www/assets/js/modules/`
+  - `theme.js`
+  - `cookie-consent.js`
+  - `dropdowns.js`
+  - `mobile-nav.js`
+  - `code-toggle.js`
+  - `lightbox.js`
+  - `footer-accordion.js`
+  - `account-nav.js`
+
+- `www/assets/js/pages/home.js`
+  - homepage carousel, filters, and reveal behavior
 
 ## Persistence and Sensitive Data
 
 - sessions live under `storage/cache/sessions`
+- session files are generated runtime cache and are safe to clear locally
 - file-backed billing fallback lives under `storage/billing/`
-- `storage/billing/` is intentionally gitignored
+- `storage/cache/sessions/` and `storage/billing/` are intentionally gitignored as runtime data
 - private pages are rendered with `noindex,nofollow,noarchive`
 - JSON API responses send `no-store`/`no-cache`
 
@@ -207,4 +261,4 @@
 
 ## Current Source of Truth
 
-The active architecture is the `app/Http`, `app/Domain`, `app/Content`, and `app/Views/web` layout above. That is the structure future changes should follow.
+The active architecture is the `app/Http`, `app/Domain`, `app/Content/Pages`, `config/pages.php`, and `app/Views/web` layout above. That is the structure future changes should follow.
