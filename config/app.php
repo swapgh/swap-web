@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 return [
-    'name'             => 'Swap RPG',
+    'name'             => 'Swap',
     'github_rpg'       => 'https://github.com/swapgh/swap-rpg',
     'github_web'       => 'https://github.com/swapgh/swap-web',
     'contact_email'    => 'swap@swap.com.es',
@@ -19,7 +19,7 @@ return [
         'cancel_url' => (string) ($_ENV['BILLING_CANCEL_URL'] ?? ''),
     ],
     'features'         => [
-        'placeholder_auth' => true,
+        'placeholder_auth' => false,
         'analytics'        => false,
         'billing'          => true,
     ],

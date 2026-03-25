@@ -23,7 +23,7 @@ Recommended extensions:
 
 3. Prepare writable storage:
 ```bash
-mkdir -p storage/cache/sessions storage/logs storage/billing
+mkdir -p storage/cache/sessions storage/logs storage/billing storage/auth storage/account
 chmod -R u+rwX storage
 ```
 
@@ -77,7 +77,16 @@ Without these values, the public site still runs, but live Stripe payments will 
 - Session files under `storage/cache/sessions/` are generated automatically and are safe to clear locally.
 - Private account pages and API responses are marked to avoid indexing/caching.
 
-## Placeholder auth
+## Auth and progression MVP
 
-- In local development, placeholder auth is enabled by default.
-- Any valid email can enter the private account area while `app.features.placeholder_auth` remains enabled.
+- Accounts now persist in `storage/auth/users.json`.
+- Web and API registration both accept `username`, `email`, and `password`.
+- Progression now persists in `storage/account/progression.json`.
+- The account API exposes:
+  - `POST /api/auth/register`
+  - `POST /api/auth/login`
+  - `GET /api/account/profile`
+  - `GET /api/account/progression`
+  - `POST /api/account/progression`
+- API auth supports the normal PHP session and `Authorization: Bearer <api_token>`.
+- The RPG client can use the bearer token returned by login/register to sync progression later.

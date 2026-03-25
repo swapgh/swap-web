@@ -10,6 +10,11 @@ $copy = [
         'signin' => 'Acceso',
         'session' => 'Sesion',
         'session_live' => 'Activa',
+        'level' => 'Nivel',
+        'kills' => 'Enemigos derrotados',
+        'character' => 'Personaje',
+        'class' => 'Clase',
+        'coins' => 'Monedas',
         'support' => 'Apoyo',
         'enabled' => 'Activo',
         'disabled' => 'Desactivado',
@@ -61,6 +66,11 @@ $copy = [
         'signin' => 'Sign-in',
         'session' => 'Session',
         'session_live' => 'Live',
+        'level' => 'Level',
+        'kills' => 'Enemies killed',
+        'character' => 'Character',
+        'class' => 'Class',
+        'coins' => 'Coins',
         'support' => 'Support',
         'enabled' => 'Enabled',
         'disabled' => 'Disabled',
@@ -109,6 +119,8 @@ $copy = [
 $page = $copy[$pageLang] ?? $copy['es'];
 $currentUser = is_array($user ?? null) ? $user : Auth::user() ?? [];
 $currentBillingSession = is_array($billingSession ?? null) ? $billingSession : null;
+$currentProgression = is_array($progression ?? null) ? $progression : [];
+$currentCharacter = is_array($currentProgression['character'] ?? null) ? $currentProgression['character'] : [];
 $isBillingAvailable = (bool) ($billingAvailable ?? false);
 $billingProviderName = (string) ($billingProvider ?? 'placeholder');
 $checkoutReturn = (string) ($checkoutReturn ?? '');
@@ -117,6 +129,12 @@ $accountRole = ucfirst((string) ($currentUser['role'] ?? 'developer'));
 $accountName = (string) ($currentUser['name'] ?? 'Swap User');
 $accountEmail = (string) ($currentUser['email'] ?? '');
 $authSource = ucfirst((string) ($currentUser['auth_source'] ?? 'unknown'));
+$characterName = (string) ($currentCharacter['name'] ?? 'Hero');
+$characterLevel = (int) ($currentCharacter['level'] ?? 1);
+$characterHp = (int) ($currentCharacter['hp'] ?? 6);
+$characterMaxHp = (int) ($currentCharacter['max_hp'] ?? 6);
+$characterKills = (int) ($currentCharacter['enemies_killed'] ?? 0);
+$characterCoins = (int) ($currentCharacter['coins'] ?? 0);
 $latestCreatedAt = format_datetime_ui((string) ($currentBillingSession['created_at'] ?? ''));
 $latestUpdatedAt = format_datetime_ui((string) ($currentBillingSession['updated_at'] ?? ''));
 $currentBillingState = (string) ($currentBillingSession['status'] ?? '');
@@ -140,13 +158,14 @@ $accountNavLabel = $page['actions_heading'];
             <span class="auth-chip"><?= e($accountEmail) ?></span>
             <span class="auth-chip"><?= e($accountRole) ?></span>
             <span class="auth-chip"><?= e(ucfirst($billingProviderName)) ?></span>
+            <span class="auth-chip"><?= e($characterName) ?></span>
           </div>
         </div>
         <div class="auth-kpi-strip">
           <article class="auth-kpi-card"><span class="auth-stat-label"><?= e($page['signin']) ?></span><strong><?= e($authSource) ?></strong></article>
           <article class="auth-kpi-card"><span class="auth-stat-label"><?= e($page['session']) ?></span><strong><?= e($page['session_live']) ?></strong></article>
-          <article class="auth-kpi-card"><span class="auth-stat-label"><?= e($page['support']) ?></span><strong><?= e($isBillingAvailable ? $page['enabled'] : $page['disabled']) ?></strong></article>
-          <article class="auth-kpi-card"><span class="auth-stat-label"><?= e($page['latest']) ?></span><strong><?= e($currentBillingSession !== null ? $billingStatus['label'] : $page['no_contribution']) ?></strong></article>
+          <article class="auth-kpi-card"><span class="auth-stat-label"><?= e($page['level']) ?></span><strong><?= e((string) $characterLevel) ?></strong></article>
+          <article class="auth-kpi-card"><span class="auth-stat-label"><?= e($page['kills']) ?></span><strong><?= e((string) $characterKills) ?></strong></article>
         </div>
       </div>
     </div>
@@ -159,6 +178,14 @@ $accountNavLabel = $page['actions_heading'];
           <div class="auth-section-heading">
             <span class="auth-eyebrow"><?= e($page['spaces_eyebrow']) ?></span>
             <h2><?= e($page['spaces_heading']) ?></h2>
+          </div>
+          <div class="auth-grid auth-account-space-grid">
+            <article class="auth-detail-card auth-account-space-card">
+              <span class="auth-stat-label"><?= e($page['character']) ?></span>
+              <h3><?= e($characterName) ?></h3>
+              <p><?= e($page['class'] . ': ' . ucfirst(str_replace('_', ' ', (string) ($currentCharacter['class_id'] ?? 'adventurer'))) . ' | HP: ' . $characterHp . '/' . $characterMaxHp . ' | ' . $page['coins'] . ': ' . $characterCoins) ?></p>
+              <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('account/characters'))) ?>"><?= e($page['characters_cta']) ?></a>
+            </article>
           </div>
           <div class="auth-grid auth-account-space-grid">
             <article class="auth-detail-card auth-account-space-card">

@@ -7,10 +7,12 @@ use App\Core\Auth;
 use App\Domain\Auth\DTOs\AuthResult;
 use App\Domain\Auth\DTOs\LoginCredentials;
 use App\Domain\Auth\Repositories\PlaceholderUserRepository;
+use App\Domain\Auth\Repositories\UserRepository;
 
 final class LoginManager
 {
     public function __construct(
+        private readonly UserRepository $registeredUsers = new UserRepository(),
         private readonly PlaceholderUserRepository $users = new PlaceholderUserRepository(),
     ) {
     }
@@ -25,7 +27,11 @@ final class LoginManager
             return AuthResult::failure('Enter a valid email address.');
         }
 
-        $user = $this->users->findByEmail($credentials->email);
+        $user = $this->registeredUsers->verifyCredentials($credentials->email, $credentials->password);
+        if ($user === null && (bool) config('app.features.placeholder_auth', false)) {
+            $user = $this->users->findByEmail($credentials->email);
+        }
+
         if ($user === null) {
             return AuthResult::failure('We could not sign you in with those details.');
         }

@@ -7,6 +7,7 @@ use App\Core\Controller;
 use App\Core\Session;
 use App\Domain\Account\Services\CharacterCatalog;
 use App\Domain\Account\Services\ProfileReader;
+use App\Domain\Account\Services\ProgressionReader;
 use App\Domain\Billing\DTOs\CheckoutRequest;
 use App\Domain\Billing\Services\CheckoutService;
 
@@ -23,6 +24,7 @@ final class AccountController extends Controller
 
         $this->renderPage('web.pages.account.dashboard', [
             'user' => (new ProfileReader())->current(),
+            'progression' => (new ProgressionReader())->current(),
             'billingSession' => $billingSession,
             'billingAvailable' => $checkoutService->isAvailable(),
             'billingProvider' => $checkoutService->providerName(),

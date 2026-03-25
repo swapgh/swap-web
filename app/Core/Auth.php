@@ -15,6 +15,8 @@ namespace App\Core;
  */
 final class Auth
 {
+    private static ?array $resolvedUser = null;
+
     /**
      * check
      * 
@@ -24,7 +26,7 @@ final class Auth
      */
     public static function check(): bool
     {
-        return Session::get('user') !== null;
+        return self::user() !== null;
     }
 
     /**
@@ -36,8 +38,12 @@ final class Auth
      */
     public static function user(): ?array
     {
+        if (self::$resolvedUser !== null) {
+            return self::$resolvedUser;
+        }
+
         $user = Session::get('user');
-        return is_array($user) ? $user : null; // Ensure the session data is an array
+        return is_array($user) ? $user : null;
     }
 
     /**
@@ -49,8 +55,14 @@ final class Auth
      */
     public static function login(array $user): void
     {
-        Session::regenerate();       // Regenerate session ID to prevent session fixation
-        Session::put('user', $user); // Save user data to the session
+        self::$resolvedUser = $user;
+        Session::regenerate();
+        Session::put('user', $user);
+    }
+
+    public static function resolve(array $user): void
+    {
+        self::$resolvedUser = $user;
     }
 
     /**
@@ -60,6 +72,7 @@ final class Auth
      */
     public static function logout(): void
     {
-        Session::invalidate(); // Destroys the session and removes user data
+        self::$resolvedUser = null;
+        Session::invalidate();
     }
 }

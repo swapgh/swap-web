@@ -7,7 +7,9 @@ use App\Core\Auth;
 use App\Core\Controller;
 use App\Core\Session;
 use App\Domain\Auth\DTOs\LoginCredentials;
+use App\Domain\Auth\DTOs\RegisterData;
 use App\Domain\Auth\Services\LoginManager;
+use App\Domain\Auth\Services\RegisterManager;
 use App\Services\AnalyticsService;
 
 final class AuthController extends Controller
@@ -17,6 +19,16 @@ final class AuthController extends Controller
         $this->protectSensitivePage();
 
         $this->renderPage('web.pages.auth.login', [
+            'authError' => Session::pull('_flash.auth_error'),
+            'robotsContent' => 'noindex,nofollow,noarchive',
+        ]);
+    }
+
+    public function showRegister(): void
+    {
+        $this->protectSensitivePage();
+
+        $this->renderPage('web.pages.auth.register', [
             'authError' => Session::pull('_flash.auth_error'),
             'robotsContent' => 'noindex,nofollow,noarchive',
         ]);
@@ -69,5 +81,36 @@ final class AuthController extends Controller
         (new LoginManager())->logout();
 
         $this->redirect(with_lang(page_url('login')));
+    }
+
+    public function register(): void
+    {
+        if (!verify_csrf_token($_POST['_token'] ?? null)) {
+            Session::flash('auth_error', 'Your session expired. Please try again.');
+            $this->redirect(with_lang(page_url('register')));
+        }
+
+        $data = RegisterData::fromArray($_POST);
+        $result = (new RegisterManager())->attempt($data);
+
+        if (!$result->success || $result->user === null) {
+            (new AnalyticsService())->trackEvent('auth.register_failed', [
+                'email' => $data->email,
+                'username' => $data->username,
+            ]);
+
+            $this->protectSensitivePage();
+            $this->renderPage('web.pages.auth.register', [
+                'authError' => $result->error ?? 'We could not create your account.',
+                'robotsContent' => 'noindex,nofollow,noarchive',
+            ]);
+            return;
+        }
+
+        (new AnalyticsService())->trackEvent('auth.register_succeeded', [
+            'auth_source' => (string) ($result->user['auth_source'] ?? 'unknown'),
+        ]);
+
+        $this->redirect(with_lang(page_url('account')));
     }
 }

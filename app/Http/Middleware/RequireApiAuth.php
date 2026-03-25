@@ -4,11 +4,21 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use App\Core\Auth;
+use App\Domain\Auth\Repositories\UserRepository;
 
 final class RequireApiAuth
 {
     public function handle(): void
     {
+        $token = $this->bearerToken();
+        if ($token !== '') {
+            $user = (new UserRepository())->findByApiToken($token);
+            if ($user !== null) {
+                Auth::resolve($user);
+                return;
+            }
+        }
+
         if (Auth::check()) {
             return;
         }
@@ -20,5 +30,15 @@ final class RequireApiAuth
             'error' => 'Authentication required.',
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         exit;
+    }
+
+    private function bearerToken(): string
+    {
+        $header = (string) ($_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '');
+        if (!preg_match('/^Bearer\s+(.+)$/i', trim($header), $matches)) {
+            return '';
+        }
+
+        return trim((string) ($matches[1] ?? ''));
     }
 }

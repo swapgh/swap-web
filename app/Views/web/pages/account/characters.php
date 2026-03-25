@@ -7,7 +7,7 @@ $copy = [
         'heading' => 'Personajes',
         'summary' => 'Una vista compacta del roster actual y de como los sistemas del jugador pueden vivir dentro del area de cuenta.',
         'active_slots' => 'espacios activos',
-        'prototype_roster' => 'Roster prototipo',
+        'prototype_roster' => 'Roster sincronizado',
         'account_area' => 'Panel',
         'overview' => 'Inicio',
         'support' => 'Apoyo',
@@ -17,6 +17,7 @@ $copy = [
         'roster_heading' => 'Alineacion actual',
         'level' => 'Nivel',
         'hp' => 'HP',
+        'inventory_empty' => 'Inventario vacio por ahora',
         'back_profile' => 'Volver a cuenta',
     ],
     'en' => [
@@ -26,7 +27,7 @@ $copy = [
         'heading' => 'Party overview',
         'summary' => 'A compact view of the current roster and how player-facing systems can live inside the account area.',
         'active_slots' => 'active slots',
-        'prototype_roster' => 'Prototype roster',
+        'prototype_roster' => 'Synced roster',
         'account_area' => 'Panel',
         'overview' => 'Home',
         'support' => 'Support',
@@ -36,6 +37,7 @@ $copy = [
         'roster_heading' => 'Current lineup',
         'level' => 'Level',
         'hp' => 'HP',
+        'inventory_empty' => 'Inventory is empty for now',
         'back_profile' => 'Back to account',
     ],
 ];
@@ -74,7 +76,7 @@ $accountNavLabel = $page['account_area'];
                 <span><?= e($page['level']) ?> <?= e((string) $character['level']) ?></span>
                 <span><?= e((string) $character['hp']) ?> <?= e($page['hp']) ?></span>
               </div>
-              <p><?= e($character['inventory']) ?></p>
+              <p><?= e((string) ($character['inventory'] !== '' ? $character['inventory'] : $page['inventory_empty'])) ?></p>
             </article>
           <?php endforeach; ?>
         </div>

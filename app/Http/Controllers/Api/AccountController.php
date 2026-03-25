@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Api;
 use App\Core\Controller;
 use App\Domain\Account\Services\CharacterCatalog;
 use App\Domain\Account\Services\ProfileReader;
+use App\Domain\Account\Repositories\ProgressionRepository;
+use App\Domain\Account\Services\ProgressionReader;
 
 final class AccountController extends Controller
 {
@@ -23,5 +25,35 @@ final class AccountController extends Controller
             'ok' => true,
             'characters' => (new CharacterCatalog())->allForCurrentUser(),
         ]);
+    }
+
+    public function progression(): never
+    {
+        $this->json([
+            'ok' => true,
+            'progression' => (new ProgressionReader())->current(),
+        ]);
+    }
+
+    public function syncProgression(): never
+    {
+        $payload = $this->requestInput();
+        $progression = (new ProgressionRepository())->updateCurrentUser($payload);
+
+        $this->json([
+            'ok' => true,
+            'progression' => $progression,
+        ]);
+    }
+
+    private function requestInput(): array
+    {
+        $contentType = strtolower((string) ($_SERVER['CONTENT_TYPE'] ?? ''));
+        if (str_contains($contentType, 'application/json')) {
+            $decoded = json_decode((string) file_get_contents('php://input'), true);
+            return is_array($decoded) ? $decoded : [];
+        }
+
+        return $_POST;
     }
 }

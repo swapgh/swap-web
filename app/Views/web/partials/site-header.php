@@ -106,7 +106,7 @@ $settingsUi = $settingsCopy[$pageLang] ?? $settingsCopy['en'];
               <a href="<?= e($accountUrl) ?>" role="menuitem"><?= e(t('nav.account_settings')) ?></a>
             <?php else: ?>
               <a href="<?= e(with_lang(page_url('login'))) ?>" role="menuitem"><?= e(t('nav.login')) ?></a>
-              <a href="<?= e(with_lang(page_url('login'))) ?>" role="menuitem" class="nav-optional"><?= e(t('nav.signup')) ?></a>
+              <a href="<?= e(with_lang(page_url('register'))) ?>" role="menuitem" class="nav-optional"><?= e(t('nav.signup')) ?></a>
             <?php endif; ?>
             <a href="<?= e($supportUrl) ?>" role="menuitem" class="nav-optional"><?= e(t('nav.support')) ?></a>
             <a href="<?= e($storeUrl) ?>" role="menuitem" class="nav-optional"><?= e(t('nav.shop')) ?></a>

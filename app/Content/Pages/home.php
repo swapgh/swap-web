@@ -12,7 +12,7 @@ function build_home_page_content(string $lang, array $site): array
 {
     $content = [
         'es' => [
-            'title' => 'Swap RPG | Portfolio premium del proyecto',
+            'title' => 'Swap',
             'description' => 'Portfolio y landing page para Swap RPG: identidad del juego, proyectos destacados y una entrada mas clara al universo del portfolio.',
             'hero' => [
                 'eyebrow' => 'Portfolio + Game Landing',
@@ -184,7 +184,7 @@ function build_home_page_content(string $lang, array $site): array
             ],
         ],
         'en' => [
-            'title' => 'Swap RPG | Premium project portfolio',
+            'title' => 'Swap',
             'description' => 'Portfolio and landing page for Swap RPG: game identity, featured projects, and a cleaner entry point into the portfolio world.',
             'hero' => [
                 'eyebrow' => 'Portfolio + Game Landing',

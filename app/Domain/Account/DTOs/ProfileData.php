@@ -9,6 +9,7 @@ final class ProfileData
     {
         return [
             'id' => (string) ($user['id'] ?? ''),
+            'username' => (string) ($user['username'] ?? ''),
             'name' => (string) ($user['name'] ?? ''),
             'email' => (string) ($user['email'] ?? ''),
             'role' => (string) ($user['role'] ?? ''),
