@@ -2,10 +2,10 @@
 $accountNavActive = (string) ($accountNavActive ?? 'dashboard');
 $accountNavLabel = (string) ($accountNavLabel ?? t('nav.account'));
 $accountNavItems = [
-    'dashboard' => ['label' => $page['overview'] ?? 'Overview', 'href' => with_lang(page_url('account'))],
+    'dashboard' => ['label' => $page['overview'] ?? 'Home', 'href' => with_lang(page_url('account'))],
     'characters' => ['label' => $page['characters_nav'] ?? $page['characters'] ?? 'Characters', 'href' => with_lang(page_url('account/characters'))],
     'support' => ['label' => $page['support_nav'] ?? $page['support'] ?? 'Support', 'href' => with_lang(page_url('account')) . '#support-area'],
-    'history' => ['label' => $page['history_nav'] ?? $page['heading'] ?? 'History', 'href' => with_lang(page_url('account/support/history'))],
+    'history' => ['label' => $page['history_nav'] ?? 'History', 'href' => with_lang(page_url('account/support/history'))],
 ];
 ?>
 <aside class="auth-card auth-account-nav-card" data-account-nav>

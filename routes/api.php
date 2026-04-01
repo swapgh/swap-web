@@ -17,6 +17,7 @@ return static function (\App\Core\Router $router): void {
     $router->get('/api/account/characters', [AccountController::class, 'characters'], [RequireApiAuth::class]);
     $router->get('/api/account/progression', [AccountController::class, 'progression'], [RequireApiAuth::class]);
     $router->post('/api/account/progression', [AccountController::class, 'syncProgression'], [RequireApiAuth::class]);
+    $router->post('/api/account/roster/reconcile', [AccountController::class, 'reconcileRoster'], [RequireApiAuth::class]);
     $router->get('/api/billing/config', [BillingController::class, 'config']);
     $router->post('/api/billing/checkout', [BillingController::class, 'createCheckout'], [RequireApiAuth::class]);
     $router->get('/api/billing/checkout', [BillingController::class, 'currentCheckout'], [RequireApiAuth::class]);

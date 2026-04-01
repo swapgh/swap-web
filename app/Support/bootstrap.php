@@ -147,6 +147,39 @@ function format_datetime_ui(?string $value): string
     return date('Y-m-d H:i', $timestamp);
 }
 
+/**
+ * Localized account/game dictionary loaded from content.
+ */
+function game_dictionary(): array
+{
+    static $cache = null;
+    if ($cache === null) {
+        $cache = require __DIR__ . '/../Content/Game/account-rpg.php';
+    }
+
+    $lang = ($GLOBALS['pageLang'] ?? config('app.locale', 'en')) === 'es' ? 'es' : 'en';
+    return is_array($cache[$lang] ?? null) ? $cache[$lang] : ($cache['en'] ?? []);
+}
+
+/**
+ * Resolve a localized game label by section/key.
+ */
+function game_label(string $section, string $key, ?string $fallback = null): string
+{
+    $dictionary = game_dictionary();
+    $items = is_array($dictionary[$section] ?? null) ? $dictionary[$section] : [];
+    $value = $items[$key] ?? null;
+    if (is_string($value) && $value !== '') {
+        return $value;
+    }
+
+    if ($fallback !== null && $fallback !== '') {
+        return $fallback;
+    }
+
+    return ucwords(str_replace(['_', '-'], ' ', $key));
+}
+
 ///////////////////////////////////////////////
 // 4. URL Helpers
 ///////////////////////////////////////////////

@@ -46,6 +46,18 @@ final class AccountController extends Controller
         ]);
     }
 
+    public function reconcileRoster(): never
+    {
+        $payload = $this->requestInput();
+        $characterIds = is_array($payload['character_ids'] ?? null) ? $payload['character_ids'] : [];
+        $progression = (new ProgressionRepository())->reconcileCurrentUserRoster($characterIds);
+
+        $this->json([
+            'ok' => true,
+            'progression' => $progression,
+        ]);
+    }
+
     private function requestInput(): array
     {
         $contentType = strtolower((string) ($_SERVER['CONTENT_TYPE'] ?? ''));

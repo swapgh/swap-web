@@ -135,6 +135,10 @@ $characterHp = (int) ($currentCharacter['hp'] ?? 6);
 $characterMaxHp = (int) ($currentCharacter['max_hp'] ?? 6);
 $characterKills = (int) ($currentCharacter['enemies_killed'] ?? 0);
 $characterCoins = (int) ($currentCharacter['coins'] ?? 0);
+$characterClassId = (string) ($currentCharacter['class_id'] ?? 'adventurer');
+$characterEquipment = is_array($currentCharacter['equipment'] ?? null) ? $currentCharacter['equipment'] : [];
+$characterInventory = is_array($currentCharacter['inventory'] ?? null) ? $currentCharacter['inventory'] : [];
+$characterQuests = is_array($currentCharacter['quests'] ?? null) ? $currentCharacter['quests'] : [];
 $latestCreatedAt = format_datetime_ui((string) ($currentBillingSession['created_at'] ?? ''));
 $latestUpdatedAt = format_datetime_ui((string) ($currentBillingSession['updated_at'] ?? ''));
 $currentBillingState = (string) ($currentBillingSession['status'] ?? '');
@@ -183,7 +187,20 @@ $accountNavLabel = $page['actions_heading'];
             <article class="auth-detail-card auth-account-space-card">
               <span class="auth-stat-label"><?= e($page['character']) ?></span>
               <h3><?= e($characterName) ?></h3>
-              <p><?= e($page['class'] . ': ' . ucfirst(str_replace('_', ' ', (string) ($currentCharacter['class_id'] ?? 'adventurer'))) . ' | HP: ' . $characterHp . '/' . $characterMaxHp . ' | ' . $page['coins'] . ': ' . $characterCoins) ?></p>
+              <p><?= e($page['class'] . ': ' . game_label('classes', $characterClassId, ucfirst(str_replace('_', ' ', $characterClassId))) . ' | HP: ' . $characterHp . '/' . $characterMaxHp . ' | ' . $page['coins'] . ': ' . $characterCoins) ?></p>
+              <div class="auth-pill-list">
+                <?php foreach ($characterEquipment as $slot => $itemId): ?>
+                  <?php if (trim((string) $itemId) !== ''): ?>
+                    <span class="auth-pill"><?= e(game_label('equipment_slots', (string) $slot, (string) $slot)) ?>: <?= e(game_label('items', (string) $itemId, (string) $itemId)) ?></span>
+                  <?php endif; ?>
+                <?php endforeach; ?>
+                <?php foreach (array_slice($characterInventory, 0, 2) as $itemId): ?>
+                  <span class="auth-pill"><?= e(game_label('items', (string) $itemId, (string) $itemId)) ?></span>
+                <?php endforeach; ?>
+                <?php foreach (array_slice($characterQuests, 0, 1) as $questId): ?>
+                  <span class="auth-pill"><?= e(game_label('quests', (string) $questId, (string) $questId)) ?></span>
+                <?php endforeach; ?>
+              </div>
               <a class="auth-secondary auth-link-button" href="<?= e(with_lang(page_url('account/characters'))) ?>"><?= e($page['characters_cta']) ?></a>
             </article>
           </div>
