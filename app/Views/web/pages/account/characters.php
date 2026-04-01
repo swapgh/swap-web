@@ -18,6 +18,7 @@ $copy = [
         'roster_eyebrow' => 'Roster',
         'roster_heading' => 'Alineacion actual',
         'level' => 'Nivel',
+        'mastery' => 'Mastery',
         'hp' => 'HP',
         'coins' => 'Monedas',
         'kills' => 'Bajas',
@@ -26,6 +27,8 @@ $copy = [
         'quests' => 'Quests',
         'attributes' => 'Atributos',
         'stats' => 'Stats',
+        'mastery_build' => 'Build de mastery',
+        'mastery_empty' => 'Sin puntos asignados por ahora',
         'empty_equipment' => 'Sin equipo',
         'inventory_empty' => 'Inventario vacio por ahora',
         'quests_empty' => 'Sin quests completadas por ahora',
@@ -52,6 +55,7 @@ $copy = [
         'roster_eyebrow' => 'Roster',
         'roster_heading' => 'Current lineup',
         'level' => 'Level',
+        'mastery' => 'Mastery',
         'hp' => 'HP',
         'coins' => 'Coins',
         'kills' => 'Kills',
@@ -60,6 +64,8 @@ $copy = [
         'quests' => 'Quests',
         'attributes' => 'Attributes',
         'stats' => 'Stats',
+        'mastery_build' => 'Mastery build',
+        'mastery_empty' => 'No allocated points yet',
         'empty_equipment' => 'No equipment yet',
         'inventory_empty' => 'Inventory is empty for now',
         'quests_empty' => 'No completed quests yet',
@@ -104,6 +110,9 @@ $compactRoster = count($characters) > 1;
             $quests = is_array($character['quests'] ?? null) ? $character['quests'] : [];
             $attributes = is_array($character['attributes'] ?? null) ? $character['attributes'] : [];
             $stats = is_array($character['stats'] ?? null) ? $character['stats'] : [];
+            $mastery = is_array($character['mastery'] ?? null) ? $character['mastery'] : [];
+            $masteryPoints = (int) ($character['mastery_points'] ?? 0);
+            $masterySpent = (int) (($mastery['offense'] ?? 0) + ($mastery['skill'] ?? 0) + ($mastery['defense'] ?? 0));
             $filledEquipment = array_filter($equipment, static fn ($itemId): bool => trim((string) $itemId) !== '');
             $classId = (string) ($character['class_id'] ?? 'adventurer');
             $classLabel = game_label('classes', $classId, $classId);
@@ -146,14 +155,18 @@ $compactRoster = count($characters) > 1;
                   <strong><?= e((string) $character['level']) ?></strong>
                 </article>
                 <article class="auth-character-kpi">
+                  <span class="auth-stat-label"><?= e($page['mastery']) ?></span>
+                  <strong><?= e((string) $masteryPoints) ?></strong>
+                </article>
+                <article class="auth-character-kpi">
                   <span class="auth-stat-label"><?= e($page['hp']) ?></span>
                   <strong><?= e((string) $character['hp']) ?>/<?= e((string) ($character['max_hp'] ?? $character['hp'])) ?></strong>
                 </article>
-                <article class="auth-character-kpi">
+                <article class="auth-character-kpi auth-character-kpi-optional">
                   <span class="auth-stat-label"><?= e($page['coins']) ?></span>
                   <strong><?= e((string) ($character['coins'] ?? 0)) ?></strong>
                 </article>
-                <article class="auth-character-kpi">
+                <article class="auth-character-kpi auth-character-kpi-optional">
                   <span class="auth-stat-label"><?= e($page['kills']) ?></span>
                   <strong><?= e((string) ($character['enemies_killed'] ?? 0)) ?></strong>
                 </article>
@@ -188,6 +201,21 @@ $compactRoster = count($characters) > 1;
 
                   <section class="auth-character-panel auth-character-panel-tight">
                     <div class="auth-character-panel-head">
+                      <span class="auth-stat-label"><?= e($page['mastery_build']) ?></span>
+                    </div>
+                    <div class="auth-micro-grid auth-micro-grid-strong auth-micro-grid-pairs auth-micro-grid-mastery">
+                      <span>Offense <strong><?= e((string) ($mastery['offense'] ?? 0)) ?></strong></span>
+                      <span>Skill <strong><?= e((string) ($mastery['skill'] ?? 0)) ?></strong></span>
+                      <span>Defense <strong><?= e((string) ($mastery['defense'] ?? 0)) ?></strong></span>
+                      <span>Spent <strong><?= e((string) $masterySpent) ?></strong></span>
+                    </div>
+                    <?php if ($masterySpent <= 0 && $masteryPoints <= 0): ?>
+                      <span class="auth-pill auth-pill-empty"><?= e($page['mastery_empty']) ?></span>
+                    <?php endif; ?>
+                  </section>
+
+                  <section class="auth-character-panel auth-character-panel-tight">
+                    <div class="auth-character-panel-head">
                       <span class="auth-stat-label"><?= e($page['stats']) ?></span>
                     </div>
                     <div class="auth-micro-grid auth-micro-grid-strong auth-micro-grid-pairs auth-micro-grid-stats">
@@ -200,6 +228,7 @@ $compactRoster = count($characters) > 1;
                 </div>
 
                 <div class="auth-character-meta-strip">
+                  <span class="auth-pill"><?= e($page['mastery']) ?>: <?= e((string) $masterySpent) ?></span>
                   <span class="auth-pill"><?= e($page['equipment']) ?>: <?= e((string) $equipmentCount) ?></span>
                   <span class="auth-pill"><?= e($page['inventory']) ?>: <?= e((string) $inventoryCount) ?></span>
                   <span class="auth-pill"><?= e($page['quests']) ?>: <?= e((string) $questCount) ?></span>
@@ -229,6 +258,21 @@ $compactRoster = count($characters) > 1;
                       <span><?= e(game_label('attributes', (string) $key, strtoupper((string) $key))) ?> <strong><?= e((string) $value) ?></strong></span>
                     <?php endforeach; ?>
                   </div>
+                </section>
+
+                <section class="auth-character-panel">
+                  <div class="auth-character-panel-head">
+                    <span class="auth-stat-label"><?= e($page['mastery_build']) ?></span>
+                  </div>
+                  <div class="auth-micro-grid auth-micro-grid-strong auth-micro-grid-pairs auth-micro-grid-mastery">
+                    <span>Offense <strong><?= e((string) ($mastery['offense'] ?? 0)) ?></strong></span>
+                    <span>Skill <strong><?= e((string) ($mastery['skill'] ?? 0)) ?></strong></span>
+                    <span>Defense <strong><?= e((string) ($mastery['defense'] ?? 0)) ?></strong></span>
+                    <span>Spent <strong><?= e((string) $masterySpent) ?></strong></span>
+                  </div>
+                  <?php if ($masterySpent <= 0 && $masteryPoints <= 0): ?>
+                    <span class="auth-pill auth-pill-empty"><?= e($page['mastery_empty']) ?></span>
+                  <?php endif; ?>
                 </section>
 
                 <section class="auth-character-panel">

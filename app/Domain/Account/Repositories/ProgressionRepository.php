@@ -52,12 +52,14 @@ final class ProgressionRepository
         $equipment = is_array($character['equipment'] ?? null) ? $character['equipment'] : [];
         $attributes = is_array($character['attributes'] ?? null) ? $character['attributes'] : [];
         $stats = is_array($character['stats'] ?? null) ? $character['stats'] : [];
+        $mastery = is_array($character['mastery'] ?? null) ? $character['mastery'] : [];
 
         $updatedCharacter = [
             'character_id' => $characterId,
             'name' => trim((string) ($character['name'] ?? $existing['name'])),
             'class_id' => trim((string) ($character['class_id'] ?? $existing['class_id'])),
             'level' => max(1, (int) ($character['level'] ?? $existing['level'])),
+            'mastery_points' => max(0, (int) ($character['mastery_points'] ?? $existing['mastery_points'])),
             'hp' => max(0, (int) ($character['hp'] ?? $existing['hp'])),
             'max_hp' => max(0, (int) ($character['max_hp'] ?? $existing['max_hp'])),
             'coins' => max(0, (int) ($character['coins'] ?? $existing['coins'])),
@@ -85,6 +87,11 @@ final class ProgressionRepository
                 'ability_power' => max(0, (float) ($stats['ability_power'] ?? $existing['stats']['ability_power'])),
                 'defense' => max(0, (float) ($stats['defense'] ?? $existing['stats']['defense'])),
                 'healing_power' => max(0, (float) ($stats['healing_power'] ?? $existing['stats']['healing_power'])),
+            ],
+            'mastery' => [
+                'offense' => max(0, (int) ($mastery['offense'] ?? $existing['mastery']['offense'])),
+                'skill' => max(0, (int) ($mastery['skill'] ?? $existing['mastery']['skill'])),
+                'defense' => max(0, (int) ($mastery['defense'] ?? $existing['mastery']['defense'])),
             ],
             'updated_at' => gmdate('c'),
         ];
@@ -203,6 +210,7 @@ final class ProgressionRepository
             'name' => trim((string) ($character['name'] ?? $default['name'])) ?: $default['name'],
             'class_id' => trim((string) ($character['class_id'] ?? $default['class_id'])) ?: $default['class_id'],
             'level' => max(1, (int) ($character['level'] ?? $default['level'])),
+            'mastery_points' => max(0, (int) ($character['mastery_points'] ?? $default['mastery_points'])),
             'hp' => max(0, (int) ($character['hp'] ?? $default['hp'])),
             'max_hp' => max(0, (int) ($character['max_hp'] ?? $default['max_hp'])),
             'coins' => max(0, (int) ($character['coins'] ?? $default['coins'])),
@@ -212,6 +220,7 @@ final class ProgressionRepository
             'equipment' => $this->normalizeEquipment(is_array($character['equipment'] ?? null) ? $character['equipment'] : $default['equipment']),
             'attributes' => $this->normalizeAttributes(is_array($character['attributes'] ?? null) ? $character['attributes'] : $default['attributes']),
             'stats' => $this->normalizeStats(is_array($character['stats'] ?? null) ? $character['stats'] : $default['stats']),
+            'mastery' => $this->normalizeMastery(is_array($character['mastery'] ?? null) ? $character['mastery'] : $default['mastery']),
             'updated_at' => trim((string) ($character['updated_at'] ?? $default['updated_at'])) ?: $default['updated_at'],
         ];
     }
@@ -232,6 +241,7 @@ final class ProgressionRepository
             'name' => $fallbackName !== '' ? $fallbackName : 'Hero',
             'class_id' => 'adventurer',
             'level' => 1,
+            'mastery_points' => 0,
             'hp' => 6,
             'max_hp' => 6,
             'coins' => 0,
@@ -259,6 +269,11 @@ final class ProgressionRepository
                 'ability_power' => 0.0,
                 'defense' => 0.0,
                 'healing_power' => 0.0,
+            ],
+            'mastery' => [
+                'offense' => 0,
+                'skill' => 0,
+                'defense' => 0,
             ],
             'updated_at' => gmdate('c'),
         ];
@@ -295,6 +310,15 @@ final class ProgressionRepository
             'ability_power' => max(0, (float) ($stats['ability_power'] ?? 0)),
             'defense' => max(0, (float) ($stats['defense'] ?? 0)),
             'healing_power' => max(0, (float) ($stats['healing_power'] ?? 0)),
+        ];
+    }
+
+    private function normalizeMastery(array $mastery): array
+    {
+        return [
+            'offense' => max(0, (int) ($mastery['offense'] ?? 0)),
+            'skill' => max(0, (int) ($mastery['skill'] ?? 0)),
+            'defense' => max(0, (int) ($mastery['defense'] ?? 0)),
         ];
     }
 

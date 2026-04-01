@@ -28,6 +28,7 @@ final class CharacterRepository
                 'name' => (string) ($character['name'] ?? 'Hero'),
                 'class_id' => (string) ($character['class_id'] ?? 'adventurer'),
                 'level' => (int) ($character['level'] ?? 1),
+                'mastery_points' => (int) ($character['mastery_points'] ?? 0),
                 'hp' => (int) ($character['hp'] ?? 6),
                 'max_hp' => (int) ($character['max_hp'] ?? 6),
                 'coins' => (int) ($character['coins'] ?? 0),
@@ -37,6 +38,7 @@ final class CharacterRepository
                 'equipment' => is_array($character['equipment'] ?? null) ? $character['equipment'] : [],
                 'attributes' => is_array($character['attributes'] ?? null) ? $character['attributes'] : [],
                 'stats' => is_array($character['stats'] ?? null) ? $character['stats'] : [],
+                'mastery' => is_array($character['mastery'] ?? null) ? $character['mastery'] : [],
                 'updated_at' => (string) ($character['updated_at'] ?? ''),
             ];
         }
