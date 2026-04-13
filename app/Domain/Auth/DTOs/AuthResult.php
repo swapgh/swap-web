@@ -9,12 +9,14 @@ final class AuthResult
         public readonly bool $success,
         public readonly ?array $user = null,
         public readonly ?string $error = null,
+        public readonly ?string $apiToken = null,
+        public readonly ?string $apiTokenExpiresAt = null,
     ) {
     }
 
-    public static function success(array $user): self
+    public static function success(array $user, ?string $apiToken = null, ?string $apiTokenExpiresAt = null): self
     {
-        return new self(true, $user, null);
+        return new self(true, $user, null, $apiToken, $apiTokenExpiresAt);
     }
 
     public static function failure(string $error): self

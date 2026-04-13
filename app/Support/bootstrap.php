@@ -1,23 +1,14 @@
 <?php
 declare(strict_types=1);
 
-///////////////////////////////////////////////
-// 1. Autoloader
-///////////////////////////////////////////////
-
-/**
- * PSR-4 style autoloader for the App namespace.
- * Automatically includes PHP class files based on namespace and class name.
- */
+// Autoload de clases del namespace App\.
 spl_autoload_register(static function (string $class): void {
     $prefix = 'App\\';
 
-    // Only handle classes in the App namespace
     if (!str_starts_with($class, $prefix)) {
         return;
     }
 
-    // Convert namespace to file path
     $relative = substr($class, strlen($prefix));
     $path = __DIR__ . '/../' . str_replace('\\', '/', $relative) . '.php';
 
@@ -26,22 +17,13 @@ spl_autoload_register(static function (string $class): void {
     }
 });
 
-///////////////////////////////////////////////
-// 2. Config
-///////////////////////////////////////////////
-
+// Configuración base compartida por todo el proyecto.
 $config = [
     'app' => require __DIR__ . '/../../config/app.php',
     'database' => require __DIR__ . '/../../config/database.php',
 ];
 
-/**
- * Retrieve nested configuration value using dot notation.
- *
- * @param string $key Example: 'app.name'
- * @param mixed $default Value to return if key doesn't exist
- * @return mixed
- */
+// Helpers generales de configuración y formato.
 function config(string $key, mixed $default = null): mixed
 {
     $segments = explode('.', $key);
@@ -57,29 +39,16 @@ function config(string $key, mixed $default = null): mixed
     return $value;
 }
 
-///////////////////////////////////////////////
-// 3. Utility functions
-///////////////////////////////////////////////
-
-/**
- * Escape string for safe HTML output.
- */
 function e(string $value): string
 {
     return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
-/**
- * Check if a URL is external (starts with http:// or https://)
- */
 function is_external_href(string $href): bool
 {
     return (bool) preg_match('#^https?://#i', $href);
 }
 
-/**
- * Format a minor-unit money amount such as cents.
- */
 function format_money_from_cents(int|string $amountCents, string $currency = 'EUR'): string
 {
     $amount = ((int) $amountCents) / 100;
@@ -100,9 +69,6 @@ function format_money_from_cents(int|string $amountCents, string $currency = 'EU
     return number_format($amount, 2, '.', ',') . ' ' . $currency;
 }
 
-/**
- * Normalize billing status for labels and CSS hooks.
- */
 function billing_status_meta(?string $status): array
 {
     return match (strtolower(trim((string) $status))) {
@@ -113,9 +79,6 @@ function billing_status_meta(?string $status): array
     };
 }
 
-/**
- * Format an ISO or strtotime-compatible datetime for UI display.
- */
 function format_datetime_ui(?string $value): string
 {
     $value = trim((string) $value);
@@ -147,9 +110,6 @@ function format_datetime_ui(?string $value): string
     return date('Y-m-d H:i', $timestamp);
 }
 
-/**
- * Localized account/game dictionary loaded from content.
- */
 function game_dictionary(): array
 {
     static $cache = null;
@@ -161,9 +121,6 @@ function game_dictionary(): array
     return is_array($cache[$lang] ?? null) ? $cache[$lang] : ($cache['en'] ?? []);
 }
 
-/**
- * Resolve a localized game label by section/key.
- */
 function game_label(string $section, string $key, ?string $fallback = null): string
 {
     $dictionary = game_dictionary();
@@ -180,13 +137,7 @@ function game_label(string $section, string $key, ?string $fallback = null): str
     return ucwords(str_replace(['_', '-'], ' ', $key));
 }
 
-///////////////////////////////////////////////
-// 4. URL Helpers
-///////////////////////////////////////////////
-
-/**
- * Get the base path of the application (useful for local dev with PHP server)
- */
+// Helpers para construir rutas y URLs del sitio.
 function page_base_path(): string
 {
     $scriptName = str_replace('\\', '/', (string) ($_SERVER['SCRIPT_NAME'] ?? '/'));
@@ -199,27 +150,18 @@ function page_base_path(): string
     return $dir === '/' ? '' : $dir;
 }
 
-/**
- * Return a URL to an asset in the /assets/ directory
- */
 function asset_url(string $path = ''): string
 {
     $base = page_base_path();
     return $base . '/assets/' . ltrim($path, '/');
 }
 
-/**
- * Determines if we are using "index.php?route=..." style links
- */
 function uses_front_controller_links(): bool
 {
     $requestPath = parse_url((string) ($_SERVER['REQUEST_URI'] ?? ''), PHP_URL_PATH) ?: '';
     return basename($requestPath) === 'index.php';
 }
 
-/**
- * Generate URL to a page, optionally using front controller routing
- */
 function page_url(string $path = ''): string
 {
     $normalizedPath = ltrim($path, '/');
@@ -239,9 +181,6 @@ function page_url(string $path = ''): string
     return $base . '/' . $normalizedPath;
 }
 
-/**
- * Return current scheme (http or https)
- */
 function current_scheme(): string
 {
     $https     = $_SERVER['HTTPS'] ?? '';
@@ -252,9 +191,6 @@ function current_scheme(): string
     return 'http';
 }
 
-/**
- * Return the full site base URL
- */
 function site_base_url(): string
 {
     $configured = trim((string) ($_ENV['SITE_URL'] ?? $_SERVER['SITE_URL'] ?? ''));
@@ -267,9 +203,6 @@ function site_base_url(): string
     return current_scheme() . '://' . $host . $base;
 }
 
-/**
- * Convert a path to an absolute URL (prepends site_base_url)
- */
 function absolute_url(string $path = ''): string
 {
     if (is_external_href($path)) {
@@ -279,13 +212,7 @@ function absolute_url(string $path = ''): string
     return rtrim(site_base_url(), '/') . '/' . ltrim($path, '/');
 }
 
-///////////////////////////////////////////////
-// 5. Language Helpers
-///////////////////////////////////////////////
-
-/**
- * Determine a valid page language from candidate, defaulting to fallback
- */
+// Helpers de idioma y enlaces con lang.
 function resolve_page_lang(?string $candidate, string $fallback = 'es'): string
 {
     $supported = ['es', 'en'];
@@ -295,9 +222,6 @@ function resolve_page_lang(?string $candidate, string $fallback = 'es'): string
     return $fallback;
 }
 
-/**
- * Add lang query parameter to a URL
- */
 function with_lang(string $url, ?string $lang = null): string
 {
     if (is_external_href($url)) {
@@ -307,14 +231,12 @@ function with_lang(string $url, ?string $lang = null): string
     $lang     = resolve_page_lang($lang ?? ($GLOBALS['pageLang'] ?? config('app.locale', 'es')), config('app.fallback_locale', 'es'));
     $fragment = '';
 
-    // Separate fragment/hash
     $hashPos  = strpos($url, '#');
     if ($hashPos !== false) {
         $fragment = substr($url, $hashPos);
         $url      = substr($url, 0, $hashPos);
     }
 
-    // Separate query string
     $path     = $url;
     $query    = [];
     $queryPos = strpos($url, '?');
@@ -329,13 +251,7 @@ function with_lang(string $url, ?string $lang = null): string
     return $path . ($queryString !== '' ? '?' . $queryString : '') . $fragment;
 }
 
-///////////////////////////////////////////////
-// 6. CSRF Helpers
-///////////////////////////////////////////////
-
-/**
- * Generate or retrieve a CSRF token
- */
+// Helpers CSRF para formularios.
 function csrf_token(): string
 {
     $token = \App\Core\Session::get('_csrf.token');
@@ -349,17 +265,11 @@ function csrf_token(): string
     return $token;
 }
 
-/**
- * Generate hidden input field for CSRF token
- */
 function csrf_field(): string
 {
     return '<input type="hidden" name="_token" value="' . e(csrf_token()) . '">';
 }
 
-/**
- * Verify submitted CSRF token
- */
 function verify_csrf_token(mixed $token): bool
 {
     $sessionToken = \App\Core\Session::get('_csrf.token');
@@ -370,10 +280,7 @@ function verify_csrf_token(mixed $token): bool
         && hash_equals($sessionToken, $token);
 }
 
-///////////////////////////////////////////////
-// 7. Site & Page Language Initialization
-///////////////////////////////////////////////
-
+// Datos globales del sitio e idioma actual.
 $site = [
     'name'             => (string) config('app.name'),
     'github_rpg'       => (string) config('app.github_rpg'),
@@ -382,20 +289,18 @@ $site = [
     'default_og_image' => asset_url((string) config('app.default_og_image')),
 ];
 
-// Determine current page language
 $pageLang = resolve_page_lang(
     (string) ($_GET['lang'] ?? $_COOKIE['swap_lang'] ?? config('app.locale', 'es')),
     config('app.fallback_locale', 'es')
 );
 
-// Save language preference in a cookie if needed
 if (isset($_GET['lang']) && $_GET['lang'] === $pageLang && !headers_sent()) {
     setcookie('swap_lang', $pageLang, [
-        'expires'  => time() + (86400 * 30), // 30 days
+        'expires'  => time() + (86400 * 30),
         'path'     => '/',
         'samesite' => 'Lax',
     ]);
 }
 
-// Load i18n translations
+// Carga las traducciones finales según el idioma resuelto.
 require_once __DIR__ . '/i18n.php';

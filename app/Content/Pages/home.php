@@ -1,13 +1,5 @@
 <?php
 declare(strict_types=1);
-
-/**
- * Returns the structured content for the homepage.
- *
- * @param string $lang The current language code ('es' or 'en')
- * @param array $site Global site configuration (GitHub links, assets, etc.)
- * @return array Structured homepage content
- */
 function build_home_page_content(string $lang, array $site): array
 {
     $content = [

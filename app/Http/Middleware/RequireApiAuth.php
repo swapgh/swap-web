@@ -19,15 +19,12 @@ final class RequireApiAuth
             }
         }
 
-        if (Auth::check()) {
-            return;
-        }
-
         http_response_code(401);
         header('Content-Type: application/json; charset=UTF-8');
+        header('WWW-Authenticate: Bearer');
         echo json_encode([
             'ok' => false,
-            'error' => 'Authentication required.',
+            'error' => 'Bearer token required.',
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         exit;
     }

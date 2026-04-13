@@ -10,6 +10,7 @@ use App\Domain\Auth\DTOs\LoginCredentials;
 use App\Domain\Auth\DTOs\RegisterData;
 use App\Domain\Auth\Services\LoginManager;
 use App\Domain\Auth\Services\RegisterManager;
+use App\Support\RateLimiter;
 use App\Services\AnalyticsService;
 
 final class AuthController extends Controller
@@ -42,9 +43,21 @@ final class AuthController extends Controller
         }
 
         $credentials = LoginCredentials::fromArray($_POST);
+        $limiter = new RateLimiter();
+        $rateKey = $this->rateLimitKey('auth.login', $credentials->email);
+        if ($limiter->tooManyAttempts($rateKey, 5, 300)) {
+            $this->protectSensitivePage();
+            $this->renderPage('web.pages.auth.login', [
+                'authError' => 'Too many login attempts. Please try again later.',
+                'robotsContent' => 'noindex,nofollow,noarchive',
+            ]);
+            return;
+        }
+
         $result = (new LoginManager())->attempt($credentials);
 
         if (!$result->success || $result->user === null) {
+            $limiter->hit($rateKey, 300);
             (new AnalyticsService())->trackEvent('auth.login_failed', [
                 'email' => $credentials->email,
             ]);
@@ -62,6 +75,7 @@ final class AuthController extends Controller
         (new AnalyticsService())->trackEvent('auth.login_succeeded', [
             'auth_source' => (string) ($user['auth_source'] ?? 'unknown'),
         ]);
+        $limiter->clear($rateKey);
 
         $this->redirect(with_lang(page_url('account')));
     }
@@ -91,9 +105,21 @@ final class AuthController extends Controller
         }
 
         $data = RegisterData::fromArray($_POST);
+        $limiter = new RateLimiter();
+        $rateKey = $this->rateLimitKey('auth.register', $data->email !== '' ? $data->email : $data->username);
+        if ($limiter->tooManyAttempts($rateKey, 5, 600)) {
+            $this->protectSensitivePage();
+            $this->renderPage('web.pages.auth.register', [
+                'authError' => 'Too many registration attempts. Please try again later.',
+                'robotsContent' => 'noindex,nofollow,noarchive',
+            ]);
+            return;
+        }
+
         $result = (new RegisterManager())->attempt($data);
 
         if (!$result->success || $result->user === null) {
+            $limiter->hit($rateKey, 600);
             (new AnalyticsService())->trackEvent('auth.register_failed', [
                 'email' => $data->email,
                 'username' => $data->username,
@@ -110,7 +136,15 @@ final class AuthController extends Controller
         (new AnalyticsService())->trackEvent('auth.register_succeeded', [
             'auth_source' => (string) ($result->user['auth_source'] ?? 'unknown'),
         ]);
+        $limiter->clear($rateKey);
 
         $this->redirect(with_lang(page_url('account')));
+    }
+
+    private function rateLimitKey(string $action, string $identifier): string
+    {
+        $ip = (string) ($_SERVER['REMOTE_ADDR'] ?? 'unknown');
+
+        return strtolower($action . '|' . $ip . '|' . trim($identifier));
     }
 }

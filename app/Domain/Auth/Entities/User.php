@@ -8,6 +8,8 @@ final class User
     public static function createStored(\App\Domain\Auth\DTOs\RegisterData $data): array
     {
         $now = gmdate('c');
+        $apiToken = bin2hex(random_bytes(32));
+        $expiresAt = gmdate('c', time() + max(60, (int) config('app.auth.api_token_ttl', 2592000)));
 
         return [
             'id' => 'user:' . bin2hex(random_bytes(16)),
@@ -17,7 +19,9 @@ final class User
             'password_hash' => password_hash($data->password, PASSWORD_DEFAULT),
             'role' => 'player',
             'auth_source' => 'local',
-            'api_token' => bin2hex(random_bytes(32)),
+            'api_token' => $apiToken,
+            'api_token_hash' => hash('sha256', $apiToken),
+            'api_token_expires_at' => $expiresAt,
             'created_at' => $now,
             'updated_at' => $now,
         ];
@@ -25,7 +29,7 @@ final class User
 
     public static function sanitize(array $user): array
     {
-        unset($user['password_hash']);
+        unset($user['password_hash'], $user['api_token'], $user['api_token_hash'], $user['api_token_expires_at']);
         return [
             'id' => (string) ($user['id'] ?? ''),
             'username' => (string) ($user['username'] ?? ''),
@@ -33,7 +37,6 @@ final class User
             'email' => (string) ($user['email'] ?? ''),
             'role' => (string) ($user['role'] ?? 'player'),
             'auth_source' => (string) ($user['auth_source'] ?? 'local'),
-            'api_token' => (string) ($user['api_token'] ?? ''),
             'created_at' => (string) ($user['created_at'] ?? ''),
             'updated_at' => (string) ($user['updated_at'] ?? ''),
         ];

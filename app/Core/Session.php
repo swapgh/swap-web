@@ -10,10 +10,13 @@ final class Session
         if (session_status() !== PHP_SESSION_ACTIVE) {
             $storagePath = dirname(__DIR__, 2) . '/storage/cache/sessions';
             if (!is_dir($storagePath)) {
-                mkdir($storagePath, 0777, true);
+                mkdir($storagePath, 0700, true);
             }
+
+            ini_set('session.use_strict_mode', '1');
             session_save_path($storagePath);
             session_set_cookie_params([
+                'secure' => self::isHttps(),
                 'httponly' => true,
                 'samesite' => 'Lax',
             ]);
@@ -97,5 +100,13 @@ final class Session
         }
 
         session_destroy();
+    }
+
+    private static function isHttps(): bool
+    {
+        $https = (string) ($_SERVER['HTTPS'] ?? '');
+        $forwarded = (string) ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '');
+
+        return $https === 'on' || $https === '1' || strtolower($forwarded) === 'https';
     }
 }

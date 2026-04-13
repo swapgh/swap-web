@@ -9,6 +9,9 @@ return [
     'default_og_image' => 'images/favicons/faviconx512.png',
     'locale'           => 'en',
     'fallback_locale'  => 'en',
+    'auth'             => [
+        'api_token_ttl' => (int) ($_ENV['API_TOKEN_TTL'] ?? 2592000),
+    ],
     'billing'          => [
         'mode' => (string) ($_ENV['BILLING_MODE'] ?? 'test'),
         'provider' => (string) ($_ENV['BILLING_PROVIDER'] ?? 'placeholder'),

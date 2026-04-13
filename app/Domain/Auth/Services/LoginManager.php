@@ -28,6 +28,15 @@ final class LoginManager
         }
 
         $user = $this->registeredUsers->verifyCredentials($credentials->email, $credentials->password);
+        $apiToken = null;
+        $apiTokenExpiresAt = null;
+
+        if ($user !== null) {
+            $tokenData = $this->registeredUsers->rotateApiToken($credentials->email);
+            $apiToken = is_array($tokenData) ? (string) ($tokenData['token'] ?? '') : null;
+            $apiTokenExpiresAt = is_array($tokenData) ? (string) ($tokenData['expires_at'] ?? '') : null;
+        }
+
         if ($user === null && (bool) config('app.features.placeholder_auth', false)) {
             $user = $this->users->findByEmail($credentials->email);
         }
@@ -38,7 +47,7 @@ final class LoginManager
 
         Auth::login($user);
 
-        return AuthResult::success($user);
+        return AuthResult::success($user, $apiToken, $apiTokenExpiresAt);
     }
 
     public function logout(): void

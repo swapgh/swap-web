@@ -5,6 +5,8 @@ namespace App\Domain\Billing\Services;
 
 final class StripeWebhookVerifier
 {
+    private const DEFAULT_TOLERANCE_SECONDS = 300;
+
     public function verify(string $payload, string $signatureHeader, string $secret): bool
     {
         if ($payload === '' || $signatureHeader === '' || $secret === '') {
@@ -22,6 +24,11 @@ final class StripeWebhookVerifier
         $timestamp = $parts['t'][0] ?? '';
         $signatures = $parts['v1'] ?? [];
         if ($timestamp === '' || $signatures === []) {
+            return false;
+        }
+
+        $timestampInt = ctype_digit($timestamp) ? (int) $timestamp : 0;
+        if ($timestampInt <= 0 || abs(time() - $timestampInt) > self::DEFAULT_TOLERANCE_SECONDS) {
             return false;
         }
 

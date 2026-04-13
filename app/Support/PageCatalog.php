@@ -7,7 +7,6 @@ final class PageCatalog
 {
     public static function all(): array
     {
-        /** @var array<int, array<string, mixed>> $pages */
         $pages = require dirname(__DIR__, 2) . '/config/pages.php';
 
         return $pages;

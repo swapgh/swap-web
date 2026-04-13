@@ -63,8 +63,11 @@ final class UserRepository
             return null;
         }
 
+        $needleHash = hash('sha256', $needle);
+
         foreach ($this->all() as $user) {
-            if ((string) ($user['api_token'] ?? '') === $needle) {
+            $storedHash = (string) ($user['api_token_hash'] ?? '');
+            if ($storedHash !== '' && hash_equals($storedHash, $needleHash) && !$this->isTokenExpired($user)) {
                 return User::sanitize($user);
             }
         }
@@ -76,10 +79,14 @@ final class UserRepository
     {
         $users = $this->all();
         $stored = User::createStored($data);
-        $users[] = $stored;
+        $users[] = $this->forStorage($stored);
         $this->writeAll($users);
 
-        return User::sanitize($stored);
+        return [
+            'user' => User::sanitize($stored),
+            'api_token' => (string) ($stored['api_token'] ?? ''),
+            'api_token_expires_at' => (string) ($stored['api_token_expires_at'] ?? ''),
+        ];
     }
 
     public function verifyCredentials(string $email, string $password): ?array
@@ -95,6 +102,63 @@ final class UserRepository
         }
 
         return User::sanitize($user);
+    }
+
+    public function rotateApiToken(string $email): ?array
+    {
+        $needle = strtolower(trim($email));
+        if ($needle === '') {
+            return null;
+        }
+
+        $users = $this->all();
+        foreach ($users as $index => $user) {
+            if (strtolower((string) ($user['email'] ?? '')) !== $needle) {
+                continue;
+            }
+
+            $token = bin2hex(random_bytes(32));
+            $user['api_token_hash'] = hash('sha256', $token);
+            $user['api_token_expires_at'] = gmdate('c', time() + max(60, (int) config('app.auth.api_token_ttl', 2592000)));
+            unset($user['api_token']);
+            $user['updated_at'] = gmdate('c');
+            $users[$index] = $user;
+            $this->writeAll($users);
+
+            return [
+                'token' => $token,
+                'expires_at' => (string) $user['api_token_expires_at'],
+            ];
+        }
+
+        return null;
+    }
+
+    public function revokeApiToken(string $email): void
+    {
+        $needle = strtolower(trim($email));
+        if ($needle === '') {
+            return;
+        }
+
+        $users = $this->all();
+        $changed = false;
+
+        foreach ($users as $index => $user) {
+            if (strtolower((string) ($user['email'] ?? '')) !== $needle) {
+                continue;
+            }
+
+            unset($user['api_token'], $user['api_token_hash'], $user['api_token_expires_at']);
+            $user['updated_at'] = gmdate('c');
+            $users[$index] = $user;
+            $changed = true;
+            break;
+        }
+
+        if ($changed) {
+            $this->writeAll($users);
+        }
     }
 
     public function all(): array
@@ -113,7 +177,7 @@ final class UserRepository
         $path = $this->storagePath();
         $directory = dirname($path);
         if (!is_dir($directory)) {
-            mkdir($directory, 0777, true);
+            mkdir($directory, 0700, true);
         }
 
         file_put_contents(
@@ -125,5 +189,29 @@ final class UserRepository
     private function storagePath(): string
     {
         return dirname(__DIR__, 4) . '/storage/auth/users.json';
+    }
+
+    private function forStorage(array $user): array
+    {
+        if (($user['api_token_hash'] ?? '') !== '') {
+            unset($user['api_token']);
+        }
+
+        return $user;
+    }
+
+    private function isTokenExpired(array $user): bool
+    {
+        $expiresAt = trim((string) ($user['api_token_expires_at'] ?? ''));
+        if ($expiresAt === '') {
+            return true;
+        }
+
+        $timestamp = strtotime($expiresAt);
+        if ($timestamp === false) {
+            return true;
+        }
+
+        return $timestamp < time();
     }
 }

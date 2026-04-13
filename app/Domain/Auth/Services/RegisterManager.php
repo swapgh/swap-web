@@ -41,9 +41,16 @@ final class RegisterManager
             return AuthResult::failure('That username is already taken.');
         }
 
-        $user = $this->users->create($data);
+        $created = $this->users->create($data);
+        $user = is_array($created['user'] ?? null) ? $created['user'] : null;
+        $apiToken = is_string($created['api_token'] ?? null) ? $created['api_token'] : null;
+        $apiTokenExpiresAt = is_string($created['api_token_expires_at'] ?? null) ? $created['api_token_expires_at'] : null;
+        if ($user === null) {
+            return AuthResult::failure('We could not create your account.');
+        }
+
         Auth::login($user);
 
-        return AuthResult::success($user);
+        return AuthResult::success($user, $apiToken, $apiTokenExpiresAt);
     }
 }
