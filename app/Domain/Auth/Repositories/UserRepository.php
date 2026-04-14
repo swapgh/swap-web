@@ -10,18 +10,8 @@ final class UserRepository
 {
     public function findByEmail(string $email): ?array
     {
-        $needle = strtolower(trim($email));
-        if ($needle === '') {
-            return null;
-        }
-
-        foreach ($this->all() as $user) {
-            if (strtolower((string) ($user['email'] ?? '')) === $needle) {
-                return User::sanitize($user);
-            }
-        }
-
-        return null;
+        $stored = $this->findStoredByEmail($email);
+        return $stored === null ? null : User::sanitize($stored);
     }
 
     public function findStoredByEmail(string $email): ?array
@@ -42,14 +32,46 @@ final class UserRepository
 
     public function findByUsername(string $username): ?array
     {
-        $needle = strtolower(trim($username));
+        $stored = $this->findStoredByUsername($username);
+        return $stored === null ? null : User::sanitize($stored);
+    }
+
+    public function findStoredByUsername(string $username): ?array
+    {
+        $needle = trim($username);
         if ($needle === '') {
             return null;
         }
 
         foreach ($this->all() as $user) {
-            if (strtolower((string) ($user['username'] ?? '')) === $needle) {
-                return User::sanitize($user);
+            if ((string) ($user['username'] ?? '') === $needle) {
+                return $user;
+            }
+        }
+
+        return null;
+    }
+
+    public function findByIdentifier(string $identifier): ?array
+    {
+        $stored = $this->findStoredByIdentifier($identifier);
+        return $stored === null ? null : User::sanitize($stored);
+    }
+
+    public function findStoredByIdentifier(string $identifier): ?array
+    {
+        $needle = trim($identifier);
+        if ($needle === '') {
+            return null;
+        }
+
+        if (str_contains($needle, '@')) {
+            return $this->findStoredByEmail($needle);
+        }
+
+        foreach ($this->all() as $user) {
+            if ((string) ($user['username'] ?? '') === $needle) {
+                return $user;
             }
         }
 
@@ -91,7 +113,7 @@ final class UserRepository
 
     public function verifyCredentials(string $email, string $password): ?array
     {
-        $user = $this->findStoredByEmail($email);
+        $user = $this->findStoredByIdentifier($email);
         if ($user === null) {
             return null;
         }
@@ -106,14 +128,22 @@ final class UserRepository
 
     public function rotateApiToken(string $email): ?array
     {
-        $needle = strtolower(trim($email));
+        return $this->rotateApiTokenByIdentifier($email);
+    }
+
+    public function rotateApiTokenByIdentifier(string $identifier): ?array
+    {
+        $needle = trim($identifier);
         if ($needle === '') {
             return null;
         }
 
+        $useEmail = str_contains($needle, '@');
         $users = $this->all();
         foreach ($users as $index => $user) {
-            if (strtolower((string) ($user['email'] ?? '')) !== $needle) {
+            $email = (string) ($user['email'] ?? '');
+            $username = (string) ($user['username'] ?? '');
+            if ($useEmail ? strtolower($email) !== strtolower($needle) : $username !== $needle) {
                 continue;
             }
 
@@ -136,16 +166,24 @@ final class UserRepository
 
     public function revokeApiToken(string $email): void
     {
-        $needle = strtolower(trim($email));
+        $this->revokeApiTokenByIdentifier($email);
+    }
+
+    public function revokeApiTokenByIdentifier(string $identifier): void
+    {
+        $needle = trim($identifier);
         if ($needle === '') {
             return;
         }
 
+        $useEmail = str_contains($needle, '@');
         $users = $this->all();
         $changed = false;
 
         foreach ($users as $index => $user) {
-            if (strtolower((string) ($user['email'] ?? '')) !== $needle) {
+            $email = (string) ($user['email'] ?? '');
+            $username = (string) ($user['username'] ?? '');
+            if ($useEmail ? strtolower($email) !== strtolower($needle) : $username !== $needle) {
                 continue;
             }
 

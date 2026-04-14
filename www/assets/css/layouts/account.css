@@ -50,6 +50,27 @@
   gap: 1rem;
 }
 
+.auth-check {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.55rem;
+  margin-bottom: 0.1rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.auth-check input {
+  margin: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.auth-check span {
+  display: block;
+}
+
 .auth-eyebrow {
   display: inline-block;
   margin-bottom: 0.8rem;

@@ -44,7 +44,7 @@ final class AuthController extends Controller
 
         $credentials = LoginCredentials::fromArray($_POST);
         $limiter = new RateLimiter();
-        $rateKey = $this->rateLimitKey('auth.login', $credentials->email);
+        $rateKey = $this->rateLimitKey('auth.login', $credentials->identifier);
         if ($limiter->tooManyAttempts($rateKey, 5, 300)) {
             $this->protectSensitivePage();
             $this->renderPage('web.pages.auth.login', [
@@ -59,7 +59,7 @@ final class AuthController extends Controller
         if (!$result->success || $result->user === null) {
             $limiter->hit($rateKey, 300);
             (new AnalyticsService())->trackEvent('auth.login_failed', [
-                'email' => $credentials->email,
+                'identifier' => $credentials->identifier,
             ]);
 
             $this->protectSensitivePage();
@@ -71,6 +71,9 @@ final class AuthController extends Controller
         }
 
         $user = $result->user;
+        if (!empty($_POST['remember'])) {
+            Session::rememberForSeconds((int) config('app.auth.remember_ttl', 2592000));
+        }
 
         (new AnalyticsService())->trackEvent('auth.login_succeeded', [
             'auth_source' => (string) ($user['auth_source'] ?? 'unknown'),

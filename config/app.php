@@ -11,6 +11,7 @@ return [
     'fallback_locale'  => 'en',
     'auth'             => [
         'api_token_ttl' => (int) ($_ENV['API_TOKEN_TTL'] ?? 2592000),
+        'remember_ttl'  => (int) ($_ENV['SESSION_REMEMBER_TTL'] ?? 2592000),
     ],
     'analytics'        => [
         'google_tag_id' => (string) ($_ENV['GOOGLE_TAG_ID'] ?? 'G-L611GK6Y4T'),

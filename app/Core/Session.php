@@ -83,6 +83,22 @@ final class Session
         session_regenerate_id(true);
     }
 
+    public static function rememberForSeconds(int $seconds): void
+    {
+        self::start();
+        $seconds = max(60, $seconds);
+        $params = session_get_cookie_params();
+
+        setcookie(session_name(), session_id(), [
+            'expires' => time() + $seconds,
+            'path' => $params['path'],
+            'domain' => $params['domain'],
+            'secure' => (bool) $params['secure'],
+            'httponly' => (bool) $params['httponly'],
+            'samesite' => 'Lax',
+        ]);
+    }
+
     public static function forget(string $key): void
     {
         self::start();

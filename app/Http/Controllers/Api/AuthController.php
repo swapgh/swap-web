@@ -20,7 +20,7 @@ final class AuthController extends Controller
         $payload = $this->requestInput();
         $credentials = LoginCredentials::fromArray($payload);
         $limiter = new RateLimiter();
-        $rateKey = $this->rateLimitKey('auth.login', $credentials->email);
+        $rateKey = $this->rateLimitKey('auth.login', $credentials->identifier);
 
         if ($limiter->tooManyAttempts($rateKey, 5, 300)) {
             $this->json([
@@ -35,7 +35,7 @@ final class AuthController extends Controller
         if (!$result->success || $result->user === null) {
             $limiter->hit($rateKey, 300);
             (new AnalyticsService())->trackEvent('auth.api_login_failed', [
-                'email' => $credentials->email,
+                'identifier' => $credentials->identifier,
             ]);
 
             $this->json([

@@ -12,6 +12,7 @@ $copy = [
         'banner_text' => 'Email works first. External providers and deeper account flows can be added on top without changing the overall layout.',
         'email' => 'Correo',
         'password' => 'Contrasena',
+        'remember' => 'Mantener sesion iniciada',
         'register_hint' => 'No tienes cuenta?',
         'register_link' => 'Registrarse',
         'provider_google' => 'Continue with Google',
@@ -30,6 +31,7 @@ $copy = [
         'banner_text' => 'Email works first. External providers and deeper account flows can be added on top without changing the overall layout.',
         'email' => 'Email',
         'password' => 'Password',
+        'remember' => 'Keep me signed in',
         'register_hint' => 'Need an account?',
         'register_link' => 'Sign up',
         'provider_google' => 'Continue with Google',
@@ -51,6 +53,7 @@ $extraCss = ['css/layouts/account.css'];
       <?php if (!empty($authError)): ?><p><?= e((string) $authError) ?></p><?php endif; ?>
       <label><span><?= e($page['email']) ?></span><input type="email" name="email" autocomplete="email"></label>
       <label><span><?= e($page['password']) ?></span><input type="password" name="password" autocomplete="current-password"></label>
+      <label class="auth-check"><input type="checkbox" name="remember" value="1"> <span><?= e($page['remember']) ?></span></label>
       <button type="submit" class="auth-submit"><?= e($page['submit']) ?></button>
       <p class="auth-meta-note"><?= e($page['register_hint']) ?> <a href="<?= e(with_lang(page_url('register'))) ?>"><?= e($page['register_link']) ?></a></p>
       <div class="auth-divider"><span><?= e($page['or']) ?></span></div>

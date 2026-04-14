@@ -19,26 +19,22 @@ final class LoginManager
 
     public function attempt(LoginCredentials $credentials): AuthResult
     {
-        if ($credentials->email === '') {
-            return AuthResult::failure('Enter your email to continue.');
+        if ($credentials->identifier === '') {
+            return AuthResult::failure('Enter your username or email to continue.');
         }
 
-        if (!filter_var($credentials->email, FILTER_VALIDATE_EMAIL)) {
-            return AuthResult::failure('Enter a valid email address.');
-        }
-
-        $user = $this->registeredUsers->verifyCredentials($credentials->email, $credentials->password);
+        $user = $this->registeredUsers->verifyCredentials($credentials->identifier, $credentials->password);
         $apiToken = null;
         $apiTokenExpiresAt = null;
 
         if ($user !== null) {
-            $tokenData = $this->registeredUsers->rotateApiToken($credentials->email);
+            $tokenData = $this->registeredUsers->rotateApiTokenByIdentifier($credentials->identifier);
             $apiToken = is_array($tokenData) ? (string) ($tokenData['token'] ?? '') : null;
             $apiTokenExpiresAt = is_array($tokenData) ? (string) ($tokenData['expires_at'] ?? '') : null;
         }
 
         if ($user === null && (bool) config('app.features.placeholder_auth', false)) {
-            $user = $this->users->findByEmail($credentials->email);
+            $user = $this->users->findByIdentifier($credentials->identifier);
         }
 
         if ($user === null) {
