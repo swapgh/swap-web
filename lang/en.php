@@ -69,8 +69,8 @@ return [
     'carousel.previous' => 'Previous',
     'carousel.next' => 'Next',
     'cookies.banner_title' => 'Cookies and privacy',
-    'cookies.banner_body' => 'This site uses technical cookies for language, session, and remembering your consent choice. It does not enable analytics or marketing by default.',
+    'cookies.banner_body' => 'This site uses technical cookies for language, session, and remembering your consent choice. Analytics only loads if you accept it.',
     'cookies.banner_accept' => 'Accept',
-    'cookies.banner_essential' => 'Only essential',
+    'cookies.banner_reject' => 'Reject',
     'cookies.banner_more' => 'Learn more',
 ];

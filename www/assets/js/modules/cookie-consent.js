@@ -1,6 +1,8 @@
 window.Swap = window.Swap || {};
 window.Swap.cookieConsent = (() => {
   const consentCookieName = "swap_cookie_consent";
+  const analyticsConfig = window.Swap.analytics || {};
+  const consentVersion = String(analyticsConfig.consentVersion || "");
 
   const readCookie = (name) => {
     const value = `; ${document.cookie}`;
@@ -39,9 +41,42 @@ window.Swap.cookieConsent = (() => {
     }
   };
 
+  const shouldShowBanner = (record) => {
+    if (!record || typeof record !== "object") {
+      return true;
+    }
+
+    return String(record.version || "") !== consentVersion || !record.choice;
+  };
+
+  const loadAnalytics = () => {
+    const tagId = String(analyticsConfig.tagId || "").trim();
+    if (!tagId || window.Swap.analyticsLoaded) {
+      return;
+    }
+
+    window.Swap.analyticsLoaded = true;
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(tagId)}`;
+    document.head.appendChild(script);
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function gtag() {
+      window.dataLayer.push(arguments);
+    };
+
+    window.gtag("js", new Date());
+    window.gtag("config", tagId, {
+      anonymize_ip: true,
+      send_page_view: true,
+    });
+  };
+
   const setConsentRecord = (choice) => {
     const record = {
       choice,
+      version: consentVersion,
       updated_at: new Date().toISOString(),
       source: "banner",
     };
@@ -57,16 +92,22 @@ window.Swap.cookieConsent = (() => {
     const banner = document.getElementById("cookie-banner");
     const consentRecord = getConsentRecord();
 
-    if (consentRecord?.choice) {
+    if (consentRecord?.choice && !shouldShowBanner(consentRecord)) {
       document.documentElement.dataset.cookieConsent = consentRecord.choice;
+      if (consentRecord.choice === "accepted") {
+        loadAnalytics();
+      }
     } else if (banner) {
       banner.hidden = false;
     }
 
     document.querySelectorAll("[data-cookie-consent]").forEach((button) => {
       button.addEventListener("click", () => {
-        const choice = button.getAttribute("data-cookie-consent") || "essential";
+        const choice = button.getAttribute("data-cookie-consent") || "rejected";
         setConsentRecord(choice);
+        if (choice === "accepted") {
+          loadAnalytics();
+        }
         if (banner) {
           banner.hidden = true;
         }

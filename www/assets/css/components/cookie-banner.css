@@ -64,6 +64,10 @@
   }
 }
 
+.cookie-banner-link {
+  text-decoration: none;
+}
+
 html[data-theme="classic"] .cookie-banner {
   border-color: rgba(125, 211, 255, 0.14);
   background:

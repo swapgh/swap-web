@@ -86,8 +86,8 @@ $gamesUrl = page_url('#featured-games');
       <p><?= e(t('cookies.banner_body')) ?></p>
     </div>
     <div class="cookie-banner-actions">
-      <button type="button" class="btn btn-secondary cookie-banner-button" data-cookie-consent="essential"><?= e(t('cookies.banner_essential')) ?></button>
       <button type="button" class="btn btn-primary cookie-banner-button" data-cookie-consent="accepted"><?= e(t('cookies.banner_accept')) ?></button>
+      <button type="button" class="btn btn-secondary cookie-banner-button" data-cookie-consent="rejected"><?= e(t('cookies.banner_reject')) ?></button>
       <a class="btn btn-ghost cookie-banner-link" href="<?= e(with_lang(page_url('cookies'))) ?>"><?= e(t('cookies.banner_more')) ?></a>
     </div>
   </div>

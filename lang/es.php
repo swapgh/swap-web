@@ -69,8 +69,8 @@ return [
     'carousel.previous' => 'Anterior',
     'carousel.next' => 'Siguiente',
     'cookies.banner_title' => 'Cookies y privacidad',
-    'cookies.banner_body' => 'Este sitio usa cookies tecnicas para idioma, sesion y recordar tu eleccion de consentimiento. No activa analitica ni marketing por defecto.',
+    'cookies.banner_body' => 'Este sitio usa cookies tecnicas para idioma, sesion y recordar tu eleccion de consentimiento. La analitica solo se activa si la aceptas.',
     'cookies.banner_accept' => 'Aceptar',
-    'cookies.banner_essential' => 'Solo esenciales',
+    'cookies.banner_reject' => 'Rechazar',
     'cookies.banner_more' => 'Mas informacion',
 ];

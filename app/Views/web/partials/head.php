@@ -54,6 +54,13 @@ $ogImage = $ogImage ?? absolute_url($site['default_og_image']);
   <meta name="twitter:image" content="<?= e((string) $ogImage) ?>">
   <link rel="icon" type="image/png" sizes="32x32" href="<?= e(asset_url('images/favicons/favicon.png')) ?>">
   <link rel="icon" type="image/x-icon" href="<?= e(asset_url('images/favicons/favicon.ico')) ?>">
+  <script>
+    window.Swap = window.Swap || {};
+    window.Swap.analytics = {
+      tagId: <?= json_encode((string) config('app.analytics.google_tag_id', '')) ?>,
+      consentVersion: <?= json_encode((string) config('app.analytics.consent_version', '')) ?>
+    };
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap">

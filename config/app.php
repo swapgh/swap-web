@@ -12,6 +12,10 @@ return [
     'auth'             => [
         'api_token_ttl' => (int) ($_ENV['API_TOKEN_TTL'] ?? 2592000),
     ],
+    'analytics'        => [
+        'google_tag_id' => (string) ($_ENV['GOOGLE_TAG_ID'] ?? 'G-L611GK6Y4T'),
+        'consent_version' => (string) ($_ENV['COOKIE_CONSENT_VERSION'] ?? '2026-04-14-ga4-v1'),
+    ],
     'billing'          => [
         'mode' => (string) ($_ENV['BILLING_MODE'] ?? 'test'),
         'provider' => (string) ($_ENV['BILLING_PROVIDER'] ?? 'placeholder'),
@@ -23,7 +27,7 @@ return [
     ],
     'features'         => [
         'placeholder_auth' => false,
-        'analytics'        => false,
+        'analytics'        => true,
         'billing'          => true,
     ],
 ];

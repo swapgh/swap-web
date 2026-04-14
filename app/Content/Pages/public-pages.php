@@ -187,7 +187,7 @@ function build_site_page_content(string $slug, string $lang, array $site): array
                     ],
                     [
                         'title' => 'Finalidades y base juridica',
-                        'body' => 'Los datos se usan para prestar la navegacion basica del sitio, mantener la sesion cuando el usuario accede a su cuenta, recordar la eleccion de idioma y consentimiento de cookies, responder mensajes enviados al correo del proyecto y gestionar contribuciones voluntarias. La base juridica depende del caso: interes legitimo para seguridad y funcionamiento tecnico, ejecucion de medidas precontractuales o contractuales para cuenta y soporte, y consentimiento cuando corresponda para preferencias o futuras cookies no tecnicas.',
+                        'body' => 'Los datos se usan para prestar la navegacion basica del sitio, mantener la sesion cuando el usuario accede a su cuenta, recordar la eleccion de idioma y consentimiento de cookies, responder mensajes enviados al correo del proyecto, gestionar contribuciones voluntarias y activar analitica solo si el usuario la acepta. La base juridica depende del caso: interes legitimo para seguridad y funcionamiento tecnico, ejecucion de medidas precontractuales o contractuales para cuenta y soporte, y consentimiento cuando corresponda para preferencias o cookies no tecnicas.',
                     ],
                     [
                         'title' => 'Destinatarios y pagos',
@@ -225,11 +225,11 @@ function build_site_page_content(string $slug, string $lang, array $site): array
                     ],
                     [
                         'title' => 'Cookies de terceros y pagos',
-                        'body' => 'El sitio no carga por defecto herramientas de analitica o marketing. Si el usuario pasa al entorno de pago de Stripe, ese proveedor puede aplicar sus propias cookies o mecanismos tecnicos dentro de su dominio y bajo sus propias politicas.',
+                        'body' => 'El sitio solo carga analitica si el usuario la acepta desde el banner. Si el usuario pasa al entorno de pago de Stripe, ese proveedor puede aplicar sus propias cookies o mecanismos tecnicos dentro de su dominio y bajo sus propias politicas.',
                     ],
                     [
                         'title' => 'Gestion del consentimiento',
-                        'body' => 'El banner permite aceptar o limitar el consentimiento a cookies esenciales. La eleccion se guarda para no repetir la pregunta en cada visita. Si en el futuro se activan cookies no tecnicas, esta pagina y el banner tendran que ampliarse para ofrecer informacion y opciones adicionales.',
+                        'body' => 'El banner permite aceptar o rechazar el uso de analitica y cookies no esenciales. La eleccion se guarda para no repetir la pregunta en cada visita. Si cambian las finalidades o se activan cookies nuevas, esta pagina y el banner tendran que actualizarse.',
                     ],
                 ],
                 'actions' => [
@@ -663,7 +663,7 @@ function build_site_page_content(string $slug, string $lang, array $site): array
                     ],
                     [
                         'title' => 'Purposes and legal basis',
-                        'body' => 'Data is used to provide basic browsing, maintain the session when a user signs in, remember language and cookie choices, reply to project emails, and manage voluntary contributions. The legal basis depends on the case: legitimate interest for security and technical operation, contract or pre-contract measures for account and support functions, and consent where applicable for preferences or any future non-essential cookies.',
+                        'body' => 'Data is used to provide basic browsing, maintain the session when a user signs in, remember language and cookie choices, reply to project emails, manage voluntary contributions, and enable analytics only if the user accepts it. The legal basis depends on the case: legitimate interest for security and technical operation, contract or pre-contract measures for account and support functions, and consent where applicable for preferences or non-essential cookies.',
                     ],
                     [
                         'title' => 'Recipients and payments',
@@ -701,11 +701,11 @@ function build_site_page_content(string $slug, string $lang, array $site): array
                     ],
                     [
                         'title' => 'Third-party cookies and payments',
-                        'body' => 'The site does not load analytics or marketing tools by default. If the user moves to Stripe’s payment environment, that provider may apply its own technical mechanisms or cookies inside its own domain and under its own policies.',
+                        'body' => 'The site only loads analytics if the user accepts it from the banner. If the user moves to Stripe’s payment environment, that provider may apply its own technical mechanisms or cookies inside its own domain and under its own policies.',
                     ],
                     [
                         'title' => 'Consent management',
-                        'body' => 'The banner allows users to accept or limit consent to essential cookies. The decision is stored so the question is not repeated on every visit. If non-essential cookies are added in the future, this page and the banner will need to expand with more detailed options and disclosures.',
+                        'body' => 'The banner allows users to accept or reject analytics and other non-essential cookies. The decision is stored so the question is not repeated on every visit. If the purposes or cookies change later, this page and the banner will need to be updated.',
                     ],
                 ],
                 'actions' => [
