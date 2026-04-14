@@ -1,0 +1,11 @@
+{"name":"auth.login_failed","payload":{"identifier":""},"recorded_at":"2026-04-14T09:17:29+00:00"}
+{"name":"auth.register_succeeded","payload":{"auth_source":"local"},"recorded_at":"2026-04-14T09:19:28+00:00"}
+{"name":"auth.logout","payload":{"auth_source":"local"},"recorded_at":"2026-04-14T09:19:31+00:00"}
+{"name":"auth.api_login_succeeded","payload":{"auth_source":"local"},"recorded_at":"2026-04-14T09:24:02+00:00"}
+{"name":"auth.login_succeeded","payload":{"auth_source":"local"},"recorded_at":"2026-04-14T09:27:41+00:00"}
+{"name":"auth.logout","payload":{"auth_source":"local"},"recorded_at":"2026-04-14T09:29:28+00:00"}
+{"name":"auth.register_succeeded","payload":{"auth_source":"local"},"recorded_at":"2026-04-14T09:29:56+00:00"}
+{"name":"auth.api_login_succeeded","payload":{"auth_source":"local"},"recorded_at":"2026-04-14T09:30:21+00:00"}
+{"name":"auth.api_logout","payload":{"auth_source":"local"},"recorded_at":"2026-04-14T09:30:25+00:00"}
+{"name":"auth.api_login_failed","payload":{"identifier":"user11"},"recorded_at":"2026-04-14T09:30:37+00:00"}
+{"name":"auth.logout","payload":{"auth_source":"local"},"recorded_at":"2026-04-14T09:32:16+00:00"}
